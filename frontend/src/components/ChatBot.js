@@ -3,6 +3,11 @@ import styled from 'styled-components';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 
+// Backend API URL configuration - auto-detects environment
+const API_BASE_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://nestlechatbot-api-fhbxhbfcb9d9hkfn.canadacentral-01.azurewebsites.net'
+  : '';  // Empty string will use the proxy in development
+
 // Chat UI Components
 const ChatContainer = styled.div`
   width: ${props => props.isExpanded ? '500px' : '400px'};
@@ -336,7 +341,7 @@ const ChatBot = ({ isOpen, toggleChat }) => {
     setInput('');
     setIsLoading(true);
     
-    // 添加"正在输入"的占位消息
+    // Add typing indicator placeholder message
     const loadingMessageId = messages.length + 2;
     const loadingMessage = {
       id: loadingMessageId,
@@ -349,8 +354,9 @@ const ChatBot = ({ isOpen, toggleChat }) => {
     scrollToBottom();
     
     try {
-      // Call API
-      const response = await axios.post('/api/chat', {
+      // API call with environment-aware URL
+      const apiEndpoint = `${API_BASE_URL}/api/chat`;
+      const response = await axios.post(apiEndpoint, {
         query: input,
         session_id: sessionId
       });
@@ -360,7 +366,7 @@ const ChatBot = ({ isOpen, toggleChat }) => {
         setSessionId(response.data.session_id);
       }
       
-      // 移除加载消息，添加实际响应
+      // Remove loading message
       setMessages(prev => prev.filter(msg => msg.id !== loadingMessageId));
       
       // Add bot response
@@ -376,7 +382,7 @@ const ChatBot = ({ isOpen, toggleChat }) => {
     } catch (error) {
       console.error('Error sending message:', error);
       
-      // 移除加载消息
+      // Remove loading message
       setMessages(prev => prev.filter(msg => msg.id !== loadingMessageId));
       
       // Add error message
