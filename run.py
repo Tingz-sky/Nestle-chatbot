@@ -62,6 +62,12 @@ def check_env_variables():
             os.environ["NEO4J_PASSWORD"] = neo4j_password
             logger.info("Retrieved Neo4j Password from Key Vault")
         
+        # Get Neo4j Aura Password
+        neo4j_aura_password = get_secret("NEO4J-AURA-PASSWORD")
+        if neo4j_aura_password:
+            os.environ["NEO4J_AURA_PASSWORD"] = neo4j_aura_password
+            logger.info("Retrieved Neo4j Aura Password from Key Vault")
+        
         # Get Azure OpenAI Key
         openai_key = get_secret("AZURE-OPENAI-KEY")
         if openai_key:
@@ -172,6 +178,7 @@ def build_knowledge_graph():
         sys.path.append(os.getcwd())
         
         from services.graph_service import GraphRAGService
+        from services.keyvault_service import get_secret
         
         data_path = '../data/scraped_data.json'
         if not os.path.exists(data_path):
@@ -191,10 +198,15 @@ def build_knowledge_graph():
             logger.info("Using empty data set")
             data = []
         
+        # 优先使用Aura密码
+        password = os.getenv("NEO4J_AURA_PASSWORD") or get_secret("NEO4J-AURA-PASSWORD")
+        if not password:
+            password = os.getenv("NEO4J_PASSWORD") or get_secret("NEO4J-PASSWORD")
+            
         service = GraphRAGService(
             uri=os.getenv("NEO4J_URI"),
             user=os.getenv("NEO4J_USER"),
-            password=os.getenv("NEO4J_PASSWORD")
+            password=password
         )
         
         result = service.build_knowledge_graph(data)

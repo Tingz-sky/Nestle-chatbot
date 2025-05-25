@@ -26,6 +26,7 @@ print(f"AZURE_SEARCH_KEY: {'Set' if os.getenv('AZURE_SEARCH_KEY') else 'Not set'
 print(f"AZURE_SEARCH_INDEX: {os.getenv('AZURE_SEARCH_INDEX')}")
 print(f"AZURE_OPENAI_KEY: {'Set' if os.getenv('AZURE_OPENAI_KEY') else 'Not set'}")
 print(f"AZURE_OPENAI_ENDPOINT: {os.getenv('AZURE_OPENAI_ENDPOINT')}")
+print(f"NEO4J_URI: {os.getenv('NEO4J_URI')}")
 
 app = FastAPI(title="Nestle Chatbot API")
 
@@ -52,10 +53,14 @@ search_service = AzureSearchService(
     key=os.getenv("AZURE_SEARCH_KEY"),
     index_name=os.getenv("AZURE_SEARCH_INDEX")
 )
+
+# 获取Neo4j Aura密码
+neo4j_password = get_secret("NEO4J-AURA-PASSWORD")
+
 graph_service = GraphRAGService(
     uri=os.getenv("NEO4J_URI"),
     user=os.getenv("NEO4J_USER"),
-    password=os.getenv("NEO4J_PASSWORD"),
+    password=neo4j_password,  # 使用从Key Vault获取的Aura密码
     openai_service=openai_service  # Pass OpenAI service to graph service
 )
 
