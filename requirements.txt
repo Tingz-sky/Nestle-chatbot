@@ -8,6 +8,6 @@ webdriver-manager==3.8.6
 neo4j==5.8.1
 openai==0.27.8
 azure-search-documents==11.4.0
-azure-core==1.26.4
+azure-core>=1.28.0,<2.0.0
 tenacity==8.2.2
 pydantic==1.10.7 
