@@ -186,10 +186,6 @@ const TypingIndicator = styled.div`
   }
 `;
 
-const MessageContent = styled.div`
-  white-space: pre-wrap;
-`;
-
 const References = styled.div`
   margin-top: 8px;
   font-size: 12px;
