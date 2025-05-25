@@ -8,6 +8,9 @@ const API_BASE_URL = process.env.NODE_ENV === 'production'
   ? 'https://nestlechatbot-api-fhbxhbfcb9d9hkfn.canadacentral-01.azurewebsites.net'
   : '';  // Empty string will use the proxy in development
 
+// Maximum retry attempts for API calls
+const MAX_RETRY_ATTEMPTS = 2;
+
 // Chat UI Components
 const ChatContainer = styled.div`
   width: ${props => props.isExpanded ? '500px' : '400px'};
@@ -353,50 +356,82 @@ const ChatBot = ({ isOpen, toggleChat }) => {
     setMessages(prev => [...prev, loadingMessage]);
     scrollToBottom();
     
-    try {
-      // API call with environment-aware URL
-      const apiEndpoint = `${API_BASE_URL}/api/chat`;
-      const response = await axios.post(apiEndpoint, {
-        query: input,
-        session_id: sessionId
-      });
-      
-      // Store session ID
-      if (response.data.session_id) {
-        setSessionId(response.data.session_id);
+    let retryCount = 0;
+    let lastError = null;
+    
+    while (retryCount <= MAX_RETRY_ATTEMPTS) {
+      try {
+        // API call with environment-aware URL
+        const apiEndpoint = `${API_BASE_URL}/api/chat`;
+        const response = await axios.post(apiEndpoint, {
+          query: input,
+          session_id: sessionId
+        }, {
+          timeout: 20000 // 20 second timeout
+        });
+        
+        // Store session ID
+        if (response.data.session_id) {
+          setSessionId(response.data.session_id);
+        }
+        
+        // Remove loading message
+        setMessages(prev => prev.filter(msg => msg.id !== loadingMessageId));
+        
+        // Add bot response
+        const botMessage = {
+          id: loadingMessageId,
+          text: response.data.response,
+          isBot: true,
+          references: response.data.references || []
+        };
+        
+        setMessages(prev => [...prev, botMessage]);
+        
+        // Success - break out of retry loop
+        break;
+        
+      } catch (error) {
+        console.error('Error sending message:', error);
+        lastError = error;
+        
+        if (retryCount < MAX_RETRY_ATTEMPTS) {
+          // Wait before retry (exponential backoff)
+          await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, retryCount)));
+          retryCount++;
+        } else {
+          // Remove loading message after all retries failed
+          setMessages(prev => prev.filter(msg => msg.id !== loadingMessageId));
+          
+          // Determine error message based on error type
+          let errorMessage = "Sorry, I'm having trouble connecting. Please try again later.";
+          
+          if (error.response) {
+            // Server responded with an error status code
+            if (error.response.status === 500) {
+              errorMessage = "Sorry, the server encountered an error. Our team is working on it.";
+            } else if (error.response.status === 404) {
+              errorMessage = "Sorry, the chatbot service couldn't be reached. Please try again later.";
+            }
+          } else if (error.request) {
+            // Request was made but no response received (network error)
+            errorMessage = "Network error. Please check your internet connection and try again.";
+          }
+          
+          // Add error message
+          const errorMessageObj = {
+            id: loadingMessageId,
+            text: errorMessage,
+            isBot: true
+          };
+          
+          setMessages(prev => [...prev, errorMessageObj]);
+          break;
+        }
       }
-      
-      // Remove loading message
-      setMessages(prev => prev.filter(msg => msg.id !== loadingMessageId));
-      
-      // Add bot response
-      const botMessage = {
-        id: loadingMessageId,
-        text: response.data.response,
-        isBot: true,
-        references: response.data.references || []
-      };
-      
-      setMessages(prev => [...prev, botMessage]);
-      
-    } catch (error) {
-      console.error('Error sending message:', error);
-      
-      // Remove loading message
-      setMessages(prev => prev.filter(msg => msg.id !== loadingMessageId));
-      
-      // Add error message
-      const errorMessage = {
-        id: loadingMessageId,
-        text: "Sorry, I'm having trouble connecting. Please try again later.",
-        isBot: true
-      };
-      
-      setMessages(prev => [...prev, errorMessage]);
-      
-    } finally {
-      setIsLoading(false);
     }
+    
+    setIsLoading(false);
   };
   
   const handleKeyPress = (e) => {
