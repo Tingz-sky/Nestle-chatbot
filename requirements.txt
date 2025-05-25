@@ -1,0 +1,13 @@
+fastapi==0.95.1
+uvicorn==0.22.0
+python-dotenv==1.0.0
+beautifulsoup4==4.12.2
+requests==2.30.0
+selenium==4.9.1
+webdriver-manager==3.8.6
+neo4j==5.8.1
+openai==0.27.8
+azure-search-documents==11.4.0
+azure-core==1.26.4
+tenacity==8.2.2
+pydantic==1.10.7 

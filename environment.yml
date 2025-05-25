@@ -1,0 +1,9 @@
+name: nestle-chatbot
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip=23.2.1
+  - pip:
+    - -r requirements.txt 

@@ -1,0 +1,132 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f5f5f5;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #007a33;
+  --secondary-color: #005522;
+  --accent-color: #e50013;
+  --text-color: #333333;
+  --light-gray: #f5f5f5;
+  --medium-gray: #e0e0e0;
+  --dark-gray: #757575;
+  --white: #ffffff;
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --border-radius: 8px;
+  --transition: all 0.3s ease;
+}
+
+/* Markdown formatting styles */
+strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 12px 0 8px 0;
+  color: #007a33;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+h2 {
+  font-size: 1.3em;
+}
+
+h3 {
+  font-size: 1.1em;
+}
+
+ul, ol {
+  margin: 8px 0;
+}
+
+li {
+  margin: 3px 0;
+}
+
+code {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+  padding: 2px 4px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+pre {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  padding: 8px;
+  overflow-x: auto;
+  margin: 10px 0;
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+  display: block;
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 10px 0;
+}
+
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 0.9em;
+}
+
+th {
+  background-color: #f0f2f5;
+  font-weight: bold;
+  text-align: left;
+  padding: 6px;
+  border: 1px solid #ddd;
+}
+
+td {
+  padding: 6px;
+  border: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.message-enter {
+  animation: fadeIn 0.3s ease forwards;
+} 

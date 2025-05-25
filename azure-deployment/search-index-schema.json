@@ -1,0 +1,88 @@
+{
+  "name": "nestle-content-index",
+  "fields": [
+    {
+      "name": "id",
+      "type": "Edm.String",
+      "key": true,
+      "searchable": false,
+      "sortable": false,
+      "facetable": false,
+      "filterable": true
+    },
+    {
+      "name": "url",
+      "type": "Edm.String",
+      "searchable": false,
+      "sortable": false,
+      "facetable": false,
+      "filterable": true
+    },
+    {
+      "name": "title",
+      "type": "Edm.String",
+      "searchable": true,
+      "sortable": true,
+      "facetable": false,
+      "filterable": true,
+      "analyzer": "en.microsoft"
+    },
+    {
+      "name": "content",
+      "type": "Edm.String",
+      "searchable": true,
+      "sortable": false,
+      "facetable": false,
+      "filterable": false,
+      "analyzer": "en.microsoft"
+    },
+    {
+      "name": "tableContent",
+      "type": "Edm.String",
+      "searchable": true,
+      "sortable": false,
+      "facetable": false,
+      "filterable": false,
+      "analyzer": "en.microsoft"
+    },
+    {
+      "name": "lastUpdated",
+      "type": "Edm.DateTimeOffset",
+      "searchable": false,
+      "sortable": true,
+      "facetable": false,
+      "filterable": true
+    }
+  ],
+  "suggesters": [
+    {
+      "name": "sg",
+      "searchMode": "analyzingInfixMatching",
+      "sourceFields": ["title", "content"]
+    }
+  ],
+  "semantic": {
+    "configurations": [
+      {
+        "name": "default",
+        "prioritizedFields": {
+          "titleField": {
+            "fieldName": "title"
+          },
+          "prioritizedContentFields": [
+            {
+              "fieldName": "content"
+            },
+            {
+              "fieldName": "tableContent"
+            }
+          ],
+          "prioritizedKeywordsFields": []
+        }
+      }
+    ]
+  },
+  "corsOptions": {
+    "allowedOrigins": ["*"]
+  }
+} 
