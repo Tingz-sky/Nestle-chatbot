@@ -1,60 +1,37 @@
 import logging
 from typing import Dict, List, Any, Optional
-import time
+from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
+from langchain_core.chat_history import BaseChatMessageHistory
+from langchain_core.runnables.history import RunnableWithMessageHistory
 
 logger = logging.getLogger(__name__)
 
-class Message:
+class InMemoryChatMessageHistory(BaseChatMessageHistory):
     """
-    Represents a single message in a conversation
+    Simple in-memory implementation of chat message history.
     """
-    def __init__(self, content: str, is_user: bool, timestamp: float = None):
-        self.content = content
-        self.is_user = is_user  # True for user messages, False for AI messages
-        self.timestamp = timestamp or time.time()
     
-    def to_dict(self) -> Dict[str, Any]:
-        """Convert message to dictionary format"""
-        return {
-            "type": "human" if self.is_user else "ai",
-            "content": self.content,
-            "timestamp": self.timestamp
-        }
-
-class ConversationMemory:
-    """
-    Stores conversation history for a session
-    """
     def __init__(self):
-        self.messages: List[Message] = []
+        self.messages = []
     
-    def add_user_message(self, content: str) -> None:
-        """Add a user message to the history"""
-        self.messages.append(Message(content=content, is_user=True))
+    def add_message(self, message):
+        self.messages.append(message)
     
-    def add_ai_message(self, content: str) -> None:
-        """Add an AI message to the history"""
-        self.messages.append(Message(content=content, is_user=False))
-    
-    def get_messages(self) -> List[Dict[str, Any]]:
-        """Get all messages in dictionary format"""
-        return [msg.to_dict() for msg in self.messages]
-    
-    def clear(self) -> None:
-        """Clear all messages"""
+    def clear(self):
         self.messages = []
 
 class ConversationService:
     """
     Service to manage conversation memory and context for multi-turn dialogue
+    using LangChain's updated memory components
     """
     
     def __init__(self):
         # Dictionary to store conversation memories by session ID
-        self.sessions: Dict[str, ConversationMemory] = {}
+        self.sessions: Dict[str, InMemoryChatMessageHistory] = {}
         logger.info("Initialized ConversationService")
     
-    def get_or_create_memory(self, session_id: str) -> ConversationMemory:
+    def get_or_create_memory(self, session_id: str) -> InMemoryChatMessageHistory:
         """
         Get an existing conversation memory or create a new one for the session
         
@@ -62,11 +39,11 @@ class ConversationService:
             session_id: Unique identifier for the conversation session
             
         Returns:
-            ConversationMemory: The memory object for this session
+            InMemoryChatMessageHistory: The memory object for this session
         """
         if session_id not in self.sessions:
             logger.info(f"Creating new conversation memory for session: {session_id}")
-            self.sessions[session_id] = ConversationMemory()
+            self.sessions[session_id] = InMemoryChatMessageHistory()
         
         return self.sessions[session_id]
     
@@ -79,7 +56,7 @@ class ConversationService:
             message: The user's message text
         """
         memory = self.get_or_create_memory(session_id)
-        memory.add_user_message(message)
+        memory.add_message(HumanMessage(content=message))
         logger.debug(f"Added user message to session {session_id}")
     
     def add_ai_message(self, session_id: str, message: str) -> None:
@@ -91,7 +68,7 @@ class ConversationService:
             message: The AI's response text
         """
         memory = self.get_or_create_memory(session_id)
-        memory.add_ai_message(message)
+        memory.add_message(AIMessage(content=message))
         logger.debug(f"Added AI message to session {session_id}")
     
     def get_conversation_history(self, session_id: str) -> List[Dict[str, Any]]:
@@ -105,7 +82,32 @@ class ConversationService:
             List of conversation messages as dictionaries with 'type' and 'content' keys
         """
         memory = self.get_or_create_memory(session_id)
-        return memory.get_messages()
+        messages = memory.messages
+        
+        # Convert LangChain message objects to dictionaries
+        history = []
+        for msg in messages:
+            if isinstance(msg, HumanMessage):
+                history.append({"type": "human", "content": msg.content})
+            elif isinstance(msg, AIMessage):
+                history.append({"type": "ai", "content": msg.content})
+            elif isinstance(msg, SystemMessage):
+                history.append({"type": "system", "content": msg.content})
+        
+        return history
+    
+    def get_memory_messages(self, session_id: str) -> List[Any]:
+        """
+        Get memory messages in the format expected by LangChain
+        
+        Args:
+            session_id: Unique identifier for the conversation session
+            
+        Returns:
+            List of message objects
+        """
+        memory = self.get_or_create_memory(session_id)
+        return memory.messages
     
     def clear_memory(self, session_id: str) -> None:
         """

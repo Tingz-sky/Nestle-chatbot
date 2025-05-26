@@ -125,23 +125,38 @@ GUIDELINES FOR RESPONSES:
             system_message = """You are a helpful, friendly assistant for Nestle products and information.
 
 GUIDELINES FOR RESPONSES:
-1. Use the provided context to answer the user's question.
-2. Remember the conversation history to provide contextually relevant responses.
-3. If the answer is not contained within the context, NEVER use phrases like "From the context provided, there isn't a specific X mentioned." Instead:
+1. Pay close attention to the conversation history to understand context. When the user refers to "it" or uses other pronouns, refer to the conversation history to determine what they are talking about.
+2. Use the provided context to answer the user's question specifically about the topic they're asking about.
+3. Conversation continuity is crucial - if a follow-up question relates to a previously discussed product, ensure your answer is about that same product.
+4. If the answer is not contained within the context, NEVER use phrases like "From the context provided, there isn't a specific X mentioned." Instead:
    - Suggest related products or information you do know about
    - Offer to help with other Nestle-related questions
    - Recommend checking the Nestle website for the most up-to-date information
-4. Make your response conversational, helpful and friendly.
-5. Include specific product details when available.
-6. Format your responses nicely using simple text.
-7. Your tone should be warm, helpful and enthusiastic about Nestle products.
-8. Avoid any repetitive, formulaic language patterns.
-9. Never mention "context" or "conversation history" in your responses.
-10. Always maintain the natural flow of conversation."""
+5. Make your response conversational, helpful and friendly.
+6. Include specific product details when available.
+7. Format your responses nicely using simple text.
+8. Your tone should be warm, helpful and enthusiastic about Nestle products.
+9. Avoid any repetitive, formulaic language patterns.
+10. Never mention "context" or "conversation history" in your responses.
+11. Always maintain the natural flow of conversation."""
+            
+            # Prepare the chat history context to help resolve references
+            recent_conversation_summary = ""
+            if chat_history and len(chat_history) > 0:
+                # Get the last few exchanges to understand current topic
+                recent_messages = chat_history[-6:] if len(chat_history) > 6 else chat_history
+                recent_conversation_summary = "Recent Conversation (for reference resolution):\n"
+                
+                for msg in recent_messages:
+                    role = "User" if msg["type"] == "human" else "Assistant"
+                    recent_conversation_summary += f"{role}: {msg['content']}\n"
+                
+                recent_conversation_summary += "\n"
             
             # Estimate token counts
             system_tokens = len(system_message) // 4
             query_tokens = len(query) // 4
+            history_summary_tokens = len(recent_conversation_summary) // 4
             
             # Calculate history tokens (approximate)
             history_tokens = 0
@@ -149,13 +164,18 @@ GUIDELINES FOR RESPONSES:
                 history_tokens += len(message["content"]) // 4 + 10  # Add overhead for message metadata
             
             # Calculate available tokens for context
-            available_context_tokens = token_limit - system_tokens - query_tokens - history_tokens - 200  # Extra buffer
+            available_context_tokens = token_limit - system_tokens - query_tokens - history_tokens - history_summary_tokens - 300  # Extra buffer
             
             # Format context within token limit
             formatted_context = self._format_context_with_limit(context, available_context_tokens)
             
+            # Create enhanced system message with conversation summary if available
+            enhanced_system_message = system_message
+            if recent_conversation_summary:
+                enhanced_system_message = f"{system_message}\n\n{recent_conversation_summary}"
+            
             # Prepare messages array for API call
-            messages = [{"role": "system", "content": system_message}]
+            messages = [{"role": "system", "content": enhanced_system_message}]
             
             # Add conversation history
             for message in chat_history:
@@ -163,6 +183,8 @@ GUIDELINES FOR RESPONSES:
                     messages.append({"role": "user", "content": message["content"]})
                 elif message["type"] == "ai":
                     messages.append({"role": "assistant", "content": message["content"]})
+                elif message["type"] == "system":
+                    messages.append({"role": "system", "content": message["content"]})
             
             # Add current context and query
             current_query = f"Context:\n{formatted_context}\n\nQuestion: {query}"

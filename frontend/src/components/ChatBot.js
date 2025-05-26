@@ -21,9 +21,7 @@ const INITIAL_MESSAGE = {
 const ClearButton = styled(ResizeButton)`
   margin-right: 10px;
   background-color: #f2f2f2;
-  font-size: ${props => props.isExpanded ? '13px' : '11px'};
-  width: ${props => props.isExpanded ? '36px' : '30px'};
-  height: ${props => props.isExpanded ? '36px' : '30px'};
+  font-size: ${props => props.isExpanded ? '0.8rem' : '0.65rem'};
   &:hover {
     background-color: #e0e0e0;
   }
