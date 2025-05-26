@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import ChatBot from './components/ChatBot';
+import GraphManager from './components/GraphManager';
 
 const AppContainer = styled.div`
   display: flex;
@@ -23,6 +25,23 @@ const SiteName = styled.h1`
   margin: 0;
   font-size: 22px;
   color: #007a33;
+`;
+
+const Navigation = styled.nav`
+  display: flex;
+  gap: 20px;
+`;
+
+const NavLink = styled(Link)`
+  color: #004d91;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #007a33;
+    text-decoration: underline;
+  }
 `;
 
 const MainContent = styled.main`
@@ -56,16 +75,28 @@ function App() {
   };
 
   return (
-    <AppContainer>
-      <Header>
-        <SiteName>Nestle</SiteName>
-      </Header>
-      <MainContent>
-        <ChatBotContainer>
-          <ChatBot isOpen={isChatOpen} toggleChat={toggleChat} />
-        </ChatBotContainer>
-      </MainContent>
-    </AppContainer>
+    <Router>
+      <AppContainer>
+        <Header>
+          <SiteName>Nestle</SiteName>
+          <Navigation>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/graph-manager">Knowledge Graph Manager</NavLink>
+          </Navigation>
+        </Header>
+        
+        <Routes>
+          <Route path="/graph-manager" element={<GraphManager />} />
+          <Route path="/" element={
+            <MainContent>
+              <ChatBotContainer>
+                <ChatBot isOpen={isChatOpen} toggleChat={toggleChat} />
+              </ChatBotContainer>
+            </MainContent>
+          } />
+        </Routes>
+      </AppContainer>
+    </Router>
   );
 }
 

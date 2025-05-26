@@ -7,6 +7,8 @@ import json
 import time
 import logging
 from dotenv import load_dotenv
+import re
+import neo4j
 
 from services.web_scraper import WebScraper
 from services.search_service import AzureSearchService
@@ -115,6 +117,30 @@ class ChatResponse(BaseModel):
     references: List[Dict[str, str]] = []
     session_id: str
 
+# New models for knowledge graph operations
+class NodeData(BaseModel):
+    title: str
+    content: Optional[str] = ""
+    url: Optional[str] = ""
+    type: str = "Entity"
+
+class NodeDeleteRequest(BaseModel):
+    url: str
+
+class RelationshipData(BaseModel):
+    source_url: str
+    target_url: str
+    rel_type: str
+    properties: Optional[Dict[str, Any]] = None
+
+class RelationshipDeleteRequest(BaseModel):
+    source_url: str
+    target_url: str
+    rel_type: str
+
+class GraphQueryRequest(BaseModel):
+    cypher_query: str
+
 @app.get("/")
 async def root():
     return {"message": "Welcome to the Nestle Chatbot API"}
@@ -194,6 +220,180 @@ async def refresh_content():
         return {"message": f"Content refreshed successfully with {len(data)} pages"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to refresh content: {str(e)}")
+
+# New endpoints for knowledge graph management
+
+@app.get("/api/graph/nodes")
+async def get_nodes():
+    """Get all nodes from the knowledge graph"""
+    if not graph_service or not graph_service.driver:
+        raise HTTPException(status_code=503, detail="Graph database service not available")
+    
+    try:
+        # Create a Cypher query to get all nodes - modified to include all node types
+        cypher_query = """
+        MATCH (n)
+        RETURN n.title as title, n.content as content, n.url as url, n.type as type, labels(n)[0] as label
+        LIMIT 100
+        """
+        
+        with graph_service.driver.session() as session:
+            result = session.run(cypher_query)
+            nodes = [record.data() for record in result]
+        
+        return nodes
+    except Exception as e:
+        logger.error(f"Error retrieving nodes: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to retrieve nodes: {str(e)}")
+
+@app.get("/api/graph/relationships")
+async def get_relationships():
+    """Get all relationships from the knowledge graph"""
+    if not graph_service or not graph_service.driver:
+        raise HTTPException(status_code=503, detail="Graph database service not available")
+    
+    try:
+        # Create a Cypher query to get all relationships - modified to include all node types
+        cypher_query = """
+        MATCH (source)-[r]->(target)
+        RETURN source.url as source_url, target.url as target_url, 
+               source.title as source_title, target.title as target_title,
+               type(r) as rel_type
+        LIMIT 100
+        """
+        
+        with graph_service.driver.session() as session:
+            result = session.run(cypher_query)
+            relationships = [record.data() for record in result]
+        
+        return relationships
+    except Exception as e:
+        logger.error(f"Error retrieving relationships: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to retrieve relationships: {str(e)}")
+
+@app.post("/api/graph/node")
+async def add_node(node_data: NodeData):
+    """Add a new node to the knowledge graph"""
+    if not graph_service or not graph_service.driver:
+        raise HTTPException(status_code=503, detail="Graph database service not available")
+    
+    try:
+        result = graph_service.add_node(node_data.dict())
+        
+        if result:
+            return {"message": "Node added successfully", "url": node_data.url}
+        else:
+            raise HTTPException(status_code=500, detail="Failed to add node")
+    except Exception as e:
+        logger.error(f"Error adding node: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to add node: {str(e)}")
+
+@app.delete("/api/graph/node")
+async def delete_node(node_data: NodeDeleteRequest):
+    """Delete a node from the knowledge graph and all its relationships"""
+    if not graph_service or not graph_service.driver:
+        raise HTTPException(status_code=503, detail="Graph database service not available")
+    
+    try:
+        # Create a Cypher query to delete the node and all its relationships
+        cypher_query = """
+        MATCH (n {url: $url})
+        DETACH DELETE n
+        RETURN count(n) as deleted_count
+        """
+        
+        with graph_service.driver.session() as session:
+            result = session.run(cypher_query, url=node_data.url)
+            record = result.single()
+            
+            if record and record["deleted_count"] > 0:
+                return {"message": "Node deleted successfully", "count": record["deleted_count"]}
+            else:
+                raise HTTPException(status_code=404, detail="Node not found")
+    except neo4j.exceptions.ClientError as e:
+        logger.error(f"Neo4j client error: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Invalid query: {str(e)}")
+    except Exception as e:
+        logger.error(f"Error deleting node: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to delete node: {str(e)}")
+
+@app.post("/api/graph/relationship")
+async def add_relationship(relationship_data: RelationshipData):
+    """Add a new relationship between nodes in the knowledge graph"""
+    if not graph_service or not graph_service.driver:
+        raise HTTPException(status_code=503, detail="Graph database service not available")
+    
+    try:
+        result = graph_service.add_relationship(
+            relationship_data.source_url,
+            relationship_data.target_url,
+            relationship_data.rel_type,
+            relationship_data.properties
+        )
+        
+        if result:
+            return {"message": "Relationship added successfully"}
+        else:
+            raise HTTPException(status_code=500, detail="Failed to add relationship")
+    except Exception as e:
+        logger.error(f"Error adding relationship: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to add relationship: {str(e)}")
+
+@app.delete("/api/graph/relationship")
+async def delete_relationship(relationship_data: RelationshipDeleteRequest):
+    """Delete a relationship between nodes in the knowledge graph"""
+    if not graph_service or not graph_service.driver:
+        raise HTTPException(status_code=503, detail="Graph database service not available")
+    
+    try:
+        # We need to use a different approach because Neo4j doesn't support parameter substitution for relationship types
+        # Create a Cypher query to delete the relationship based on the type
+        rel_type = relationship_data.rel_type
+        
+        # Sanitize the relationship type to prevent injection
+        if not re.match(r'^[A-Za-z_][A-Za-z0-9_]*$', rel_type):
+            raise HTTPException(status_code=400, detail="Invalid relationship type format")
+        
+        cypher_query = f"""
+        MATCH (source {{url: $source_url}})-[r:{rel_type}]->(target {{url: $target_url}})
+        DELETE r
+        RETURN count(r) as deleted_count
+        """
+        
+        with graph_service.driver.session() as session:
+            result = session.run(
+                cypher_query, 
+                source_url=relationship_data.source_url, 
+                target_url=relationship_data.target_url
+            )
+            record = result.single()
+            
+            if record and record["deleted_count"] > 0:
+                return {"message": f"Relationship deleted successfully", "count": record["deleted_count"]}
+            else:
+                raise HTTPException(status_code=404, detail="Relationship not found")
+    except neo4j.exceptions.ClientError as e:
+        logger.error(f"Neo4j client error: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Invalid query: {str(e)}")
+    except Exception as e:
+        logger.error(f"Error deleting relationship: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to delete relationship: {str(e)}")
+
+@app.post("/api/graph/query")
+async def run_custom_query(request: GraphQueryRequest):
+    """Run a custom Cypher query on the knowledge graph"""
+    if not graph_service or not graph_service.driver:
+        raise HTTPException(status_code=503, detail="Graph database service not available")
+    
+    try:
+        with graph_service.driver.session() as session:
+            result = session.run(request.cypher_query)
+            data = [record.data() for record in result]
+        
+        return {"results": data}
+    except Exception as e:
+        logger.error(f"Error executing custom query: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to execute query: {str(e)}")
 
 # Add a simple endpoint to check the status of the services
 @app.get("/api/status")

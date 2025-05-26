@@ -104,11 +104,21 @@ class GraphRAGService:
             title = node_data.get("title", "")
             content = node_data.get("content", "")
             url = node_data.get("url", "")
-            node_type = node_data.get("type", "Content")
+            node_type = node_data.get("type", "Entity")
             
-            # Create Cypher query
-            cypher_query = """
-            MERGE (n:Content {url: $url})
+            # If URL is empty and this is an Entity, generate one based on title
+            if not url and node_type == "Entity":
+                url = f"entity:{title.replace(' ', '')}"
+            
+            # Create appropriate label based on type
+            if node_type == "Entity" or node_type == "Product" or node_type == "Category" or node_type == "Recipe" or node_type == "Ingredient":
+                label = node_type
+            else:
+                label = "Content"  # Default label for Page type and others
+            
+            # Create Cypher query with dynamic label
+            cypher_query = f"""
+            MERGE (n:{label} {{url: $url}})
             SET n.title = $title,
                 n.content = $content,
                 n.type = $node_type,
@@ -141,10 +151,10 @@ class GraphRAGService:
             properties = {}
         
         try:
-            # Create Cypher query
+            # Create Cypher query - updated to match any node type
             cypher_query = """
-            MATCH (source:Content {url: $source_url})
-            MATCH (target:Content {url: $target_url})
+            MATCH (source {url: $source_url})
+            MATCH (target {url: $target_url})
             MERGE (source)-[r:%s]->(target)
             """ % rel_type
             
