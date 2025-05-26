@@ -7,6 +7,7 @@ import {
   Message, TypingIndicator, References, ChatInputContainer, 
   ChatInput, SendButton, ChatBubble, ResizeControls, ResizeButton 
 } from './ChatStyles';
+import styled from 'styled-components';
 
 // Constants
 const MAX_RETRY_ATTEMPTS = 2;
@@ -15,6 +16,18 @@ const INITIAL_MESSAGE = {
   text: "Welcome to NesBot! I can provide information about Nestle products, nutrition facts, recipes, and sustainability initiatives. What would you like to learn about today?", 
   isBot: true
 };
+
+// Add a new ClearButton style component
+const ClearButton = styled(ResizeButton)`
+  margin-right: 10px;
+  background-color: #f2f2f2;
+  font-size: ${props => props.isExpanded ? '13px' : '11px'};
+  width: ${props => props.isExpanded ? '36px' : '30px'};
+  height: ${props => props.isExpanded ? '36px' : '30px'};
+  &:hover {
+    background-color: #e0e0e0;
+  }
+`;
 
 /**
  * ChatBot component that provides the interface for user interaction
@@ -182,6 +195,40 @@ const ChatBot = ({ isOpen, toggleChat }) => {
     }
   };
   
+  /**
+   * Clears the conversation history
+   */
+  const handleClearConversation = async () => {
+    if (!sessionId) return;
+    
+    try {
+      await ApiService.clearConversation(sessionId);
+      
+      // Reset chat to initial state
+      setMessages([INITIAL_MESSAGE]);
+      
+      // Show a confirmation message
+      const confirmationMessage = {
+        id: 2,
+        text: "Conversation history has been cleared. How can I help you today?",
+        isBot: true
+      };
+      
+      setMessages([INITIAL_MESSAGE, confirmationMessage]);
+    } catch (error) {
+      console.error('Error clearing conversation:', error);
+      
+      // Show error message
+      const errorMessage = {
+        id: messages.length + 1,
+        text: "I couldn't clear the conversation history. Please try again later.",
+        isBot: true
+      };
+      
+      setMessages(prev => [...prev, errorMessage]);
+    }
+  };
+  
   // Render chat interface or bubble based on isOpen state
   return (
     <>
@@ -241,6 +288,13 @@ const ChatBot = ({ isOpen, toggleChat }) => {
           </ChatMessages>
           
           <ResizeControls isExpanded={isExpanded}>
+            <ClearButton 
+              isExpanded={isExpanded} 
+              onClick={handleClearConversation}
+              title="Clear conversation history"
+            >
+              Clear
+            </ClearButton>
             <ResizeButton isExpanded={isExpanded} onClick={increaseFontSize} title="Increase font size">
               A+
             </ResizeButton>

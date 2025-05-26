@@ -1,117 +1,154 @@
 import axios from 'axios';
 
-// Environment configuration - auto-detects production or development
-const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://nestlechatbot-api-fhbxhbfcb9d9hkfn.canadacentral-01.azurewebsites.net'
-  : '';  // Empty string will use the proxy in development
+// Get API base URL from environment variable or use default
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000';
 
 /**
- * Service for handling API calls to the backend
+ * Service for interacting with the backend API
  */
-class ApiService {
+const ApiService = {
   /**
    * Send a chat message to the API
-   * @param {string} message - User's message
-   * @param {string|null} sessionId - Session ID for conversation continuity
-   * @param {number} timeout - Request timeout in milliseconds
-   * @returns {Promise} - Promise with the API response
+   * @param {string} message - The user's message
+   * @param {string} sessionId - Optional session ID for continuing a conversation
+   * @returns {Promise} - API response
    */
-  static async sendChatMessage(message, sessionId = null, timeout = 20000) {
-    const endpoint = `${API_BASE_URL}/api/chat`;
-    
-    return axios.post(endpoint, {
-      query: message,
-      session_id: sessionId
-    }, {
-      timeout: timeout
-    });
-  }
+  sendChatMessage: async (message, sessionId = null) => {
+    try {
+      const payload = { 
+        query: message,
+        session_id: sessionId
+      };
+      
+      return await axios.post(`${API_BASE_URL}/api/chat`, payload);
+    } catch (error) {
+      console.error('Error sending message:', error);
+      throw error;
+    }
+  },
   
   /**
-   * Trigger content refresh on the backend
-   * @returns {Promise} - Promise with the API response
+   * Clear the conversation history for a session
+   * @param {string} sessionId - The session ID to clear
+   * @returns {Promise} - API response
    */
-  static async refreshContent() {
-    const endpoint = `${API_BASE_URL}/api/refresh-content`;
-    return axios.post(endpoint);
-  }
+  clearConversation: async (sessionId) => {
+    try {
+      return await axios.delete(`${API_BASE_URL}/api/conversation/${sessionId}`);
+    } catch (error) {
+      console.error('Error clearing conversation:', error);
+      throw error;
+    }
+  },
   
-  /**
-   * Check the status of backend services
-   * @returns {Promise} - Promise with the API response
-   */
-  static async checkStatus() {
-    const endpoint = `${API_BASE_URL}/api/status`;
-    return axios.get(endpoint);
-  }
-
   /**
    * Get all nodes from the knowledge graph
-   * @returns {Promise} - Promise with the API response
+   * @returns {Promise} - API response with nodes data
    */
-  static async getNodes() {
-    const endpoint = `${API_BASE_URL}/api/graph/nodes`;
-    return axios.get(endpoint);
-  }
-
+  getNodes: async () => {
+    try {
+      return await axios.get(`${API_BASE_URL}/api/graph/nodes`);
+    } catch (error) {
+      console.error('Error fetching nodes:', error);
+      throw error;
+    }
+  },
+  
   /**
    * Get all relationships from the knowledge graph
-   * @returns {Promise} - Promise with the API response
+   * @returns {Promise} - API response with relationship data
    */
-  static async getRelationships() {
-    const endpoint = `${API_BASE_URL}/api/graph/relationships`;
-    return axios.get(endpoint);
-  }
-
+  getRelationships: async () => {
+    try {
+      return await axios.get(`${API_BASE_URL}/api/graph/relationships`);
+    } catch (error) {
+      console.error('Error fetching relationships:', error);
+      throw error;
+    }
+  },
+  
   /**
    * Add a new node to the knowledge graph
-   * @param {Object} nodeData - Node data with title, content, url, and type
-   * @returns {Promise} - Promise with the API response
+   * @param {Object} nodeData - Data for the new node
+   * @returns {Promise} - API response
    */
-  static async addNode(nodeData) {
-    const endpoint = `${API_BASE_URL}/api/graph/node`;
-    return axios.post(endpoint, nodeData);
-  }
-
+  addNode: async (nodeData) => {
+    try {
+      return await axios.post(`${API_BASE_URL}/api/graph/node`, nodeData);
+    } catch (error) {
+      console.error('Error adding node:', error);
+      throw error;
+    }
+  },
+  
   /**
    * Delete a node from the knowledge graph
-   * @param {string} url - URL of the node to delete
-   * @returns {Promise} - Promise with the API response
+   * @param {string} url - URL identifier of the node to delete
+   * @returns {Promise} - API response
    */
-  static async deleteNode(url) {
-    const endpoint = `${API_BASE_URL}/api/graph/node`;
-    return axios.delete(endpoint, { data: { url } });
-  }
-
+  deleteNode: async (url) => {
+    try {
+      return await axios.delete(`${API_BASE_URL}/api/graph/node`, { data: { url } });
+    } catch (error) {
+      console.error('Error deleting node:', error);
+      throw error;
+    }
+  },
+  
   /**
-   * Add a new relationship between nodes in the knowledge graph
-   * @param {Object} relationshipData - Relationship data with source_url, target_url, rel_type, and properties
-   * @returns {Promise} - Promise with the API response
+   * Add a new relationship to the knowledge graph
+   * @param {Object} relationshipData - Data for the new relationship
+   * @returns {Promise} - API response
    */
-  static async addRelationship(relationshipData) {
-    const endpoint = `${API_BASE_URL}/api/graph/relationship`;
-    return axios.post(endpoint, relationshipData);
-  }
-
+  addRelationship: async (relationshipData) => {
+    try {
+      return await axios.post(`${API_BASE_URL}/api/graph/relationship`, relationshipData);
+    } catch (error) {
+      console.error('Error adding relationship:', error);
+      throw error;
+    }
+  },
+  
   /**
-   * Delete a relationship between nodes in the knowledge graph
-   * @param {Object} relationshipData - Relationship data with source_url, target_url, and rel_type
-   * @returns {Promise} - Promise with the API response
+   * Delete a relationship from the knowledge graph
+   * @param {Object} relationshipData - Data identifying the relationship to delete
+   * @returns {Promise} - API response
    */
-  static async deleteRelationship(relationshipData) {
-    const endpoint = `${API_BASE_URL}/api/graph/relationship`;
-    return axios.delete(endpoint, { data: relationshipData });
-  }
-
+  deleteRelationship: async (relationshipData) => {
+    try {
+      return await axios.delete(`${API_BASE_URL}/api/graph/relationship`, { data: relationshipData });
+    } catch (error) {
+      console.error('Error deleting relationship:', error);
+      throw error;
+    }
+  },
+  
   /**
-   * Run a custom Cypher query on the knowledge graph
-   * @param {string} cypherQuery - Cypher query to execute
-   * @returns {Promise} - Promise with the API response
+   * Run a custom Cypher query
+   * @param {string} cypherQuery - The Cypher query to execute
+   * @returns {Promise} - API response with query results
    */
-  static async runCustomQuery(cypherQuery) {
-    const endpoint = `${API_BASE_URL}/api/graph/query`;
-    return axios.post(endpoint, { cypher_query: cypherQuery });
+  runCustomQuery: async (cypherQuery) => {
+    try {
+      return await axios.post(`${API_BASE_URL}/api/graph/query`, { cypher_query: cypherQuery });
+    } catch (error) {
+      console.error('Error running custom query:', error);
+      throw error;
+    }
+  },
+  
+  /**
+   * Check API server status
+   * @returns {Promise} - API response with status information
+   */
+  checkStatus: async () => {
+    try {
+      return await axios.get(`${API_BASE_URL}/api/status`);
+    } catch (error) {
+      console.error('Error checking API status:', error);
+      throw error;
+    }
   }
-}
+};
 
 export default ApiService; 

@@ -15,6 +15,7 @@ from services.search_service import AzureSearchService
 from services.graph_service import GraphRAGService
 from services.openai_service import AzureOpenAIService
 from services.keyvault_service import get_secret
+from services.conversation_service import ConversationService
 
 # Configure logging
 logging.getLogger('azure').setLevel(logging.WARNING)
@@ -108,6 +109,9 @@ except Exception as e:
     logger.error(f"Failed to initialize graph service: {str(e)}")
     graph_service = None
 
+# Initialize conversation service
+conversation_service = ConversationService()
+
 class ChatRequest(BaseModel):
     query: str
     session_id: Optional[str] = None
@@ -173,16 +177,35 @@ async def chat(request: ChatRequest):
         
         # If we have context data, use OpenAI to generate a response
         if context_data:
-            # Use RAG approach with OpenAI
+            # Save user message to conversation history
+            conversation_service.add_user_message(session_id, request.query)
+            
+            # Get conversation history for the session
+            chat_history = conversation_service.get_conversation_history(session_id)
+            
+            # Use RAG approach with OpenAI and conversation history
             try:
-                response_text = openai_service.generate_response(
-                    query=request.query,
-                    context=context_data,
-                    temperature=0.7
-                )
+                # If chat history exists, use it for context
+                if chat_history and len(chat_history) > 1:  # More than just the current message
+                    response_text = openai_service.generate_response_with_history(
+                        query=request.query,
+                        context=context_data,
+                        chat_history=chat_history[:-1],  # Exclude the last message which we just added
+                        temperature=0.7
+                    )
+                else:
+                    # For first message, use the standard response generator
+                    response_text = openai_service.generate_response(
+                        query=request.query,
+                        context=context_data,
+                        temperature=0.7
+                    )
             except Exception as e:
                 logger.error(f"Error generating response with OpenAI: {str(e)}")
                 response_text = "I'm sorry, I'm having trouble processing your request right now. Please try again later."
+            
+            # Save AI response to conversation history
+            conversation_service.add_ai_message(session_id, response_text)
             
             # Extract references for attribution
             references = [
@@ -192,7 +215,9 @@ async def chat(request: ChatRequest):
             ]
         else:
             # Fallback response
+            conversation_service.add_user_message(session_id, request.query)
             response_text = "I'm sorry, I couldn't find specific information about that. Please try asking another question about Nestle products or services."
+            conversation_service.add_ai_message(session_id, response_text)
             references = []
             
         return ChatResponse(
@@ -405,6 +430,16 @@ async def status():
         "openai_service": openai_service is not None
     }
     return status
+
+@app.delete("/api/conversation/{session_id}")
+async def clear_conversation(session_id: str):
+    """Clear the conversation history for a specific session"""
+    try:
+        conversation_service.clear_memory(session_id)
+        return {"message": f"Conversation cleared for session {session_id}"}
+    except Exception as e:
+        logger.error(f"Error clearing conversation: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to clear conversation: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn

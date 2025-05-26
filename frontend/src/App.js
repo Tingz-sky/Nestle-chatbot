@@ -76,26 +76,26 @@ function App() {
 
   return (
     <Router>
-      <AppContainer>
-        <Header>
-          <SiteName>Nestle</SiteName>
+    <AppContainer>
+      <Header>
+        <SiteName>Nestle</SiteName>
           <Navigation>
             <NavLink to="/">Home</NavLink>
             <NavLink to="/graph-manager">Knowledge Graph Manager</NavLink>
           </Navigation>
-        </Header>
+      </Header>
         
         <Routes>
           <Route path="/graph-manager" element={<GraphManager />} />
           <Route path="/" element={
-            <MainContent>
-              <ChatBotContainer>
-                <ChatBot isOpen={isChatOpen} toggleChat={toggleChat} />
-              </ChatBotContainer>
-            </MainContent>
+      <MainContent>
+        <ChatBotContainer>
+          <ChatBot isOpen={isChatOpen} toggleChat={toggleChat} />
+        </ChatBotContainer>
+      </MainContent>
           } />
         </Routes>
-      </AppContainer>
+    </AppContainer>
     </Router>
   );
 }
