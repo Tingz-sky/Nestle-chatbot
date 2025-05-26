@@ -202,7 +202,7 @@ def build_knowledge_graph():
         password = os.getenv("NEO4J_AURA_PASSWORD") or get_secret("NEO4J-AURA-PASSWORD")
         if not password:
             password = os.getenv("NEO4J_PASSWORD") or get_secret("NEO4J-PASSWORD")
-            
+        
         service = GraphRAGService(
             uri=os.getenv("NEO4J_URI"),
             user=os.getenv("NEO4J_USER"),
