@@ -12,7 +12,7 @@ import {
 const MAX_RETRY_ATTEMPTS = 2;
 const INITIAL_MESSAGE = {
   id: 1, 
-  text: "Welcome to Nestle Assistant! I can provide information about Nestle products, nutrition facts, recipes, and sustainability initiatives. What would you like to learn about today?", 
+  text: "Welcome to NesBot! I can provide information about Nestle products, nutrition facts, recipes, and sustainability initiatives. What would you like to learn about today?", 
   isBot: true
 };
 
@@ -166,7 +166,8 @@ const ChatBot = ({ isOpen, toggleChat }) => {
    * Increases font size for better readability
    */
   const increaseFontSize = () => {
-    if (fontSize < 18) {
+    const maxFontSize = isExpanded ? 22 : 18;
+    if (fontSize < maxFontSize) {
       setFontSize(fontSize + 1);
     }
   };
@@ -175,7 +176,8 @@ const ChatBot = ({ isOpen, toggleChat }) => {
    * Decreases font size
    */
   const decreaseFontSize = () => {
-    if (fontSize > 12) {
+    const minFontSize = 12;
+    if (fontSize > minFontSize) {
       setFontSize(fontSize - 1);
     }
   };
@@ -188,9 +190,9 @@ const ChatBot = ({ isOpen, toggleChat }) => {
           <ChatHeader>
             <ChatTitle>
               <BotLogo>
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABPUlEQVR4nO2UQUoDQRBFf8AbeILewZV4Bj2BnsAzeAIXiSvBnXsXLj2JbhWCiOAiMZJAQB2NYQgkGaebyWQSXEigl9MNP/+v6uluhl2CTS8pgGPgHJgCH8A3sACegDtgCPTqkg+BG+CTv/ENPAIDYKcq+QnwXJJ0CVwCZ8ARcABcAFPL+wLGbvO6jbsEoydgOLcbYyPOj4FrYG7nvhyfF8Y+qEoedDZlV11W4Aa4j/ik/N9yrJzEqk0wLvmYbeQF2I8k2v9DFfJAMimRHBQEF1XJeybpcjORZBfr2qZtLPKl/m4wGW9q0TISA2NnS+M/qvt3tM0UXUbO32kUKDnbrhrZX9tbRUW5Bfo22Trrqm3cNDXUxp32YukS+PIM3iXNzGcunaSXuTZ5xvoDMk/I2qzb8c8C9QEP5ZJ/AV09WAAAAABJRU5ErkJggg==" alt="Bot" />
+                <img src="/images/nestlechatboticon.png" alt="Bot" />
               </BotLogo>
-              SMARTIE
+              NesBot
             </ChatTitle>
             <HeaderButtons>
               <ExpandButton onClick={toggleExpand} title={isExpanded ? "Compact view" : "Expanded view"}>
@@ -200,11 +202,12 @@ const ChatBot = ({ isOpen, toggleChat }) => {
             </HeaderButtons>
           </ChatHeader>
           
-          <ChatMessages>
+          <ChatMessages isExpanded={isExpanded}>
             {messages.map((message, index) => (
               <Message 
                 key={message.id} 
                 isBot={message.isBot}
+                isExpanded={isExpanded}
                 className="message-enter"
                 style={{ 
                   animationDelay: `${index * 0.1}s`,
@@ -237,17 +240,18 @@ const ChatBot = ({ isOpen, toggleChat }) => {
             <div ref={messagesEndRef} />
           </ChatMessages>
           
-          <ResizeControls>
-            <ResizeButton onClick={increaseFontSize} title="Increase font size">
+          <ResizeControls isExpanded={isExpanded}>
+            <ResizeButton isExpanded={isExpanded} onClick={increaseFontSize} title="Increase font size">
               A+
             </ResizeButton>
-            <ResizeButton onClick={decreaseFontSize} title="Decrease font size">
+            <ResizeButton isExpanded={isExpanded} onClick={decreaseFontSize} title="Decrease font size">
               A-
             </ResizeButton>
           </ResizeControls>
           
-          <ChatInputContainer>
+          <ChatInputContainer isExpanded={isExpanded}>
             <ChatInput
+              isExpanded={isExpanded}
               type="text"
               placeholder="Ask me anything..."
               value={input}
@@ -256,14 +260,14 @@ const ChatBot = ({ isOpen, toggleChat }) => {
               disabled={isLoading}
               style={{ fontSize: `${fontSize}px` }}
             />
-            <SendButton onClick={handleSendMessage} disabled={isLoading || !input.trim()}>
+            <SendButton isExpanded={isExpanded} onClick={handleSendMessage} disabled={isLoading || !input.trim()}>
               {isLoading ? "" : "➤"}
             </SendButton>
           </ChatInputContainer>
         </ChatContainer>
       ) : (
         <ChatBubble onClick={toggleChat}>
-          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABPUlEQVR4nO2UQUoDQRBFf8AbeILewZV4Bj2BnsAzeAIXiSvBnXsXLj2JbhWCiOAiMZJAQB2NYQgkGaebyWQSXEigl9MNP/+v6uluhl2CTS8pgGPgHJgCH8A3sACegDtgCPTqkg+BG+CTv/ENPAIDYKcq+QnwXJJ0CVwCZ8ARcABcAFPL+wLGbvO6jbsEoydgOLcbYyPOj4FrYG7nvhyfF8Y+qEoedDZlV11W4Aa4j/ik/N9yrJzEqk0wLvmYbeQF2I8k2v9DFfJAMimRHBQEF1XJeybpcjORZBfr2qZtLPKl/m4wGW9q0TISA2NnS+M/qvt3tM0UXUbO32kUKDnbrhrZX9tbRUW5Bfo22Trrqm3cNDXUxp32YukS+PIM3iXNzGcunaSXuTZ5xvoDMk/I2qzb8c8C9QEP5ZJ/AV09WAAAAABJRU5ErkJggg==" alt="Chat" />
+          <img src="/images/nestlechatboticon.png" alt="Chat" />
         </ChatBubble>
       )}
     </>
