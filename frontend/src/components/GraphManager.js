@@ -291,7 +291,7 @@ const GraphManager = () => {
     
     try {
       setIsLoading(true);
-      const response = await ApiService.addNode(formData);
+      await ApiService.addNode(formData);
       setAlert({ message: 'Node added successfully', type: 'success' });
       setNodeForm({
         title: '',
@@ -318,7 +318,7 @@ const GraphManager = () => {
     if (window.confirm('Are you sure you want to delete this node? This will also delete all relationships connected to this node.')) {
       try {
         setIsLoading(true);
-        const response = await ApiService.deleteNode(url);
+        await ApiService.deleteNode(url);
         
         setAlert({ message: 'Node deleted successfully', type: 'success' });
         
@@ -355,7 +355,7 @@ const GraphManager = () => {
     
     try {
       setIsLoading(true);
-      const response = await ApiService.addRelationship(relationshipForm);
+      await ApiService.addRelationship(relationshipForm);
       setAlert({ message: 'Relationship added successfully', type: 'success' });
       setRelationshipForm({
         source_url: '',
@@ -382,7 +382,7 @@ const GraphManager = () => {
     if (window.confirm('Are you sure you want to delete this relationship?')) {
       try {
         setIsLoading(true);
-        const response = await ApiService.deleteRelationship({
+        await ApiService.deleteRelationship({
           source_url: rel.source_url,
           target_url: rel.target_url,
           rel_type: rel.rel_type

@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 import ApiService from '../services/apiService';
 import { 
@@ -108,7 +107,9 @@ const ChatBot = ({ isOpen, toggleChat }) => {
         
         if (retryCount < MAX_RETRY_ATTEMPTS) {
           // Wait before retry (exponential backoff)
-          await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, retryCount)));
+          // Use a closure to capture the current value of retryCount
+          const currentRetryCount = retryCount;
+          await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, currentRetryCount)));
           retryCount++;
         } else {
           // Remove loading message after all retries failed
