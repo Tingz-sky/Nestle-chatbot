@@ -4,6 +4,7 @@ import json
 from typing import List, Dict, Any, Optional
 from openai import AzureOpenAI
 from tenacity import retry, stop_after_attempt, wait_random_exponential
+import re
 
 logger = logging.getLogger(__name__)
 
@@ -40,10 +41,10 @@ class AzureOpenAIService:
         Generate a response to the user's query using Azure OpenAI and the provided context
         """
         try:
-            # 设置令牌限制，为回复留出空间
-            token_limit = 15000  # 为回复和其他系统消息留出约1000个令牌的空间
+            # Set token limit for response space
+            token_limit = 15000  # Reserve about 1000 tokens for response and other system messages
             
-            # 构造系统消息
+            # Construct system message
             system_message = """You are a helpful, friendly assistant for Nestle products and information.
 
 GUIDELINES FOR RESPONSES:
@@ -64,18 +65,18 @@ GUIDELINES FOR RESPONSES:
 8. Never mention "context" in your responses.
 9. Always maintain the natural flow of conversation."""
             
-            # 估算token数量（粗略估计：每4个字符约1个token）
+            # Estimate token count (rough estimate: about 1 token per 4 characters)
             system_tokens = len(system_message) // 4
             query_tokens = len(query) // 4
-            available_context_tokens = token_limit - system_tokens - query_tokens - 100  # 额外缓冲
+            available_context_tokens = token_limit - system_tokens - query_tokens - 100  # Extra buffer
             
-            # 格式化上下文，但限制其长度
+            # Format context, but limit its length
             formatted_context = self._format_context_with_limit(context, available_context_tokens)
             
-            # 构造用户消息
+            # Construct user message
             user_message = f"Context:\n{formatted_context}\n\nQuestion: {query}"
             
-            # 调用Azure OpenAI API
+            # Call Azure OpenAI API
             response = self.client.chat.completions.create(
                 model=self.deployment_name,
                 messages=[
@@ -87,7 +88,7 @@ GUIDELINES FOR RESPONSES:
                 n=1
             )
             
-            # 提取生成的文本
+            # Extract generated text
             if response and response.choices:
                 return response.choices[0].message.content.strip()
             else:
@@ -241,8 +242,8 @@ GUIDELINES FOR RESPONSES:
             if response and response.choices:
                 query_text = response.choices[0].message.content.strip()
                 
-                # 清理可能存在的代码块标记
-                query_text = query_text.replace("```cypher", "").replace("```", "").strip()
+                # Clean up potential code block markers
+                query_text = re.sub(r'```(?:cypher)?(.*?)```', r'\1', query_text, flags=re.DOTALL)
                 
                 return query_text
             else:
@@ -273,26 +274,25 @@ GUIDELINES FOR RESPONSES:
             title = item.get("title", f"Document {i+1}")
             content = item.get("content", "")
             
-            # 估算当前项的token数量
-            item_text = f"--- {title} ---\n{content}\n\n"
-            item_tokens = len(item_text) // 4  # 粗略估计
+            # Estimate tokens for current item
+            current_tokens = len(title + content) // 4
             
-            # 如果添加当前项会超出限制，则尝试截断内容
-            if estimated_tokens + item_tokens > token_limit:
+            # If adding current item exceeds limit, try truncating content
+            if estimated_tokens + current_tokens > token_limit:
                 remaining_tokens = token_limit - estimated_tokens
-                if remaining_tokens > 30:  # 确保至少有足够的token来添加有意义的内容
-                    # 截断内容以适应剩余空间
+                if remaining_tokens > 30:  # Ensure at least enough tokens for meaningful content
+                    # Truncate content to fit within remaining space
                     max_chars = remaining_tokens * 4
                     truncated_content = content[:max_chars - 20] + "..."
                     truncated_text = f"--- {title} ---\n{truncated_content}\n\n"
                     formatted_text += truncated_text
                 break
             
-            # 添加完整项
-            formatted_text += item_text
-            estimated_tokens += item_tokens
+            # Add full item
+            formatted_text += f"--- {title} ---\n{content}\n\n"
+            estimated_tokens += current_tokens
             
-            # 如果已经达到限制，停止添加
+            # If limit reached, stop adding
             if estimated_tokens >= token_limit:
                 break
         

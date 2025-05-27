@@ -1,80 +1,80 @@
-# 雀巢AI聊天机器人
+# Nestle AI Chatbot
 
-一个基于Azure OpenAI和Neo4j的智能聊天机器人，可以回答关于雀巢产品和信息的问题。
+An intelligent chatbot based on Azure OpenAI and Neo4j that can answer questions about Nestle products and information.
 
-## 技术架构
+## Technical Architecture
 
-该项目使用以下技术：
+This project uses the following technologies:
 
-- **Web爬虫**：使用Selenium爬取雀巢网站内容
-- **Neo4j图数据库**：存储结构化的产品和内容信息
-- **Azure Cognitive Search**：提供高效的向量搜索
-- **Azure OpenAI**：为聊天机器人提供自然语言理解和生成能力
-- **RAG (Retrieval-Augmented Generation)**：结合检索和生成，提供准确的回答
+- **Web Crawler**: Using Selenium to scrape Nestle website content
+- **Neo4j Graph Database**: Storing structured product and content information
+- **Azure Cognitive Search**: Providing efficient vector search capabilities
+- **Azure OpenAI**: Providing natural language understanding and generation capabilities for the chatbot
+- **RAG (Retrieval-Augmented Generation)**: Combining retrieval and generation to provide accurate answers
 
-## 项目设置
+## Project Setup
 
-### 前提条件
+### Prerequisites
 
 1. Python 3.8+
-2. Neo4j数据库
-3. Azure OpenAI服务
-4. Azure Cognitive Search服务
+2. Neo4j database
+3. Azure OpenAI service
+4. Azure Cognitive Search service
 
-### 安装步骤
+### Installation Steps
 
-1. 克隆仓库
-2. 安装依赖：`pip install -r requirements.txt`
-3. 设置环境变量：
+1. Clone the repository
+2. Install dependencies: `pip install -r requirements.txt`
+3. Set up environment variables:
    ```bash
    source setup_env.sh
    ```
-   请确保先在`setup_env.sh`中填入您的API密钥和端点信息
+   Please make sure to fill in your API keys and endpoint information in `setup_env.sh` first
 
-4. 启动应用程序：
+4. Start the application:
    ```bash
    cd backend
    python main.py
    ```
 
-### 数据初始化
+### Data Initialization
 
-首次运行时，需要爬取网站内容并构建图数据库：
+On first run, you need to scrape website content and build the graph database:
 
 ```bash
 curl -X POST http://localhost:8000/api/refresh-content
 ```
 
-## 使用方法
+## Usage
 
-启动应用后，可以通过以下API与聊天机器人交互：
+After starting the application, you can interact with the chatbot through the following APIs:
 
-- `POST /api/chat`：发送查询并获取回复
-- `POST /api/refresh-content`：刷新内容数据
-- `GET /api/status`：检查服务状态
+- `POST /api/chat`: Send a query and get a reply
+- `POST /api/refresh-content`: Refresh content data
+- `GET /api/status`: Check service status
 
-## RAG工作流程
+## RAG Workflow
 
-1. 用户发送查询
-2. 系统首先在Neo4j图数据库中搜索相关信息
-3. 如果找不到，则使用Azure Cognitive Search进行向量搜索
-4. 将检索到的内容发送给Azure OpenAI进行上下文理解和回答生成
-5. 返回格式化的回答，并提供信息来源引用
+1. User sends a query
+2. System first searches for relevant information in the Neo4j graph database
+3. If not found, it uses Azure Cognitive Search for vector search
+4. The retrieved content is sent to Azure OpenAI for context understanding and answer generation
+5. Returns a formatted answer with reference sources
 
-## 项目结构
+## Project Structure
 
 ```
 ├── backend/
 │   ├── services/
-│   │   ├── web_scraper.py     # 网站爬虫
-│   │   ├── graph_service.py   # Neo4j图数据库服务
-│   │   ├── search_service.py  # Azure搜索服务
-│   │   └── openai_service.py  # Azure OpenAI服务
-│   ├── main.py                # 主应用程序
-│   └── data/                  # 爬取的数据存储
-├── frontend/                  # 前端代码(如有)
-├── setup_env.sh               # 环境变量设置
-└── README.md                  # 项目说明
+│   │   ├── web_scraper.py     # Website crawler
+│   │   ├── graph_service.py   # Neo4j graph database service
+│   │   ├── search_service.py  # Azure search service
+│   │   └── openai_service.py  # Azure OpenAI service
+│   ├── main.py                # Main application
+│   └── data/                  # Scraped data storage
+├── frontend/                  # Frontend code (if any)
+├── setup_env.sh               # Environment variable setup
+└── README.md                  # Project documentation
 ```
 
 ## License
@@ -96,7 +96,42 @@ This project now uses Azure Key Vault to securely store sensitive information in
 
 ## Setup
 
-### Azure Key Vault Setup
+### Automatic Azure Resources Setup
+
+This project includes an automated script to set up all necessary Azure resources for the Nestle AI Chatbot:
+
+1. Make sure you have Azure CLI installed and you're logged in:
+   ```bash
+   # Install Azure CLI (if not already installed)
+   # macOS
+   brew install azure-cli
+   
+   # Windows
+   winget install -e --id Microsoft.AzureCLI
+   
+   # Login to Azure
+   az login
+   ```
+
+2. Run the automated setup script:
+   ```bash
+   python setup_azure_resources.py
+   ```
+
+3. The script will:
+   - Create a resource group
+   - Set up Azure OpenAI service with necessary model deployments
+   - Create Azure Cognitive Search service with the required index
+   - Set up Azure Key Vault for secure secret storage
+   - Create App Service Plan and Web App for backend deployment
+   - Create Static Web App for frontend deployment
+   - Configure all resources and generate the `setup_env.sh` file
+
+4. After the script completes, follow the displayed "Next steps" to finish setting up your project.
+
+### Manual Azure Resources Setup
+
+If you prefer to set up resources manually, follow these steps:
 
 1. Create an Azure Key Vault resource if you don't have one already:
 

@@ -155,30 +155,30 @@ async def chat(request: ChatRequest):
         # Generate a session ID if not provided
         session_id = request.session_id or f"session_{int(time.time())}"
         
-        # 获取当前用户查询
+        # Get current user query
         user_query = request.query
         
-        # 检查是否是已有会话，并检查查询中是否包含指代词
+        # Check if it's an existing session and if the query contains reference terms
         reference_terms = ["it", "this", "that", "these", "those", "they", "them", "its", "their", "this product"]
         has_reference = any(ref in user_query.lower().split() for ref in reference_terms)
         
-        # 如果包含指代词并且有会话历史，尝试增强查询
+        # If contains reference terms and has session history, try to enhance the query
         search_query = user_query
         if has_reference and session_id in conversation_service.sessions:
-            # 获取历史对话
+            # Get conversation history
             chat_history = conversation_service.get_conversation_history(session_id)
             
-            # 如果有历史对话，尝试从最近的对话中找出可能被指代的实体
+            # If there's history, try to find entities that might be referenced
             if chat_history and len(chat_history) >= 2:
-                # 使用最近的助手回复进行上下文增强查询
+                # Use recent assistant replies to enhance context
                 recent_assistant_msgs = [msg for msg in chat_history if msg["type"] == "ai"]
                 
                 if recent_assistant_msgs:
-                    # 提取最近的一次助手回复中可能提到的产品名称
+                    # Extract potential product names mentioned in the most recent assistant reply
                     last_assistant_msg = recent_assistant_msgs[-1]["content"]
                     first_paragraph = last_assistant_msg.split('\n\n')[0] if '\n\n' in last_assistant_msg else last_assistant_msg
                     
-                    # 增强查询以包含上下文信息
+                    # Enhance query to include context information
                     if first_paragraph and len(first_paragraph) > 10:
                         logger.info(f"Enhancing query with context from previous conversation")
                         search_query = f"{user_query} (referring to previous topic: {first_paragraph})"
@@ -206,7 +206,7 @@ async def chat(request: ChatRequest):
         # If we have context data, use OpenAI to generate a response
         if context_data:
             # Save user message to conversation history
-            conversation_service.add_user_message(session_id, user_query)  # 保存原始查询，而非增强查询
+            conversation_service.add_user_message(session_id, user_query)  # Save original query, not enhanced query
             
             # Get conversation history for the session
             chat_history = conversation_service.get_conversation_history(session_id)
@@ -216,7 +216,7 @@ async def chat(request: ChatRequest):
                 # If chat history exists, use it for context
                 if chat_history and len(chat_history) > 1:  # More than just the current message
                     response_text = openai_service.generate_response_with_history(
-                        query=user_query,  # 使用原始查询
+                        query=user_query,  # Use original query
                         context=context_data,
                         chat_history=chat_history[:-1],  # Exclude the last message which we just added
                         temperature=0.7
@@ -235,12 +235,20 @@ async def chat(request: ChatRequest):
             # Save AI response to conversation history
             conversation_service.add_ai_message(session_id, response_text)
             
-            # Extract references for attribution
-            references = [
-                {"title": result.get("title", ""), "url": result.get("url", "")}
-                for result in context_data
-                if "title" in result and "url" in result
-            ]
+            # Extract references for attribution with deduplication
+            seen_urls = set()
+            references = []
+            
+            for result in context_data:
+                if "title" in result and "url" in result:
+                    url = result.get("url", "")
+                    # Only add URLs we haven't seen yet
+                    if url and url not in seen_urls:
+                        seen_urls.add(url)
+                        references.append({
+                            "title": result.get("title", ""),
+                            "url": url
+                        })
         else:
             # Fallback response
             conversation_service.add_user_message(session_id, user_query)

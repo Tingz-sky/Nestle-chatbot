@@ -12,13 +12,13 @@ class GraphRAGService:
         self.uri = uri
         self.user = user
         self.password = password
-        self.openai_service = openai_service  # OpenAI服务实例
+        self.openai_service = openai_service  # OpenAI service instance
         
         # Initialize Neo4j driver if credentials are provided
         if uri and user and password:
             try:
                 self.driver = GraphDatabase.driver(uri, auth=(user, password))
-                # 验证连接
+                # Verify connection
                 with self.driver.session() as session:
                     result = session.run("RETURN 1")
                     result.single()

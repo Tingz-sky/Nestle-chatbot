@@ -1,7 +1,9 @@
 import axios from 'axios';
 
-// Get API base URL from environment variable or use default
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000';
+// Environment configuration - auto-detects production or development
+const API_BASE_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://nestlechatbot-api-fhbxhbfcb9d9hkfn.canadacentral-01.azurewebsites.net'
+  : '';  // Empty string will use the proxy in development
 
 /**
  * Service for interacting with the backend API
@@ -13,14 +15,16 @@ const ApiService = {
    * @param {string} sessionId - Optional session ID for continuing a conversation
    * @returns {Promise} - API response
    */
-  sendChatMessage: async (message, sessionId = null) => {
+  sendChatMessage: async (message, sessionId = null, timeout = 20000) => {
     try {
       const payload = { 
         query: message,
         session_id: sessionId
       };
       
-      return await axios.post(`${API_BASE_URL}/api/chat`, payload);
+      return await axios.post(`${API_BASE_URL}/api/chat`, payload, {
+        timeout: timeout
+      });
     } catch (error) {
       console.error('Error sending message:', error);
       throw error;
@@ -146,6 +150,19 @@ const ApiService = {
       return await axios.get(`${API_BASE_URL}/api/status`);
     } catch (error) {
       console.error('Error checking API status:', error);
+      throw error;
+    }
+  },
+  
+  /**
+   * Trigger content refresh on the backend
+   * @returns {Promise} - API response
+   */
+  refreshContent: async () => {
+    try {
+      return await axios.post(`${API_BASE_URL}/api/refresh-content`);
+    } catch (error) {
+      console.error('Error refreshing content:', error);
       throw error;
     }
   }

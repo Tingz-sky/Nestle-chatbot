@@ -198,7 +198,7 @@ def build_knowledge_graph():
             logger.info("Using empty data set")
             data = []
         
-        # 优先使用Aura密码
+        # Prioritize using Aura password
         password = os.getenv("NEO4J_AURA_PASSWORD") or get_secret("NEO4J-AURA-PASSWORD")
         if not password:
             password = os.getenv("NEO4J_PASSWORD") or get_secret("NEO4J-PASSWORD")

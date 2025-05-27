@@ -121,7 +121,7 @@ tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-/* 动画效果 */
+/* Animation effects */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
