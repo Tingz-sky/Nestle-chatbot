@@ -187,6 +187,50 @@ const ResultContainer = styled.div`
   white-space: pre-wrap;
 `;
 
+// New styled component for modal
+const Modal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`;
+
+const ModalContent = styled.div`
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+`;
+
+const ModalHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+const CloseButton = styled.button`
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+  
+  &:hover {
+    color: #000;
+  }
+`;
+
 const GraphManager = () => {
   // State for tab management
   const [activeTab, setActiveTab] = useState('nodes');
@@ -200,6 +244,10 @@ const GraphManager = () => {
     type: 'Entity'
   });
   
+  // State for node editing
+  const [editingNode, setEditingNode] = useState(null);
+  const [isEditingNode, setIsEditingNode] = useState(false);
+  
   // State for relationships
   const [relationships, setRelationships] = useState([]);
   const [relationshipForm, setRelationshipForm] = useState({
@@ -208,6 +256,10 @@ const GraphManager = () => {
     rel_type: 'MENTIONS',
     properties: {}
   });
+  
+  // State for relationship editing
+  const [editingRelationship, setEditingRelationship] = useState(null);
+  const [isEditingRelationship, setIsEditingRelationship] = useState(false);
   
   // State for custom query
   const [customQuery, setCustomQuery] = useState("MATCH (n) RETURN n LIMIT 10");
@@ -266,6 +318,74 @@ const GraphManager = () => {
   // Determine if content and URL are required based on node type
   const isContentRequired = nodeForm.type === 'Page';
   const isUrlRequired = nodeForm.type === 'Page';
+  
+  // Open edit node modal
+  const handleEditNode = (node) => {
+    setEditingNode(node);
+    setNodeForm({
+      title: node.title,
+      content: node.content || '',
+      url: node.url,
+      type: node.label || node.type || 'Entity'
+    });
+    setIsEditingNode(true);
+  };
+  
+  // Close edit node modal
+  const handleCloseEditNodeModal = () => {
+    setIsEditingNode(false);
+    setEditingNode(null);
+    setNodeForm({
+      title: '',
+      content: '',
+      url: '',
+      type: 'Entity'
+    });
+  };
+  
+  // Update node
+  const handleUpdateNode = async (e) => {
+    e.preventDefault();
+    
+    // Validate form - title is always required
+    if (!nodeForm.title) {
+      setAlert({ message: 'Title is required', type: 'error' });
+      return;
+    }
+    
+    // For Page type, content and URL are required
+    if (nodeForm.type === 'Page' && (!nodeForm.content || !nodeForm.url)) {
+      setAlert({ message: 'Content and URL are required for Page type nodes', type: 'error' });
+      return;
+    }
+    
+    try {
+      setIsLoading(true);
+      
+      // First delete the existing node
+      await ApiService.deleteNode(nodeForm.url);
+      
+      // Then create a new node with the updated data
+      await ApiService.addNode(nodeForm);
+      
+      setAlert({ message: 'Node updated successfully', type: 'success' });
+      
+      // Close edit modal
+      handleCloseEditNodeModal();
+      
+      // Refresh nodes list
+      fetchNodes();
+      fetchRelationships(); // Refresh relationships too as they might be affected
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error updating node:', error);
+      setAlert({
+        message: 'Failed to update node: ' + (error.response?.data?.detail || error.message),
+        type: 'error'
+      });
+      setIsLoading(false);
+    }
+  };
   
   // Submit node form
   const handleNodeSubmit = async (e) => {
@@ -341,6 +461,74 @@ const GraphManager = () => {
   const handleRelationshipInputChange = (e) => {
     const { name, value } = e.target;
     setRelationshipForm(prev => ({ ...prev, [name]: value }));
+  };
+  
+  // Open edit relationship modal
+  const handleEditRelationship = (relationship) => {
+    setEditingRelationship(relationship);
+    setRelationshipForm({
+      source_url: relationship.source_url,
+      target_url: relationship.target_url,
+      rel_type: relationship.rel_type,
+      properties: relationship.properties || {}
+    });
+    setIsEditingRelationship(true);
+  };
+  
+  // Close edit relationship modal
+  const handleCloseEditRelationshipModal = () => {
+    setIsEditingRelationship(false);
+    setEditingRelationship(null);
+    setRelationshipForm({
+      source_url: '',
+      target_url: '',
+      rel_type: 'MENTIONS',
+      properties: {}
+    });
+  };
+  
+  // Update relationship
+  const handleUpdateRelationship = async (e) => {
+    e.preventDefault();
+    
+    // Validate form
+    if (!relationshipForm.source_url || !relationshipForm.target_url || !relationshipForm.rel_type) {
+      setAlert({ message: 'Please fill in all required fields', type: 'error' });
+      return;
+    }
+    
+    try {
+      setIsLoading(true);
+      
+      // Original relationship data for deletion
+      const originalData = {
+        source_url: editingRelationship.source_url,
+        target_url: editingRelationship.target_url,
+        rel_type: editingRelationship.rel_type
+      };
+      
+      // First delete the existing relationship
+      await ApiService.deleteRelationship(originalData);
+      
+      // Then create a new relationship with the updated data
+      await ApiService.addRelationship(relationshipForm);
+      
+      setAlert({ message: 'Relationship updated successfully', type: 'success' });
+      
+      // Close edit modal
+      handleCloseEditRelationshipModal();
+      
+      // Refresh relationships list
+      fetchRelationships();
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error updating relationship:', error);
+      setAlert({
+        message: 'Failed to update relationship: ' + (error.response?.data?.detail || error.message),
+        type: 'error'
+      });
+      setIsLoading(false);
+    }
   };
   
   // Submit relationship form
@@ -551,6 +739,13 @@ const GraphManager = () => {
                         <Td>{node.label || node.type}</Td>
                         <Td>
                           <ActionButton 
+                            onClick={() => handleEditNode(node)}
+                            disabled={isLoading}
+                            style={{ marginRight: '5px' }}
+                          >
+                            Edit
+                          </ActionButton>
+                          <ActionButton 
                             danger 
                             onClick={() => handleDeleteNode(node.url)}
                             disabled={isLoading}
@@ -653,6 +848,13 @@ const GraphManager = () => {
                         <Td>{rel.target_title || rel.target_url}</Td>
                         <Td>
                           <ActionButton 
+                            onClick={() => handleEditRelationship(rel)}
+                            disabled={isLoading}
+                            style={{ marginRight: '5px' }}
+                          >
+                            Edit
+                          </ActionButton>
+                          <ActionButton 
                             danger 
                             onClick={() => handleDeleteRelationship(rel)}
                             disabled={isLoading}
@@ -704,6 +906,151 @@ const GraphManager = () => {
           </QueryContainer>
         )}
       </ContentPanel>
+      
+      {/* Edit Node Modal */}
+      {isEditingNode && (
+        <Modal>
+          <ModalContent>
+            <ModalHeader>
+              <h2>Edit Node</h2>
+              <CloseButton onClick={handleCloseEditNodeModal}>&times;</CloseButton>
+            </ModalHeader>
+            
+            <Form onSubmit={handleUpdateNode}>
+              <FormGroup>
+                <Label htmlFor="edit-title">Title*</Label>
+                <Input 
+                  id="edit-title"
+                  name="title" 
+                  value={nodeForm.title} 
+                  onChange={handleNodeInputChange} 
+                  placeholder="Node title"
+                  required 
+                />
+              </FormGroup>
+              
+              <FormGroup>
+                <Label htmlFor="edit-content">Content{isContentRequired ? '*' : ''}</Label>
+                <TextArea 
+                  id="edit-content"
+                  name="content" 
+                  value={nodeForm.content} 
+                  onChange={handleNodeInputChange} 
+                  placeholder={isContentRequired ? "Required for Page nodes" : "Optional for Entity nodes"}
+                  required={isContentRequired}
+                />
+              </FormGroup>
+              
+              <FormGroup>
+                <Label htmlFor="edit-url">URL (cannot be changed)</Label>
+                <Input 
+                  id="edit-url"
+                  name="url" 
+                  value={nodeForm.url} 
+                  readOnly
+                  disabled
+                  style={{ backgroundColor: '#f0f0f0' }}
+                />
+                <div style={{ fontSize: '12px', color: '#6c757d', marginTop: '5px' }}>
+                  The URL is the unique identifier and cannot be changed
+                </div>
+              </FormGroup>
+              
+              <FormGroup>
+                <Label htmlFor="edit-type">Type</Label>
+                <Select 
+                  id="edit-type"
+                  name="type" 
+                  value={nodeForm.type} 
+                  onChange={handleNodeInputChange}
+                >
+                  <option value="Entity">Entity (Knowledge Graph Node)</option>
+                  <option value="Page">Page (Website Content)</option>
+                  <option value="Product">Product</option>
+                  <option value="Category">Category</option>
+                  <option value="Recipe">Recipe</option>
+                  <option value="Ingredient">Ingredient</option>
+                </Select>
+              </FormGroup>
+              
+              <Button type="submit" disabled={isLoading}>
+                {isLoading ? 'Updating...' : 'Update Node'}
+              </Button>
+            </Form>
+          </ModalContent>
+        </Modal>
+      )}
+      
+      {/* Edit Relationship Modal */}
+      {isEditingRelationship && (
+        <Modal>
+          <ModalContent>
+            <ModalHeader>
+              <h2>Edit Relationship</h2>
+              <CloseButton onClick={handleCloseEditRelationshipModal}>&times;</CloseButton>
+            </ModalHeader>
+            
+            <Form onSubmit={handleUpdateRelationship}>
+              <FormGroup>
+                <Label htmlFor="edit-source-url">Source Node URL*</Label>
+                <Select 
+                  id="edit-source-url"
+                  name="source_url" 
+                  value={relationshipForm.source_url} 
+                  onChange={handleRelationshipInputChange}
+                  required
+                >
+                  <option value="">Select a source node</option>
+                  {nodes.map((node, index) => (
+                    <option key={`edit-source-${index}`} value={node.url}>
+                      {node.title} ({node.url})
+                    </option>
+                  ))}
+                </Select>
+              </FormGroup>
+              
+              <FormGroup>
+                <Label htmlFor="edit-rel-type">Relationship Type*</Label>
+                <Select 
+                  id="edit-rel-type"
+                  name="rel_type" 
+                  value={relationshipForm.rel_type} 
+                  onChange={handleRelationshipInputChange}
+                  required
+                >
+                  <option value="MENTIONS">MENTIONS</option>
+                  <option value="CONTAINS">CONTAINS</option>
+                  <option value="RELATED_TO">RELATED_TO</option>
+                  <option value="SIMILAR_TO">SIMILAR_TO</option>
+                  <option value="INGREDIENT_OF">INGREDIENT_OF</option>
+                </Select>
+              </FormGroup>
+              
+              <FormGroup>
+                <Label htmlFor="edit-target-url">Target Node URL*</Label>
+                <Select 
+                  id="edit-target-url"
+                  name="target_url" 
+                  value={relationshipForm.target_url} 
+                  onChange={handleRelationshipInputChange}
+                  required
+                >
+                  <option value="">Select a target node</option>
+                  {nodes.map((node, index) => (
+                    <option key={`edit-target-${index}`} value={node.url}>
+                      {node.title} ({node.url})
+                    </option>
+                  ))}
+                </Select>
+              </FormGroup>
+              
+              <Button type="submit" disabled={isLoading}>
+                {isLoading ? 'Updating...' : 'Update Relationship'}
+              </Button>
+            </Form>
+          </ModalContent>
+        </Modal>
+      )}
     </Container>
   );
 };

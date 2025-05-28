@@ -190,11 +190,28 @@ The Nestle AI Chatbot is deployed on Microsoft Azure using several managed servi
 The chatbot utilizes the following Azure resources:
 
 1. **Resource Group**: `nestlechatbot-rg` (East US)
+   - Central management for all project resources
+   - Simplifies resource administration and billing
+
 2. **Azure OpenAI Service**: `nestleopenai` (East US)
+   - Provides advanced language understanding and generation
+   - Supports conversation context and natural responses
+
 3. **Azure Cognitive Search**: `nestlechatbot-search` (Central US)
+   - Vector search for semantic understanding
+   - Full-text search capabilities for content retrieval
+
 4. **Azure App Service**: `nestlechatbot-api` (Canada Central)
+   - Hosts the FastAPI backend application
+   - Managed platform with automatic scaling
+
 5. **Azure Static Web App**: `nestlechatbot-frontend` (East US 2)
+   - Hosts the React frontend application
+   - Integrated CDN for fast content delivery
+
 6. **Azure Key Vault**: `nestlechatbot-kv` (East US)
+   - Secure credential storage and management
+   - Integrates with other Azure services for authentication
 
 ### Deployment Options
 
@@ -258,7 +275,13 @@ The project uses a Neo4j Aura database for the knowledge graph:
 ```
 nestle-chatbot/
 ├── backend/           # FastAPI backend application
+│   ├── main.py        # Main application entry point
+│   ├── services/      # Service modules for different functionalities
+│   └── models/        # Data models and schemas
 ├── frontend/          # React frontend application
+│   ├── src/           # Source code
+│   ├── public/        # Static assets
+│   └── package.json   # Dependencies and scripts
 ├── azure-deployment/  # Azure deployment configuration
 ├── run.py             # Application entry point
 ├── requirements.txt   # Python dependencies
