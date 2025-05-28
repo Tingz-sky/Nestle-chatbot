@@ -6,6 +6,8 @@ A modern conversational AI chatbot for the Nestle website, leveraging Azure Open
 
 Access the deployed chatbot here: [Nestle AI Chatbot](https://happy-plant-09497fa0f.6.azurestaticapps.net)
 
+**Note**: The Knowledge Graph Manager uses Neo4j Aura Free Tier, which may occasionally experience connection issues due to automatic instance sleep after periods of inactivity. If you encounter errors like "Failed to fetch nodes" or connection timeouts, simply refresh the page and try again.
+
 ## Table of Contents
 
 - [Technology Stack](#technology-stack)
@@ -64,7 +66,9 @@ The chatbot uses a sophisticated retrieval process:
 
 ### 4. Contextual Response Generation
 - Retrieved information is passed to Azure OpenAI for response generation
-- The system maintains conversation context, allowing for follow-up questions
+- The system leverages LangChain's conversation memory to maintain detailed context throughout multi-turn conversations
+- This enables natural follow-up questions without repeating context, creating a more human-like interaction experience
+- Users can refer to previous questions and answers, and the system understands these references
 - Response formatting includes proper attribution and source references
 
 ### 5. Interactive Knowledge Management
@@ -294,13 +298,15 @@ nestle-chatbot/
 - The chatbot requires Azure OpenAI and Cognitive Search services to function properly
 - Local development requires setting up environment variables with valid Azure service credentials
 - The knowledge graph requires access to the Neo4j Aura database (password available upon request via email)
+- The Knowledge Graph Manager interface may experience temporary connection issues due to Neo4j Aura Free Tier limitations, requiring a page refresh
 - Queries are limited to Nestle product information contained in the knowledge base
 - Azure OpenAI service quotas may limit the number of requests you can make
 
 ## Additional Features
 
 - **Knowledge Graph Manager**: Visual interface for managing the product knowledge graph
-- **Contextual Conversations**: The chatbot maintains context throughout the conversation
+- **Multi-turn Conversation Support**: The chatbot maintains context throughout extended conversations, enabling natural follow-up questions without requiring users to repeat information
+- **Context-Aware Responses**: LangChain's conversation memory allows the system to understand references to previous messages, creating a more natural dialog flow
 - **Custom Queries**: Support for advanced graph queries through the UI
 - **CORS Support**: Configured for cross-origin requests
 - **Error Handling**: Robust error handling and user feedback 
