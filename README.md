@@ -1,216 +1,427 @@
 # Nestle AI Chatbot
 
-An intelligent chatbot based on Azure OpenAI and Neo4j that can answer questions about Nestle products and information.
+A modern conversational AI chatbot for the Nestle website, leveraging Azure OpenAI, Cognitive Search, and Knowledge Graph technology.
 
-## Technical Architecture
+## Live Demo
 
-This project uses the following technologies:
+Access the deployed chatbot here: [Nestle AI Chatbot](https://happy-plant-09497fa0f.6.azurestaticapps.net)
 
-- **Web Crawler**: Using Selenium to scrape Nestle website content
-- **Neo4j Graph Database**: Storing structured product and content information
-- **Azure Cognitive Search**: Providing efficient vector search capabilities
-- **Azure OpenAI**: Providing natural language understanding and generation capabilities for the chatbot
-- **RAG (Retrieval-Augmented Generation)**: Combining retrieval and generation to provide accurate answers
+## Table of Contents
 
-## Project Setup
+- [Technology Stack](#technology-stack)
+- [Features](#features)
+- [Implementation Approach](#implementation-approach)
+- [Cloud Deployment](#cloud-deployment)
+- [Local Setup](#local-setup)
+- [Azure Resource Setup](#azure-resource-setup)
+- [Project Structure](#project-structure)
+- [Known Limitations](#known-limitations)
+- [Additional Features](#additional-features)
+
+## Technology Stack
+
+### Backend
+- Python 3.10+
+- FastAPI
+- Azure OpenAI Service (GPT-3.5/GPT-4)
+- Azure Cognitive Search
+- Neo4j Graph Database (Neo4j Aura)
+- LangChain for orchestration
+
+### Frontend
+- React.js
+- Styled Components
+- Axios for API communication
+
+### Deployment
+- Azure App Service
+- Azure Static Web Apps
+- Azure Key Vault for secure secrets management
+
+## Features
+
+- **Conversational AI**: Natural language interaction using Azure OpenAI
+- **Knowledge Graph**: Graph-based representation of Nestle product relationships
+- **Semantic Search**: Find relevant information across Nestle content
+- **Knowledge Management**: Interface for managing the knowledge graph
+- **Responsive Design**: Works on mobile and desktop devices
+
+## Implementation Approach
+
+This chatbot implements a Graph-based Retrieval Augmented Generation (GraphRAG) architecture that enhances traditional RAG with structured knowledge representation. Here's how the system works:
+
+### 1. Web Scraping and Data Collection
+- The system uses a custom web scraper built with Selenium and BeautifulSoup to extract content from the Made with Nestle website
+- The scraper navigates through product pages, recipes, and information pages to collect comprehensive data
+- Content is processed, cleaned, and stored for further use
+
+### 2. Knowledge Graph Construction
+- Information extracted from the website is organized into a graph structure using Neo4j
+- Entities (products, ingredients, recipes) are represented as nodes
+- Relationships between entities (contains, mentions, related_to) are captured as edges
+- This approach preserves semantic relationships between different pieces of information
+
+### 3. Multi-step Retrieval Process
+The chatbot uses a sophisticated retrieval process:
+
+1. **Graph-Based Retrieval**: When a user asks a question, the system first attempts to find relevant information in the knowledge graph
+   - For structured queries (e.g., "What ingredients are in KitKat?"), the graph provides precise answers
+   - The system uses natural language understanding to generate appropriate Cypher queries
+
+2. **Vector Search Fallback**: If graph retrieval doesn't yield sufficient results, the system falls back to vector search
+   - Content is indexed in Azure Cognitive Search with vector embeddings
+   - Semantic search capabilities find relevant documents even when exact keywords aren't present
+
+### 4. Contextual Response Generation
+- Retrieved information is passed to Azure OpenAI for response generation
+- The system maintains conversation context, allowing for follow-up questions
+- Response formatting includes proper attribution and source references
+
+### 5. Interactive Knowledge Management
+- A web interface allows authorized users to:
+  - View and explore the knowledge graph
+  - Add new nodes (entities) and relationships
+  - Run custom queries to extract specific information
+  - Update existing information
+
+### GraphRAG vs. Traditional RAG
+The graph-based approach offers several advantages:
+- Preserves structural relationships between entities
+- Enables more precise answers to specific queries
+- Provides better handling of complex, multi-hop queries
+- Allows for reasoning over the knowledge base
+
+### Security and Scalability
+- Azure Key Vault securely stores all sensitive credentials
+- The architecture is designed to scale with increasing content and user load
+- System components are decoupled for easier maintenance and updates
+
+This implementation aligns with modern AI best practices by combining structured knowledge representation with advanced language models, resulting in a more accurate and context-aware chatbot experience.
+
+## Cloud Deployment
+
+The Nestle AI Chatbot is fully deployed on Microsoft Azure, utilizing several managed services to ensure reliability, scalability, and security. This section outlines the current deployment architecture and provides guidance for deploying similar solutions.
+
+### Deployed Azure Resources
+
+The chatbot is deployed using the following Azure resources:
+
+1. **Resource Group**: `nestlechatbot-rg` (East US)
+   - Centralized management of all chatbot resources
+
+2. **Azure OpenAI Service**: `nestleopenai` (East US)
+   - Service Tier: Standard (S0)
+   - Custom Subdomain: nestleopenai.openai.azure.com
+   - Model Deployment: GPT-3.5 Turbo for conversational AI capabilities
+
+3. **Azure Cognitive Search**: `nestlechatbot-search` (Central US)
+   - Tier: Free
+   - Configuration: 1 replica, 1 partition
+   - Vector search capability for semantic document retrieval
+
+4. **Azure App Service**: `nestlechatbot-api` (Canada Central)
+   - Hosting the FastAPI backend
+   - Runtime: Python 3.10
+   - HTTPS Only: Enabled
+   - CORS configured for static web app frontend
+   - Command: `cd backend && gunicorn --bind=0.0.0.0 --timeout 600 --worker-class uvicorn.workers.UvicornWorker main:app`
+
+5. **Azure Static Web App**: `nestlechatbot-frontend` (East US 2)
+   - Hosting the React frontend
+   - Tier: Free
+   - Default URL: happy-plant-09497fa0f.6.azurestaticapps.net
+   - Connected to GitHub repository for CI/CD
+
+6. **Azure Key Vault**: `nestlechatbot-kv` (East US)
+   - Securely storing sensitive credentials (API keys, database passwords)
+   - Managed identity integration with App Service
+
+### CI/CD Pipeline
+
+The project uses GitHub Actions for automated deployment:
+
+1. **Backend Pipeline**: `.github/workflows/main_nestlechatbot-api.yml`
+   - Triggers on push to main branch
+   - Python dependencies installation
+   - Unit tests execution
+   - Deployment to Azure App Service
+
+2. **Frontend Pipeline**: `.github/workflows/azure-static-web-apps-happy-plant-09497fa0f.yml`
+   - Triggers on push to main branch or pull request
+   - Node.js setup and dependency installation
+   - Build process with environment variables
+   - Deployment to Azure Static Web Apps
+
+### Deployment Steps
+
+To deploy a similar chatbot application to Azure:
+
+1. **Set up Azure Resources**:
+   ```bash
+   # Run the included setup script
+   python setup_azure_resources.py
+   
+   # Or manually create resources via Azure Portal or CLI
+   ```
+
+2. **Configure GitHub Secrets**:
+   - `AZURE_CREDENTIALS`: Service principal credentials for deployment
+   - `AZURE_WEBAPP_PUBLISH_PROFILE`: Publish profile for App Service
+   - `AZURE_STATIC_WEB_APPS_API_TOKEN`: Deployment token for Static Web App
+
+3. **Deploy Backend**:
+   ```bash
+   # Initial deployment (subsequent deployments handled by GitHub Actions)
+   az webapp deployment source config-local-git --name nestlechatbot-api --resource-group nestlechatbot-rg
+   git remote add azure <git-url-from-previous-command>
+   git push azure main
+   ```
+
+4. **Deploy Frontend**:
+   ```bash
+   # Build React app locally
+   cd frontend
+   npm run build
+   
+   # Deploy to Static Web App (initial deployment)
+   az staticwebapp deploy --source-location ./build --name nestlechatbot-frontend --resource-group nestlechatbot-rg
+   ```
+
+### Monitoring and Maintenance
+
+The deployed application can be monitored using:
+
+1. **Azure Application Insights**:
+   - Real-time metrics on performance and usage
+   - Error tracking and diagnostics
+
+2. **Azure Log Analytics**:
+   - Centralized logging for all components
+   - Custom queries for specific scenarios
+
+3. **Azure Monitor Alerts**:
+   - Proactive notification of issues
+   - Automated scaling based on usage patterns
+
+### Environment Configuration
+
+The production environment is configured with:
+
+1. **CORS Settings**:
+   - App Service is configured to allow requests only from the Static Web App domain
+   - Headers properly set for secure cross-origin communication
+
+2. **Security Measures**:
+   - HTTPS enforced for all communications
+   - Managed identities used for service-to-service authentication
+   - Key Vault for sensitive credential storage
+
+3. **Performance Optimization**:
+   - CDN integration for static content delivery
+   - Appropriate caching policies
+   - Asynchronous processing for long-running operations
+
+### Best Practices
+
+For optimal cloud deployment:
+
+1. **Use Infrastructure as Code**: Maintain deployment templates (ARM, Terraform, or Bicep) for reproducibility
+2. **Implement Staging Environments**: Test changes in staging before production deployment
+3. **Version Control Configuration**: Keep environment-specific configurations in version control
+4. **Regular Backups**: Schedule regular backups of the Neo4j database and other stateful components
+5. **Cost Monitoring**: Set up budgets and alerts to monitor resource consumption
+6. **Security Scans**: Regularly scan for vulnerabilities and apply security patches
+
+By following this deployment approach, the Nestle AI Chatbot maintains high availability, security, and performance while minimizing operational overhead.
+
+## Local Setup
 
 ### Prerequisites
 
-1. Python 3.8+
-2. Neo4j database
-3. Azure OpenAI service
-4. Azure Cognitive Search service
+- Anaconda or Miniconda
+- Node.js 18+ and npm
+- Git
+- Azure subscription (for cloud resources)
 
-### Installation Steps
-
-1. Clone the repository
-2. Install dependencies: `pip install -r requirements.txt`
-3. Set up environment variables:
-   ```bash
-   source setup_env.sh
-   ```
-   Please make sure to fill in your API keys and endpoint information in `setup_env.sh` first
-
-4. Start the application:
-   ```bash
-   cd backend
-   python main.py
-   ```
-
-### Data Initialization
-
-On first run, you need to scrape website content and build the graph database:
+### Step 1: Clone the Repository
 
 ```bash
-curl -X POST http://localhost:8000/api/refresh-content
+git clone https://github.com/Tingz-sky/Nestle-chatbot.git
+cd Nestle-chatbot
 ```
 
-## Usage
+### Step 2: Set Up Conda Environment
 
-After starting the application, you can interact with the chatbot through the following APIs:
-
-- `POST /api/chat`: Send a query and get a reply
-- `POST /api/refresh-content`: Refresh content data
-- `GET /api/status`: Check service status
-
-## RAG Workflow
-
-1. User sends a query
-2. System first searches for relevant information in the Neo4j graph database
-3. If not found, it uses Azure Cognitive Search for vector search
-4. The retrieved content is sent to Azure OpenAI for context understanding and answer generation
-5. Returns a formatted answer with reference sources
-
-## Project Structure
-
-```
-├── backend/
-│   ├── services/
-│   │   ├── web_scraper.py     # Website crawler
-│   │   ├── graph_service.py   # Neo4j graph database service
-│   │   ├── search_service.py  # Azure search service
-│   │   └── openai_service.py  # Azure OpenAI service
-│   ├── main.py                # Main application
-│   └── data/                  # Scraped data storage
-├── frontend/                  # Frontend code (if any)
-├── setup_env.sh               # Environment variable setup
-└── README.md                  # Project documentation
-```
-
-## License
-
-This project is licensed under the MIT License.
-
-## Acknowledgements
-
-- Nestlé for providing the content and inspiration for this project.
-- Azure for the cloud infrastructure and AI services.
-
-## Security Update
-
-This project now uses Azure Key Vault to securely store sensitive information instead of hardcoding them in environment files. The following secrets are stored in Key Vault:
-
-- AZURE-SEARCH-KEY
-- NEO4J-PASSWORD
-- AZURE-OPENAI-KEY
-
-## Setup
-
-### Automatic Azure Resources Setup
-
-This project includes an automated script to set up all necessary Azure resources for the Nestle AI Chatbot:
-
-1. Make sure you have Azure CLI installed and you're logged in:
-   ```bash
-   # Install Azure CLI (if not already installed)
-   # macOS
-   brew install azure-cli
-   
-   # Windows
-   winget install -e --id Microsoft.AzureCLI
-   
-   # Login to Azure
-   az login
-   ```
-
-2. Run the automated setup script:
-   ```bash
-   python setup_azure_resources.py
-   ```
-
-3. The script will:
-   - Create a resource group
-   - Set up Azure OpenAI service with necessary model deployments
-   - Create Azure Cognitive Search service with the required index
-   - Set up Azure Key Vault for secure secret storage
-   - Create App Service Plan and Web App for backend deployment
-   - Create Static Web App for frontend deployment
-   - Configure all resources and generate the `setup_env.sh` file
-
-4. After the script completes, follow the displayed "Next steps" to finish setting up your project.
-
-### Manual Azure Resources Setup
-
-If you prefer to set up resources manually, follow these steps:
-
-1. Create an Azure Key Vault resource if you don't have one already:
+1. Create and activate a Conda environment:
 
 ```bash
-az keyvault create --name nestlechatbot-kv --resource-group YOUR_RESOURCE_GROUP --location YOUR_LOCATION
+conda env create -f environment.yml
+conda activate nestle-ai
 ```
 
-2. Add your secrets to the Key Vault:
+If the environment file is not available, create one manually:
 
 ```bash
-az keyvault secret set --vault-name nestlechatbot-kv --name "AZURE-SEARCH-KEY" --value "your-search-key"
-az keyvault secret set --vault-name nestlechatbot-kv --name "NEO4J-PASSWORD" --value "your-neo4j-password"
-az keyvault secret set --vault-name nestlechatbot-kv --name "AZURE-OPENAI-KEY" --value "your-openai-key"
-```
-
-3. Ensure your development environment has proper access to the Key Vault:
-
-```bash
-az keyvault set-policy --name nestlechatbot-kv --upn your-email@example.com --secret-permissions get list
-```
-
-For deployed applications, use managed identities for secure access.
-
-### Environment Setup
-
-1. Install the required Python packages:
-
-```bash
+conda create -n nestle-ai python=3.10
+conda activate nestle-ai
 pip install -r requirements.txt
 ```
 
-2. Configure your environment variables in `setup_env.sh`:
+2. Set up environment variables:
 
-```bash
-source setup_env.sh
+Create a `.env` file in the project root with the following variables:
+
+```
+AZURE_OPENAI_ENDPOINT=https://nestleopenai.openai.azure.com/
+AZURE_OPENAI_DEPLOYMENT=nestle-gpt4o
+AZURE_OPENAI_KEY=<your-openai-key>
+
+AZURE_SEARCH_ENDPOINT=https://nestlechatbot-search.search.windows.net
+AZURE_SEARCH_KEY=<your-search-key>
+AZURE_SEARCH_INDEX=nestle-content-index
+
+NEO4J_URI=neo4j+s://e6acfbcb.databases.neo4j.io
+NEO4J_USER=neo4j
+NEO4J_PASSWORD=<neo4j-password>
 ```
 
-## Running the Application
+**Important Note**: The Neo4j Aura password is not included in this repository for security reasons. Please email tianze.zhang@mail.utoronto.ca to obtain the password for accessing the knowledge graph database.
 
-### Start the Backend Server
+Alternatively, source the provided environment setup file:
+
+```bash
+source setup_env.sh  # On Windows: source setup_env.bat
+```
+
+Note that you will still need to set the Neo4j password after sourcing this file:
+
+```bash
+export NEO4J_PASSWORD=<password-from-email>
+```
+
+### Step 3: Set Up Frontend
+
+1. Navigate to the frontend directory:
+
+```bash
+cd frontend
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+### Step 4: Run the Application
+
+1. Start the backend server (from the project root):
 
 ```bash
 python run.py --backend
 ```
 
-### Start the Frontend Development Server
+2. In a new terminal, start the frontend development server:
 
 ```bash
 python run.py --frontend
 ```
 
-### Update Data
-
-To scrape new data and update the knowledge base:
+Alternatively, you can start the frontend directly:
 
 ```bash
-python run.py --scrape --update-index --build-graph
+cd frontend
+npm start
 ```
 
-## Architecture
+3. Access the application in your browser at http://localhost:3000
 
-This chatbot uses a combination of:
+## Azure Resource Setup
 
-- Azure OpenAI for natural language processing
-- Azure Cognitive Search for document retrieval
-- Neo4j graph database for knowledge representation
-- FastAPI backend
-- React frontend
+This project includes a script to automatically provision all required Azure resources:
 
-## Development
+```bash
+python setup_azure_resources.py
+```
 
-### Project Structure
+### Prerequisites for Azure Setup
+
+1. Install the Azure CLI if you haven't already:
+   - **Windows**: Download from [Microsoft's website](https://aka.ms/installazurecli)
+   - **macOS**: `brew install azure-cli`
+   - **Linux**: `curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash`
+
+2. Login to your Azure account:
+   ```bash
+   az login
+   ```
+
+3. If you have multiple subscriptions, select the one you want to use:
+   ```bash
+   az account set --subscription <subscription-id>
+   ```
+
+### Running the Setup Script
+
+The setup script will create:
+- Resource Group: `nestlechatbot-rg`
+- Azure OpenAI Service: `nestleopenai`
+- Azure Cognitive Search: `nestlechatbot-search`
+- Azure Key Vault: `nestlechatbot-kv`
+- App Service Plan: `nestlechatbot-plan`
+- Web App: `nestlechatbot-api`
+- Static Web App: `nestlechatbot-frontend`
+
+After running the script, you'll receive:
+1. A generated `setup_env.sh` file with environment variables
+2. Azure resource access details
+3. Instructions for next steps
+
+### Manual Azure Configuration
+
+If you prefer to configure resources manually:
+
+1. Create an Azure OpenAI service in your Azure portal
+2. Deploy a model (e.g., GPT-4) and note the deployment name
+3. Create an Azure Cognitive Search service
+4. Create a search index with the schema defined in `azure-deployment/search-index-schema.json`
+5. Create a Key Vault to store your secrets
+6. Update your environment variables with the appropriate keys and endpoints
+
+### Neo4j Aura Access
+
+The project uses a Neo4j Aura database for the knowledge graph. For evaluation purposes:
+
+1. The Neo4j URI and username are already configured in the setup files
+2. The password is stored securely and not included in the repository
+3. **To obtain the password, please email tianze.zhang@mail.utoronto.ca**
+4. Once obtained, set it as an environment variable: `export NEO4J_PASSWORD=<provided-password>`
+
+## Project Structure
 
 ```
-.
-├── backend/            # FastAPI backend
-├── frontend/           # React frontend
-├── data/               # Scraped and processed data
-├── setup_env.sh        # Environment configuration
-├── run.py              # Main entry point
-└── requirements.txt    # Python dependencies
-``` 
+nestle-chatbot/
+├── backend/           # FastAPI backend application
+├── frontend/          # React frontend application
+├── azure-deployment/  # Azure deployment configuration
+├── run.py             # Application entry point
+├── requirements.txt   # Python dependencies
+├── environment.yml    # Conda environment specification
+└── setup_env.sh       # Environment setup script
+```
+
+## Known Limitations
+
+- The chatbot requires Azure OpenAI and Cognitive Search services to function properly
+- Local development requires setting up environment variables with valid Azure service credentials
+- The knowledge graph requires access to the Neo4j Aura database (password available upon request via email)
+- Queries are limited to Nestle product information contained in the knowledge base
+- Azure OpenAI service quotas may limit the number of requests you can make
+
+## Additional Features
+
+- **Knowledge Graph Manager**: Visual interface for managing the product knowledge graph
+- **Contextual Conversations**: The chatbot maintains context throughout the conversation
+- **Custom Queries**: Support for advanced graph queries through the UI
+- **CORS Support**: Configured for cross-origin requests
+- **Error Handling**: Robust error handling and user feedback 
