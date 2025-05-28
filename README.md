@@ -6,6 +6,8 @@ A modern conversational AI chatbot for the Nestle website, leveraging Azure Open
 
 Access the deployed chatbot here: [Nestle AI Chatbot](https://happy-plant-09497fa0f.6.azurestaticapps.net)
 
+Watch the demonstration video: [Nestle AI Chatbot Demo](https://www.loom.com/share/c086d5b191f94eccab64c2fac8f1c2c3?sid=b60f5b61-45a1-470e-a5b6-1abecad17270)
+
 **Note**: The Knowledge Graph Manager uses Neo4j Aura Free Tier, which may occasionally experience connection issues due to automatic instance sleep after periods of inactivity. If you encounter errors like "Failed to fetch nodes" or connection timeouts, simply refresh the page and try again.
 
 ## Table of Contents
