@@ -16,6 +16,9 @@ from services.graph_service import GraphRAGService
 from services.openai_service import AzureOpenAIService
 from services.keyvault_service import get_secret
 from services.conversation_service import ConversationService
+from services.store_service import StoreService
+from services.product_service import ProductService
+from services.structured_query_service import StructuredQueryService
 
 # Configure logging
 logging.getLogger('azure').setLevel(logging.WARNING)
@@ -112,14 +115,24 @@ except Exception as e:
 # Initialize conversation service
 conversation_service = ConversationService()
 
+# Initialize new services
+store_service = StoreService()
+product_service = ProductService()
+structured_query_service = StructuredQueryService()
+
 class ChatRequest(BaseModel):
     query: str
     session_id: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
 
 class ChatResponse(BaseModel):
     response: str
     references: List[Dict[str, str]] = []
     session_id: str
+    stores: Optional[List[Dict[str, Any]]] = None
+    purchase_link: Optional[str] = None
+    product_info: Optional[Dict[str, Any]] = None
 
 # New models for knowledge graph operations
 class NodeData(BaseModel):
@@ -145,6 +158,16 @@ class RelationshipDeleteRequest(BaseModel):
 class GraphQueryRequest(BaseModel):
     cypher_query: str
 
+# New models for store and product operations
+class StoreLocationRequest(BaseModel):
+    latitude: float
+    longitude: float
+    product: Optional[str] = None
+    limit: Optional[int] = 3
+
+class ProductSearchRequest(BaseModel):
+    product_name: str
+
 @app.get("/")
 async def root():
     return {"message": "Welcome to the Nestle Chatbot API"}
@@ -158,6 +181,26 @@ async def chat(request: ChatRequest):
         # Get current user query
         user_query = request.query
         
+        # First, check if this is a structured query that we can handle directly
+        structured_response = structured_query_service.handle_query(user_query)
+        if structured_response:
+            # If it's a structured query, use the direct response
+            logger.info(f"Handled structured query: {user_query}")
+            
+            # Add to conversation history
+            conversation_service.add_message(session_id, "user", user_query)
+            conversation_service.add_message(session_id, "ai", structured_response)
+            
+            return {
+                "response": structured_response,
+                "references": [],
+                "session_id": session_id,
+                "stores": None,
+                "purchase_link": None,
+                "product_info": None
+            }
+        
+        # If not a structured query, continue with the regular RAG flow
         # Check if it's an existing session and if the query contains reference terms
         reference_terms = ["it", "this", "that", "these", "those", "they", "them", "its", "their", "this product"]
         has_reference = any(ref in user_query.lower().split() for ref in reference_terms)
@@ -203,67 +246,150 @@ async def chat(request: ChatRequest):
             except Exception as e:
                 logger.error(f"Error querying search service: {str(e)}")
         
-        # If we have context data, use OpenAI to generate a response
-        if context_data:
-            # Save user message to conversation history
-            conversation_service.add_user_message(session_id, user_query)  # Save original query, not enhanced query
+        # Process the conversation
+        conversation_service.add_message(session_id, "user", user_query)
+        
+        # Extract potential product mentions from the query using LLM-based normalization
+        product_name = None
+        potential_products = []
+        
+        # Try to identify product with LLM
+        try:
+            product_name = product_service.normalize_product_name(user_query, openai_service)
+            if product_name:
+                potential_products = [product_name]
+                logger.info(f"LLM identified product: {product_name} from query: {user_query}")
+        except Exception as e:
+            logger.error(f"Error in LLM product identification: {str(e)}")
+            # Fall back to basic pattern matching if LLM fails
+            product_pattern = r"(?i)(KitKat|Nescafé|Nestle|Smarties|Nestea|Perrier|San Pellegrino|Chocolate|Coffee Crisp|Aero|Pure Life|MAGGI|Maggi|After Eight|Big Turk|Crunch|Turtles|Häagen-Dazs|Haagen-Dazs|Carnation|Hot Chocolate|Milo|Nesquik)"
+            potential_products = re.findall(product_pattern, user_query)
+        
+        # Variables for enhanced response
+        nearby_stores = None
+        purchase_link = None
+        product_info = None
+        
+        # Check if query contains purchase-related keywords and product mentions
+        purchase_keywords = ["buy", "purchase", "get", "where", "find", "shop", "store", "amazon", "order", "online"]
+        is_purchase_query = any(keyword in user_query.lower() for keyword in purchase_keywords)
+        
+        # If it's a purchase query OR if any product is mentioned, try to get product info
+        if (is_purchase_query or potential_products):
+            # If we have a specific product mentioned, use it
+            if potential_products:
+                product_name = potential_products[0]
+            # Otherwise, check if there's a product mentioned in recent messages
+            elif is_purchase_query and session_id in conversation_service.sessions:
+                # Get recent messages to extract context
+                recent_messages = conversation_service.get_conversation_history(session_id)[-3:]
+                
+                # Try to extract products from recent conversation
+                for msg in recent_messages:
+                    if msg["type"] == "ai" and msg["content"]:
+                        # Try to identify product with LLM
+                        extracted_product = product_service.normalize_product_name(msg["content"], openai_service)
+                        if extracted_product:
+                            product_name = extracted_product
+                            logger.info(f"LLM identified product: {product_name} from message content")
+                            break
             
-            # Get conversation history for the session
-            chat_history = conversation_service.get_conversation_history(session_id)
-            
-            # Use RAG approach with OpenAI and conversation history
-            try:
-                # If chat history exists, use it for context
-                if chat_history and len(chat_history) > 1:  # More than just the current message
-                    response_text = openai_service.generate_response_with_history(
-                        query=user_query,  # Use original query
-                        context=context_data,
-                        chat_history=chat_history[:-1],  # Exclude the last message which we just added
-                        temperature=0.7
+            # If we have a product name, get purchase info
+            if product_name:
+                # Try to get purchase link
+                purchase_link, product_info = product_service.get_purchase_link(product_name, openai_service)
+                
+                # Always include both online and offline purchase options when location is provided
+                # This ensures that when a user asks about buying a product after sharing location,
+                # they get both Amazon links and nearby stores
+                if request.latitude is not None and request.longitude is not None:
+                    logger.info(f"Location data provided, finding nearby stores for product: {product_name}")
+                    nearby_stores = store_service.find_nearby_stores(
+                        request.latitude, 
+                        request.longitude,
+                        product_name
                     )
-                else:
-                    # For first message, use the standard response generator
-                    response_text = openai_service.generate_response(
-                        query=user_query,
-                        context=context_data,
-                        temperature=0.7
+                    
+                    # Log results
+                    if nearby_stores:
+                        logger.info(f"Found {len(nearby_stores)} nearby stores for {product_name}")
+                    else:
+                        logger.info(f"No nearby stores found for {product_name}")
+            
+            # If this is a follow-up query and we have location but no product,
+            # look for any previous product mentions and try to provide store info
+            elif is_purchase_query and request.latitude is not None and request.longitude is not None and session_id in conversation_service.sessions:
+                logger.info("Purchase query with location but no product, searching conversation history")
+                
+                # Get full conversation history to find product mentions
+                full_history = conversation_service.get_conversation_history(session_id)
+                
+                # Extract all product mentions from history
+                all_products = []
+                for msg in full_history:
+                    if msg["content"]:
+                        # Try to identify product with LLM
+                        extracted_product = product_service.normalize_product_name(msg["content"], openai_service)
+                        if extracted_product:
+                            all_products.append(extracted_product)
+                            logger.info(f"LLM identified product: {extracted_product} from history message")
+                
+                # Use the most recent product mention if available
+                if all_products:
+                    product_name = all_products[-1]
+                    purchase_link, product_info = product_service.get_purchase_link(product_name, openai_service)
+                    
+                    # Find nearby stores for this product
+                    nearby_stores = store_service.find_nearby_stores(
+                        request.latitude, 
+                        request.longitude,
+                        product_name
                     )
-            except Exception as e:
-                logger.error(f"Error generating response with OpenAI: {str(e)}")
-                response_text = "I'm sorry, I'm having trouble processing your request right now. Please try again later."
-            
-            # Save AI response to conversation history
-            conversation_service.add_ai_message(session_id, response_text)
-            
-            # Extract references for attribution with deduplication
-            seen_urls = set()
-            references = []
-            
-            for result in context_data:
-                if "title" in result and "url" in result:
-                    url = result.get("url", "")
-                    # Only add URLs we haven't seen yet
-                    if url and url not in seen_urls:
-                        seen_urls.add(url)
-                        references.append({
-                            "title": result.get("title", ""),
-                            "url": url
-                        })
-        else:
-            # Fallback response
-            conversation_service.add_user_message(session_id, user_query)
-            response_text = "I'm sorry, I couldn't find specific information about that. Please try asking another question about Nestle products or services."
-            conversation_service.add_ai_message(session_id, response_text)
-            references = []
-            
-        return ChatResponse(
-            response=response_text,
-            references=references,
-            session_id=session_id
+                    logger.info(f"Using product from history: {product_name}, found {len(nearby_stores) if nearby_stores else 0} stores")
+        
+        # Generate response with OpenAI
+        response = openai_service.get_chat_completion(
+            user_query, 
+            context_data, 
+            conversation_service.get_conversation_history(session_id)
         )
+        
+        # Extract references from context
+        references = []
+        for item in context_data:
+            if "url" in item and "title" in item:
+                references.append({
+                    "title": item["title"],
+                    "url": item["url"]
+                })
+        
+        # Add unique references
+        unique_refs = []
+        urls = set()
+        for ref in references:
+            if ref["url"] not in urls:
+                unique_refs.append(ref)
+                urls.add(ref["url"])
+        
+        # Add AI message to conversation history
+        conversation_service.add_message(session_id, "ai", response)
+        
+        # Always include product info in response if available
+        # Don't check if it's in the response text, just include it
+        if product_info and purchase_link:
+            logger.info(f"Including purchase info for product: {product_info['name']}")
+        
+        return {
+            "response": response,
+            "references": unique_refs,
+            "session_id": session_id,
+            "stores": nearby_stores if nearby_stores else None,
+            "purchase_link": purchase_link,
+            "product_info": product_info
+        }
     except Exception as e:
         logger.error(f"Error in chat endpoint: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/api/refresh-content")
 async def refresh_content():
@@ -476,6 +602,77 @@ async def clear_conversation(session_id: str):
     except Exception as e:
         logger.error(f"Error clearing conversation: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Failed to clear conversation: {str(e)}")
+
+# New API endpoints for store and product functionality
+
+@app.post("/api/stores/nearby")
+async def find_nearby_stores(request: StoreLocationRequest):
+    """
+    Find nearby Nestle product retail locations
+    """
+    try:
+        stores = store_service.find_nearby_stores(
+            request.latitude,
+            request.longitude,
+            request.product,
+            limit=request.limit or 3
+        )
+        return {"stores": stores}
+    except Exception as e:
+        logger.error(f"Error finding nearby stores: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/products")
+async def get_all_products():
+    """
+    Get all product information
+    """
+    try:
+        products = product_service.get_all_products()
+        return {"products": products}
+    except Exception as e:
+        logger.error(f"Error getting products: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/products/{product_name}")
+async def get_product(product_name: str):
+    """
+    Get specific product information
+    """
+    try:
+        product = product_service.find_product(product_name)
+        if not product:
+            raise HTTPException(status_code=404, detail=f"Product '{product_name}' not found")
+        return product
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error getting product: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/products/{product_name}/stores")
+async def get_product_stores(
+    product_name: str, 
+    latitude: Optional[float] = None, 
+    longitude: Optional[float] = None
+):
+    """
+    Get stores that sell a specific product
+    """
+    try:
+        # Verify product exists
+        product = product_service.find_product(product_name)
+        if not product:
+            raise HTTPException(status_code=404, detail=f"Product '{product_name}' not found")
+            
+        # Get store information
+        stores = store_service.get_product_stores(product_name, latitude, longitude)
+        return {"stores": stores}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error getting product stores: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     import uvicorn

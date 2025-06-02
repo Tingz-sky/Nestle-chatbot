@@ -13,20 +13,120 @@ const ApiService = {
    * Send a chat message to the API
    * @param {string} message - The user's message
    * @param {string} sessionId - Optional session ID for continuing a conversation
+   * @param {Object} location - Optional user location {latitude, longitude}
    * @returns {Promise} - API response
    */
-  sendChatMessage: async (message, sessionId = null, timeout = 20000) => {
+  sendChatMessage: async (message, sessionId = null, location = null, timeout = 20000) => {
     try {
       const payload = { 
         query: message,
         session_id: sessionId
       };
       
-      return await axios.post(`${API_BASE_URL}/api/chat`, payload, {
+      // Add location data if available
+      if (location && location.latitude && location.longitude) {
+        payload.latitude = location.latitude;
+        payload.longitude = location.longitude;
+      }
+      
+      console.log("Sending chat request with payload:", JSON.stringify(payload));
+      
+      const response = await axios.post(`${API_BASE_URL}/api/chat`, payload, {
         timeout: timeout
       });
+      
+      // Log response details to help with debugging
+      console.log(`Chat response received. Contains stores: ${!!response.data.stores}, contains product info: ${!!response.data.product_info}, contains purchase link: ${!!response.data.purchase_link}`);
+      
+      return response;
     } catch (error) {
       console.error('Error sending message:', error);
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error('API error response:', error.response.status, error.response.data);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error('No response received from API');
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error('Error setting up API request:', error.message);
+      }
+      throw error;
+    }
+  },
+  
+  /**
+   * Find nearby stores based on location
+   * @param {Object} location - User location {latitude, longitude}
+   * @param {string} product - Optional product name to filter stores
+   * @param {number} limit - Maximum number of results to return
+   * @returns {Promise} - API response with nearby stores
+   */
+  findNearbyStores: async (location, product = null, limit = 3) => {
+    try {
+      const payload = {
+        latitude: location.latitude,
+        longitude: location.longitude,
+        limit: limit
+      };
+      
+      if (product) {
+        payload.product = product;
+      }
+      
+      return await axios.post(`${API_BASE_URL}/api/stores/nearby`, payload);
+    } catch (error) {
+      console.error('Error finding nearby stores:', error);
+      throw error;
+    }
+  },
+  
+  /**
+   * Get all available products
+   * @returns {Promise} - API response with product data
+   */
+  getAllProducts: async () => {
+    try {
+      return await axios.get(`${API_BASE_URL}/api/products`);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      throw error;
+    }
+  },
+  
+  /**
+   * Get information for a specific product
+   * @param {string} productName - Name of the product
+   * @returns {Promise} - API response with product details
+   */
+  getProduct: async (productName) => {
+    try {
+      return await axios.get(`${API_BASE_URL}/api/products/${encodeURIComponent(productName)}`);
+    } catch (error) {
+      console.error(`Error fetching product '${productName}':`, error);
+      throw error;
+    }
+  },
+  
+  /**
+   * Get stores that sell a specific product
+   * @param {string} productName - Name of the product
+   * @param {Object} location - Optional user location {latitude, longitude}
+   * @returns {Promise} - API response with store data
+   */
+  getProductStores: async (productName, location = null) => {
+    try {
+      let url = `${API_BASE_URL}/api/products/${encodeURIComponent(productName)}/stores`;
+      
+      // Add location parameters if available
+      if (location && location.latitude && location.longitude) {
+        url += `?latitude=${location.latitude}&longitude=${location.longitude}`;
+      }
+      
+      return await axios.get(url);
+    } catch (error) {
+      console.error(`Error fetching stores for product '${productName}':`, error);
       throw error;
     }
   },

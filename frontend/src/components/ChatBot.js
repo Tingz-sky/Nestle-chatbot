@@ -5,7 +5,10 @@ import {
   ChatContainer, ChatHeader, ChatTitle, BotLogo, 
   HeaderButtons, ExpandButton, IconButton, ChatMessages, 
   Message, TypingIndicator, References, ChatInputContainer, 
-  ChatInput, SendButton, ChatBubble, ResizeControls, ResizeButton 
+  ChatInput, SendButton, ChatBubble, ResizeControls, ResizeButton,
+  ProductInfo, ProductTitle, PurchaseLink, StoresContainer,
+  StoreItem, StoreHeader, StoreName, StoreDistance, StoreAddress,
+  LocationButton
 } from './ChatStyles';
 import styled from 'styled-components';
 
@@ -41,6 +44,8 @@ const ChatBot = ({ isOpen, toggleChat }) => {
   const [sessionId, setSessionId] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const [fontSize, setFontSize] = useState(14);
+  const [userLocation, setUserLocation] = useState(null);
+  const [isGettingLocation, setIsGettingLocation] = useState(false);
   
   const messagesEndRef = useRef(null);
   
@@ -57,16 +62,242 @@ const ChatBot = ({ isOpen, toggleChat }) => {
   };
   
   /**
+   * Get user's geolocation and automatically fetch nearby stores
+   */
+  const getUserLocation = () => {
+    if (!navigator.geolocation) {
+      // Add a message if geolocation is not supported
+      const message = {
+        id: messages.length + 1,
+        text: "Geolocation is not supported by your browser. I can't provide location-based store recommendations.",
+        isBot: true,
+        hasPurchaseIntent: true
+      };
+      
+      setMessages(prev => [...prev, message]);
+      return;
+    }
+    
+    setIsGettingLocation(true);
+    
+    // Find the latest bot message to update (should be the current one)
+    const latestBotMessageIndex = [...messages].reverse().findIndex(msg => msg.isBot && !msg.isLoading);
+    if (latestBotMessageIndex === -1) {
+      // If no bot message found, don't proceed
+      setIsGettingLocation(false);
+      return;
+    }
+    
+    // Get the actual index in the original array
+    const messageIndexToUpdate = messages.length - 1 - latestBotMessageIndex;
+    const messageToUpdate = messages[messageIndexToUpdate];
+    
+    // Show loading state in the current message
+    const updatedMessages = [...messages];
+    updatedMessages[messageIndexToUpdate] = {
+      ...messageToUpdate,
+      text: messageToUpdate.text + "\n\nSearching for nearby stores...",
+      isLoading: true,
+      hasPurchaseIntent: true
+    };
+    setMessages(updatedMessages);
+    
+    navigator.geolocation.getCurrentPosition(
+      // Success callback
+      async (position) => {
+        const location = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        };
+        
+        setUserLocation(location);
+        
+        // Define standard product names for potential matches
+        const productNames = [
+          "KitKat", "Nescafé", "Smarties", "Nestea", "Perrier", 
+          "San Pellegrino", "Coffee Crisp", "Aero", "Nestlé Pure Life", "MAGGI",
+          "After Eight", "Big Turk", "Crunch", "Turtles", "Häagen-Dazs",
+          "Carnation Hot Chocolate", "Milo", "Nesquik"
+        ];
+        
+        // Extract product name from the conversation
+        let productName = null;
+        
+        // Look for product mentions in previous messages
+        for (let i = messages.length - 1; i >= 0; i--) {
+          const msg = messages[i];
+          if (msg.text && typeof msg.text === 'string') {
+            const msg_lower = msg.text.toLowerCase();
+            
+            // Try direct matching of product names
+            for (const name of productNames) {
+              // Try exact match
+              if (msg.text.includes(name) || msg_lower.includes(name.toLowerCase())) {
+                productName = name;
+                break;
+              }
+              
+              // Try normalized matching (remove spaces and special characters)
+              const normalized_name = name.toLowerCase().replace(/[^a-z0-9]/g, '');
+              const normalized_msg = msg_lower.replace(/[^a-z0-9]/g, '');
+              
+              if (normalized_msg.includes(normalized_name)) {
+                productName = name;
+                break;
+              }
+            }
+            
+            if (productName) break;
+          }
+        }
+        
+        try {
+          // Find nearby stores based on location and product
+          const storeResponse = await ApiService.findNearbyStores(location, productName);
+          const nearbyStores = storeResponse.data.stores;
+          
+          // Update the original message with the results
+          const finalMessages = [...messages];
+          
+          if (nearbyStores && nearbyStores.length > 0) {
+            // Update the original message with stores data
+            finalMessages[messageIndexToUpdate] = {
+              ...messageToUpdate,
+              text: messageToUpdate.text,
+              isLoading: false,
+              stores: nearbyStores,
+              hasPurchaseIntent: true
+            };
+          } else {
+            // No stores found
+            finalMessages[messageIndexToUpdate] = {
+              ...messageToUpdate,
+              text: messageToUpdate.text + "\n\nI couldn't find any nearby stores that carry " + 
+                   (productName ? productName : "Nestle products") + 
+                   " within a reasonable distance. You can still purchase online through retailers like Amazon.",
+              isLoading: false,
+              hasPurchaseIntent: true
+            };
+          }
+          
+          setMessages(finalMessages);
+        } catch (error) {
+          console.error("Error fetching nearby stores:", error);
+          
+          // Update message with error
+          const errorMessages = [...messages];
+          errorMessages[messageIndexToUpdate] = {
+            ...messageToUpdate,
+            text: messageToUpdate.text + "\n\nI had trouble finding nearby stores. Please try again later.",
+            isLoading: false,
+            hasPurchaseIntent: true
+          };
+          
+          setMessages(errorMessages);
+        }
+        
+        setIsGettingLocation(false);
+      },
+      // Error callback
+      (error) => {
+        console.error("Error getting location:", error);
+        setIsGettingLocation(false);
+        
+        // Add error message based on the error code
+        let errorMessage = "I couldn't access your location. ";
+        
+        switch(error.code) {
+          case error.PERMISSION_DENIED:
+            errorMessage += "You denied permission to access your location.";
+            break;
+          case error.POSITION_UNAVAILABLE:
+            errorMessage += "Location information is unavailable.";
+            break;
+          case error.TIMEOUT:
+            errorMessage += "The request to get your location timed out.";
+            break;
+          default:
+            errorMessage += "An unknown error occurred.";
+        }
+        
+        // Update the original message with the error
+        const errorMessages = [...messages];
+        errorMessages[messageIndexToUpdate] = {
+          ...messageToUpdate,
+          text: messageToUpdate.text + "\n\n" + errorMessage,
+          isLoading: false,
+          hasPurchaseIntent: true
+        };
+        
+        setMessages(errorMessages);
+      },
+      // Options
+      {
+        enableHighAccuracy: false,
+        timeout: 10000,
+        maximumAge: 0
+      }
+    );
+  };
+  
+  /**
+   * Check if a message contains purchase intent
+   */
+  const checkPurchaseIntent = (message) => {
+    const messageLower = message.toLowerCase();
+    
+    // Exact patterns for purchase intent
+    const strongBuyIntentPatterns = [
+      /where (can|could) (i|we) (buy|purchase|get|find)/i,
+      /how (can|could) (i|we) (buy|purchase|get|find)/i,
+      /where (to|do you) (buy|purchase|get|find)/i,
+      /(buy|purchase) online/i,
+      /shopping for/i,
+      /order online/i,
+      /nearby stores?/i,
+      /stores? near/i,
+      /where.*(sell|sold)/i
+    ];
+    
+    // Check for strong purchase intent
+    for (const pattern of strongBuyIntentPatterns) {
+      if (pattern.test(messageLower)) {
+        return true;
+      }
+    }
+    
+    // If message contains purchase-related words and product names, it might also be purchase intent
+    const buyKeywords = /(buy|purchase|shop|order)/i;
+    const productKeywords = /(kitkat|kit kat|nescafe|smarties|perrier|chocolate|coffee|water|nestle)/i;
+    
+    if (buyKeywords.test(messageLower) && productKeywords.test(messageLower)) {
+      return true;
+    }
+    
+    // Special case: "where can I find X" is likely purchase intent
+    if (/where can (i|we) find/i.test(messageLower) && productKeywords.test(messageLower)) {
+      return true;
+    }
+    
+    // Default is not purchase intent
+    return false;
+  };
+  
+  /**
    * Handles sending user message and getting response from API
    */
   const handleSendMessage = async () => {
     if (!input.trim()) return;
     
+    // Check if the message contains purchase intent keywords
+    const hasPurchaseIntent = checkPurchaseIntent(input);
+    
     // Add user message
     const userMessage = {
       id: messages.length + 1,
       text: input,
-      isBot: false
+      isBot: false,
+      hasPurchaseIntent: hasPurchaseIntent
     };
     
     setMessages(prev => [...prev, userMessage]);
@@ -79,7 +310,8 @@ const ChatBot = ({ isOpen, toggleChat }) => {
       id: loadingMessageId,
       text: '',
       isBot: true,
-      isLoading: true
+      isLoading: true,
+      hasPurchaseIntent: hasPurchaseIntent
     };
     
     setMessages(prev => [...prev, loadingMessage]);
@@ -89,8 +321,10 @@ const ChatBot = ({ isOpen, toggleChat }) => {
     
     while (retryCount <= MAX_RETRY_ATTEMPTS) {
       try {
-        // Use API service to send message
-        const response = await ApiService.sendChatMessage(input, sessionId);
+        // Use API service to send message, always including location if available
+        // This ensures that when asking about products after sharing location,
+        // the API will return both online and offline purchase options
+        const response = await ApiService.sendChatMessage(input, sessionId, userLocation);
         
         // Store session ID
         if (response.data.session_id) {
@@ -100,12 +334,81 @@ const ChatBot = ({ isOpen, toggleChat }) => {
         // Remove loading message
         setMessages(prev => prev.filter(msg => msg.id !== loadingMessageId));
         
+        // If there's no store data but we have location and it's a purchase query,
+        // fetch nearby stores directly
+        if (hasPurchaseIntent && userLocation && !response.data.stores) {
+          try {
+            // Try to extract product name from the response or query
+            let productName = null;
+            
+            // Define standard product names for potential matches
+            const productNames = [
+              "KitKat", "Nescafé", "Smarties", "Nestea", "Perrier", 
+              "San Pellegrino", "Coffee Crisp", "Aero", "Nestlé Pure Life", "MAGGI",
+              "After Eight", "Big Turk", "Crunch", "Turtles", "Häagen-Dazs",
+              "Carnation Hot Chocolate", "Milo", "Nesquik"
+            ];
+            
+            try {
+              // First try direct pattern matching for product names
+              const input_lower = input.toLowerCase();
+              
+              // Try direct matching of product names
+              for (const name of productNames) {
+                // Try exact match
+                if (input.includes(name) || input_lower.includes(name.toLowerCase())) {
+                  productName = name;
+                  break;
+                }
+                
+                // Try normalized matching (remove spaces and special characters)
+                const normalized_name = name.toLowerCase().replace(/[^a-z0-9]/g, '');
+                const normalized_input = input_lower.replace(/[^a-z0-9]/g, '');
+                
+                if (normalized_input.includes(normalized_name) || normalized_name.includes(normalized_input)) {
+                  productName = name;
+                  break;
+                }
+              }
+              
+              // If still no match found, try looking in the response
+              if (!productName && response.data.response) {
+                const response_lower = response.data.response.toLowerCase();
+                
+                for (const name of productNames) {
+                  if (response.data.response.includes(name) || response_lower.includes(name.toLowerCase())) {
+                    productName = name;
+                    break;
+                  }
+                }
+              }
+            } catch (error) {
+              console.error("Error in product name extraction:", error);
+            }
+            
+            if (productName) {
+              // Fetch nearby stores for this product
+              const storeResponse = await ApiService.findNearbyStores(userLocation, productName);
+              if (storeResponse.data.stores && storeResponse.data.stores.length > 0) {
+                // Add stores to the response data
+                response.data.stores = storeResponse.data.stores;
+              }
+            }
+          } catch (storeError) {
+            console.error("Error fetching additional store data:", storeError);
+          }
+        }
+        
         // Add bot response
         const botMessage = {
           id: loadingMessageId,
           text: response.data.response,
           isBot: true,
-          references: response.data.references || []
+          references: response.data.references || [],
+          stores: response.data.stores || null,
+          purchase_link: response.data.purchase_link || null,
+          product_info: response.data.product_info || null,
+          hasPurchaseIntent: hasPurchaseIntent
         };
         
         setMessages(prev => [...prev, botMessage]);
@@ -266,9 +569,64 @@ const ChatBot = ({ isOpen, toggleChat }) => {
                     <span></span>
                   </TypingIndicator>
                 ) : (
-                  <ReactMarkdown>
-                    {message.text}
-                  </ReactMarkdown>
+                  <>
+                    <ReactMarkdown>
+                      {message.text}
+                    </ReactMarkdown>
+                    
+                    {/* Display purchase information if available */}
+                    {message.isBot && message.hasPurchaseIntent && (message.product_info || message.purchase_link) && (
+                      <ProductInfo>
+                        {message.product_info && (
+                          <>
+                            <ProductTitle>{message.product_info.name}</ProductTitle>
+                            <div>{message.product_info.description}</div>
+                          </>
+                        )}
+                        
+                        {message.purchase_link && (
+                          <PurchaseLink 
+                            href={message.purchase_link} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                          >
+                            <img src="https://embeddedcloud.pricespider.com/seller_md/141172.png" alt="Amazon" />
+                            Shop on Amazon
+                          </PurchaseLink>
+                        )}
+                      </ProductInfo>
+                    )}
+                    
+                    {/* Display nearby stores if available */}
+                    {message.isBot && message.hasPurchaseIntent && message.stores && message.stores.length > 0 && (
+                      <StoresContainer>
+                        <ProductTitle>Nearby Stores:</ProductTitle>
+                        {message.stores.map((store, idx) => (
+                          <StoreItem key={idx}>
+                            <StoreHeader>
+                              <StoreName>{store.name}</StoreName>
+                              <StoreDistance>{store.distance} km</StoreDistance>
+                            </StoreHeader>
+                            <StoreAddress>{store.address}</StoreAddress>
+                          </StoreItem>
+                        ))}
+                      </StoresContainer>
+                    )}
+                    
+                    {/* Show location request button if purchase query but no location */}
+                    {message.isBot && 
+                     !userLocation && 
+                     !message.stores && 
+                     message.hasPurchaseIntent &&
+                     index === messages.length - 1 && (
+                      <LocationButton 
+                        onClick={getUserLocation}
+                        disabled={isGettingLocation}
+                      >
+                        {isGettingLocation ? 'Getting location...' : 'Share my location to find nearby stores'}
+                      </LocationButton>
+                    )}
+                  </>
                 )}
                 
                 {message.isBot && message.references && message.references.length > 0 && (

@@ -307,4 +307,159 @@ GUIDELINES FOR RESPONSES:
             content = item.get("content", "")
             formatted_text += f"--- {title} ---\n{content}\n\n"
             
-        return formatted_text 
+        return formatted_text
+    
+    @retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(3))
+    def get_chat_completion(self, 
+                           user_query: str, 
+                           context_data: List[Dict[str, Any]],
+                           conversation_history: Optional[List[Dict[str, Any]]] = None,
+                           temperature: float = 0.7,
+                           max_tokens: int = 500) -> str:
+        """
+        Enhanced chat completion function with better handling of purchase and location queries
+        
+        Args:
+            user_query: The user's current query
+            context_data: Context information retrieved from knowledge base
+            conversation_history: Optional conversation history
+            temperature: Model temperature parameter
+            max_tokens: Maximum tokens to generate
+            
+        Returns:
+            Generated response text
+        """
+        try:
+            # Detect if it's a product purchase query
+            purchase_intent = self._detect_purchase_intent(user_query)
+            
+            # Build system prompt
+            system_message = """You are an assistant for Nestle products, providing friendly and accurate product information.
+
+Response Guidelines:
+1. Use the provided context to answer user questions.
+2. Pay close attention to conversation history to understand the context of products or topics mentioned.
+3. If the user asks where to buy a product:
+   - ALWAYS mention BOTH online and physical store options
+   - Tell them the product can be found at most grocery stores, supermarkets, and convenience stores
+   - Mention that it can be purchased online through retailers like Amazon
+   - If specific store data is provided in the response, refer to those specific stores
+4. For any product purchase questions, always recommend BOTH online and physical store options.
+5. Avoid phrases like "based on the provided context" - provide information directly.
+6. Be friendly, helpful, and enthusiastic about Nestle products.
+7. If you don't have a specific answer, provide related Nestle product information.
+8. Maintain a natural conversation flow."""
+
+            # Set token limit
+            token_limit = 15000  # Reserve about 1000 tokens for response
+            
+            # Estimate token counts
+            system_tokens = len(system_message) // 4
+            query_tokens = len(user_query) // 4
+            
+            # Calculate history tokens
+            history_tokens = 0
+            if conversation_history:
+                for message in conversation_history:
+                    history_tokens += len(message.get("content", "")) // 4 + 10  # Add overhead for message metadata
+            
+            # Calculate available tokens for context
+            available_context_tokens = token_limit - system_tokens - query_tokens - history_tokens - 300  # Extra buffer
+            
+            # Format context within token limit
+            formatted_context = self._format_context_with_limit(context_data, available_context_tokens)
+            
+            # Prepare message array
+            messages = [{"role": "system", "content": system_message}]
+            
+            # Add conversation history
+            if conversation_history:
+                for message in conversation_history:
+                    role = "user" if message.get("type") == "user" else "assistant"
+                    if message.get("type") in ["user", "ai"]:
+                        messages.append({"role": role, "content": message.get("content", "")})
+            
+            # If it's a purchase intent query, enhance prompt
+            if purchase_intent:
+                purchase_guidance = """The user is asking about how to purchase a product. In your response:
+1. ALWAYS mention BOTH online and physical purchase options
+2. State that the product can be found at grocery stores, supermarkets, and convenience stores
+3. Mention that the user can also buy online through retailers like Amazon
+4. If the response includes specific store information, mention those specific stores by name
+5. Do not say "I can help you find specific links or stores" - instead, directly provide the information"""
+                messages.append({"role": "system", "content": purchase_guidance})
+            
+            # Add current context and query
+            current_query = f"Context information:\n{formatted_context}\n\nUser question: {user_query}"
+            messages.append({"role": "user", "content": current_query})
+            
+            # Call Azure OpenAI API
+            response = self.client.chat.completions.create(
+                model=self.deployment_name,
+                messages=messages,
+                temperature=temperature,
+                max_tokens=max_tokens,
+                n=1
+            )
+            
+            # Extract generated text
+            if response and response.choices:
+                return response.choices[0].message.content.strip()
+            else:
+                return "Sorry, I couldn't generate a response."
+                
+        except Exception as e:
+            logger.error(f"Error generating chat completion: {str(e)}")
+            return f"Sorry, there was a problem processing your request. Please try again later."
+    
+    def _detect_purchase_intent(self, query: str) -> bool:
+        """
+        Detect if user query contains purchase intent
+        
+        Args:
+            query: User query
+            
+        Returns:
+            Whether purchase intent was detected
+        """
+        purchase_keywords = [
+            "buy", "purchase", "where", "find", "store", "shop", "amazon", 
+            "where to buy", "where can i buy", "where to find", "where can i find",
+            "where to get", "where can i get", "shopping", "order", "online"
+        ]
+        
+        lower_query = query.lower()
+        return any(keyword in lower_query for keyword in purchase_keywords)
+    
+    def get_completion(self, prompt: str) -> str:
+        """
+        Get a direct text completion from OpenAI
+        
+        Args:
+            prompt: Text prompt
+            
+        Returns:
+            Text completion from OpenAI
+        """
+        try:
+            if not self.client:
+                raise ValueError("OpenAI client not initialized")
+                
+            # Use chat.completions instead of completions for GPT-4o compatibility
+            response = self.client.chat.completions.create(
+                model=self.deployment_name,
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant that provides short, concise responses."},
+                    {"role": "user", "content": prompt}
+                ],
+                max_tokens=50,
+                temperature=0.1
+            )
+            
+            if response.choices and len(response.choices) > 0:
+                return response.choices[0].message.content.strip()
+            else:
+                return ""
+        except Exception as e:
+            logger.error(f"Error in OpenAI completion: {e}")
+            return "" 
