@@ -8,7 +8,7 @@ export AZURE_SEARCH_INDEX="nestle-content-index"
 
 # Azure OpenAI configuration
 export AZURE_OPENAI_ENDPOINT="https://nestleopenai.openai.azure.com"
-export AZURE_OPENAI_DEPLOYMENT="gpt-35-turbo"
+export AZURE_OPENAI_DEPLOYMENT="nestle-gpt4o"
 
 # Azure Key Vault configuration
 export AZURE_KEYVAULT_NAME="nestlechatbot-kv"

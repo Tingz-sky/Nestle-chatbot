@@ -47,6 +47,29 @@ class ConversationService:
         
         return self.sessions[session_id]
     
+    def add_message(self, session_id: str, message_type: str, content: str) -> None:
+        """
+        Add a message to the conversation history with different types
+        
+        Args:
+            session_id: Session ID
+            message_type: Message type ('user'/'ai'/'system')
+            content: Message content
+        """
+        memory = self.get_or_create_memory(session_id)
+        
+        if message_type == "user":
+            memory.add_message(HumanMessage(content=content))
+            logger.debug(f"Added user message to session {session_id}")
+        elif message_type == "ai":
+            memory.add_message(AIMessage(content=content))
+            logger.debug(f"Added AI message to session {session_id}")
+        elif message_type == "system":
+            memory.add_message(SystemMessage(content=content))
+            logger.debug(f"Added system message to session {session_id}")
+        else:
+            logger.warning(f"Unknown message type: {message_type}")
+    
     def add_user_message(self, session_id: str, message: str) -> None:
         """
         Add a user message to the conversation history
@@ -55,9 +78,7 @@ class ConversationService:
             session_id: Unique identifier for the conversation session
             message: The user's message text
         """
-        memory = self.get_or_create_memory(session_id)
-        memory.add_message(HumanMessage(content=message))
-        logger.debug(f"Added user message to session {session_id}")
+        self.add_message(session_id, "user", message)
     
     def add_ai_message(self, session_id: str, message: str) -> None:
         """
@@ -67,9 +88,7 @@ class ConversationService:
             session_id: Unique identifier for the conversation session
             message: The AI's response text
         """
-        memory = self.get_or_create_memory(session_id)
-        memory.add_message(AIMessage(content=message))
-        logger.debug(f"Added AI message to session {session_id}")
+        self.add_message(session_id, "ai", message)
     
     def get_conversation_history(self, session_id: str) -> List[Dict[str, Any]]:
         """
@@ -88,7 +107,7 @@ class ConversationService:
         history = []
         for msg in messages:
             if isinstance(msg, HumanMessage):
-                history.append({"type": "human", "content": msg.content})
+                history.append({"type": "user", "content": msg.content})
             elif isinstance(msg, AIMessage):
                 history.append({"type": "ai", "content": msg.content})
             elif isinstance(msg, SystemMessage):

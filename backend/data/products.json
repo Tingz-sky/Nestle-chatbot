@@ -1,0 +1,2944 @@
+[
+  {
+    "id": "nestle-kitkat",
+    "name": "KitKat",
+    "description": "Nestle KitKat - A delicious chocolate product in the chocolate bites category",
+    "category": "Chocolate",
+    "subcategory": "Chocolate Bites",
+    "image_url": "https://example.com/images/products/nestle-kitkat.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/D4ZCMU0OX5",
+        "price": 17.21,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/kitkat-9058",
+        "price": 27.52,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Sugar",
+      "Cocoa",
+      "Palm Oil",
+      "Wheat Flour",
+      "Milk",
+      "Vanilla Extract"
+    ],
+    "allergens": [
+      "Nuts",
+      "Eggs"
+    ]
+  },
+  {
+    "id": "nestle-kitkat-chunky",
+    "name": "KitKat Chunky",
+    "description": "Nestle KitKat Chunky - A delicious chocolate product in the chocolate gifts category",
+    "category": "Chocolate",
+    "subcategory": "Chocolate Gifts",
+    "image_url": "https://example.com/images/products/nestle-kitkat-chunky.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/5JFPAUCJ36",
+        "price": 24.0,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/kitkat-chunky-4142",
+        "price": 10.46,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.qizkl14p",
+        "price": 11.14,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/lhey4ffn",
+        "price": 10.65,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Cocoa",
+      "Sugar",
+      "Palm Oil",
+      "Milk"
+    ],
+    "allergens": [
+      "Soy"
+    ]
+  },
+  {
+    "id": "nestle-aero",
+    "name": "Aero",
+    "description": "Nestle Aero - A delicious chocolate product in the chocolate bites category",
+    "category": "Chocolate",
+    "subcategory": "Chocolate Bites",
+    "image_url": "https://example.com/images/products/nestle-aero.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/I34J6K4UGP",
+        "price": 17.92,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Walmart",
+        "url": "https://www.walmart.com/ip/17843326",
+        "price": 22.39,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Palm Oil",
+      "Salt",
+      "Wheat Flour",
+      "Milk",
+      "Vanilla Extract",
+      "Cocoa",
+      "Corn Syrup"
+    ],
+    "allergens": [
+      "Eggs"
+    ]
+  },
+  {
+    "id": "nestle-crunch",
+    "name": "Crunch",
+    "description": "Nestle Crunch - A delicious confectionery product in the candy category",
+    "category": "Confectionery",
+    "subcategory": "Candy",
+    "image_url": "https://example.com/images/products/nestle-crunch.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/X0AHAKRPWH",
+        "price": 9.01,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/crunch-2608",
+        "price": 19.28,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/keojlkrs",
+        "price": 9.63,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Sugar",
+      "Vanilla Extract",
+      "Cocoa"
+    ],
+    "allergens": [
+      "Eggs",
+      "Milk"
+    ]
+  },
+  {
+    "id": "nestle-smarties",
+    "name": "Smarties",
+    "description": "Nestle Smarties - A delicious chocolate product in the chocolate bites category",
+    "category": "Chocolate",
+    "subcategory": "Chocolate Bites",
+    "image_url": "https://example.com/images/products/nestle-smarties.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/STDW92WFJL",
+        "price": 28.24,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/smarties-9945",
+        "price": 16.65,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Sugar",
+      "Cocoa",
+      "Salt",
+      "Vanilla Extract",
+      "Palm Oil",
+      "Corn Syrup"
+    ],
+    "allergens": []
+  },
+  {
+    "id": "nestle-butterfinger",
+    "name": "Butterfinger",
+    "description": "Nestle Butterfinger - A delicious confectionery product in the mints category",
+    "category": "Confectionery",
+    "subcategory": "Mints",
+    "image_url": "https://example.com/images/products/nestle-butterfinger.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/HND6J8KSMQ",
+        "price": 26.92,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.9c3hc5ic",
+        "price": 13.7,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/butterfinger-8825",
+        "price": 25.29,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/ldhzpjkh",
+        "price": 4.86,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Corn Syrup",
+      "Wheat Flour",
+      "Salt",
+      "Milk",
+      "Vanilla Extract"
+    ],
+    "allergens": []
+  },
+  {
+    "id": "nestle-kitkat-dark",
+    "name": "KitKat Dark",
+    "description": "Nestle KitKat Dark - A delicious chocolate product in the chocolate bites category",
+    "category": "Chocolate",
+    "subcategory": "Chocolate Bites",
+    "image_url": "https://example.com/images/products/nestle-kitkat-dark.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/MYEVH4QE6T",
+        "price": 2.54,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.sq33dssw",
+        "price": 6.95,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Walmart",
+        "url": "https://www.walmart.com/ip/40241853",
+        "price": 8.13,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/kitkat-dark-3525",
+        "price": 14.17,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Milk",
+      "Palm Oil",
+      "Salt",
+      "Corn Syrup",
+      "Vanilla Extract",
+      "Cocoa"
+    ],
+    "allergens": [
+      "Eggs"
+    ]
+  },
+  {
+    "id": "nestle-aero-mint",
+    "name": "Aero Mint",
+    "description": "Nestle Aero Mint - A delicious chocolate product in the chocolate bars category",
+    "category": "Chocolate",
+    "subcategory": "Chocolate Bars",
+    "image_url": "https://example.com/images/products/nestle-aero-mint.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/5E3RA8ID5U",
+        "price": 14.9,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/076e2on4",
+        "price": 20.72,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Corn Syrup",
+      "Sugar",
+      "Salt",
+      "Vanilla Extract",
+      "Wheat Flour"
+    ],
+    "allergens": []
+  },
+  {
+    "id": "nestle-nescafe-gold",
+    "name": "Nescafe Gold",
+    "description": "Nestle Nescafe Gold - A delicious coffee product in the ground coffee category",
+    "category": "Coffee",
+    "subcategory": "Ground Coffee",
+    "image_url": "https://example.com/images/products/nestle-nescafe-gold.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/1ZQXHB2IID",
+        "price": 27.3,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.19heqsxk",
+        "price": 24.97,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/nescafe-gold-3031",
+        "price": 21.94,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Palm Oil",
+      "Vanilla Extract",
+      "Corn Syrup",
+      "Sugar",
+      "Milk",
+      "Wheat Flour"
+    ],
+    "allergens": [
+      "Wheat"
+    ]
+  },
+  {
+    "id": "nestle-nescafe-classic",
+    "name": "Nescafe Classic",
+    "description": "Nestle Nescafe Classic - A delicious coffee product in the instant coffee category",
+    "category": "Coffee",
+    "subcategory": "Instant Coffee",
+    "image_url": "https://example.com/images/products/nestle-nescafe-classic.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/NU1TVJ4YOG",
+        "price": 22.55,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/62ht66v5",
+        "price": 20.74,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Salt",
+      "Palm Oil",
+      "Vanilla Extract",
+      "Sugar",
+      "Milk",
+      "Wheat Flour",
+      "Cocoa",
+      "Corn Syrup"
+    ],
+    "allergens": [
+      "Eggs",
+      "Soy"
+    ]
+  },
+  {
+    "id": "nestle-nescafe-tasters-choice",
+    "name": "Nescafe Taster's Choice",
+    "description": "Nestle Nescafe Taster's Choice - A delicious coffee product in the instant coffee category",
+    "category": "Coffee",
+    "subcategory": "Instant Coffee",
+    "image_url": "https://example.com/images/products/nestle-nescafe-tasters-choice.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/K21MRR89GJ",
+        "price": 2.74,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/nescafe-taster's-choice-9525",
+        "price": 16.78,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/rx9a9fky",
+        "price": 26.52,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Corn Syrup",
+      "Milk",
+      "Wheat Flour"
+    ],
+    "allergens": [
+      "Eggs"
+    ]
+  },
+  {
+    "id": "nestle-nescafe-dolce-gusto",
+    "name": "Nescafe Dolce Gusto",
+    "description": "Nestle Nescafe Dolce Gusto - A delicious coffee product in the coffee pods category",
+    "category": "Coffee",
+    "subcategory": "Coffee Pods",
+    "image_url": "https://example.com/images/products/nestle-nescafe-dolce-gusto.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/IRJ6BRYB69",
+        "price": 22.82,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/2jes4jfs",
+        "price": 18.14,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/yl6p0c2m",
+        "price": 24.85,
+        "currency": "USD",
+        "in_stock": false
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/nescafe-dolce-gusto-5666",
+        "price": 7.95,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Cocoa",
+      "Salt",
+      "Palm Oil",
+      "Wheat Flour"
+    ],
+    "allergens": [
+      "Nuts",
+      "Milk"
+    ]
+  },
+  {
+    "id": "nestle-nespresso-original",
+    "name": "Nespresso Original",
+    "description": "Nestle Nespresso Original - A delicious coffee product in the ground coffee category",
+    "category": "Coffee",
+    "subcategory": "Ground Coffee",
+    "image_url": "https://example.com/images/products/nestle-nespresso-original.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/E7GF748PBR",
+        "price": 9.28,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.3s4ew1ay",
+        "price": 10.74,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/nespresso-original-1727",
+        "price": 15.23,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/hjhqhowt",
+        "price": 11.41,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Vanilla Extract",
+      "Palm Oil",
+      "Wheat Flour",
+      "Cocoa"
+    ],
+    "allergens": [
+      "Soy"
+    ]
+  },
+  {
+    "id": "nestle-nespresso-vertuo",
+    "name": "Nespresso Vertuo",
+    "description": "Nestle Nespresso Vertuo - A delicious coffee product in the instant coffee category",
+    "category": "Coffee",
+    "subcategory": "Instant Coffee",
+    "image_url": "https://example.com/images/products/nestle-nespresso-vertuo.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/SGSWGABWXA",
+        "price": 2.61,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Walmart",
+        "url": "https://www.walmart.com/ip/39423826",
+        "price": 9.63,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/nespresso-vertuo-6767",
+        "price": 2.07,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/qfxt57m6",
+        "price": 5.75,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Sugar",
+      "Wheat Flour",
+      "Palm Oil",
+      "Milk",
+      "Vanilla Extract",
+      "Salt",
+      "Cocoa",
+      "Corn Syrup"
+    ],
+    "allergens": [
+      "Wheat"
+    ]
+  },
+  {
+    "id": "nestle-starbucks-by-nescafe",
+    "name": "Starbucks by Nescafe",
+    "description": "Nestle Starbucks by Nescafe - A delicious coffee product in the instant coffee category",
+    "category": "Coffee",
+    "subcategory": "Instant Coffee",
+    "image_url": "https://example.com/images/products/nestle-starbucks-by-nescafe.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/APTFWM2U4W",
+        "price": 12.7,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Walmart",
+        "url": "https://www.walmart.com/ip/35004723",
+        "price": 9.8,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/waqvar27",
+        "price": 17.77,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Palm Oil",
+      "Vanilla Extract",
+      "Wheat Flour"
+    ],
+    "allergens": []
+  },
+  {
+    "id": "nestle-coffee-mate",
+    "name": "Coffee-Mate",
+    "description": "Nestle Coffee-Mate - A delicious coffee product in the instant coffee category",
+    "category": "Coffee",
+    "subcategory": "Instant Coffee",
+    "image_url": "https://example.com/images/products/nestle-coffee-mate.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/H061OR76YP",
+        "price": 13.68,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/lpssinzx",
+        "price": 16.38,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Corn Syrup",
+      "Sugar",
+      "Cocoa"
+    ],
+    "allergens": []
+  },
+  {
+    "id": "nestle-haagen-dazs-vanilla",
+    "name": "Haagen-Dazs Vanilla",
+    "description": "Nestle Haagen-Dazs Vanilla - A delicious ice cream product in the frozen desserts category",
+    "category": "Ice Cream",
+    "subcategory": "Frozen Desserts",
+    "image_url": "https://example.com/images/products/nestle-haagen-dazs-vanilla.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/L5XV244TUH",
+        "price": 11.77,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Walmart",
+        "url": "https://www.walmart.com/ip/18391774",
+        "price": 23.56,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/q417y0p8",
+        "price": 8.11,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/qywnalfz",
+        "price": 26.27,
+        "currency": "USD",
+        "in_stock": false
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Vanilla Extract",
+      "Sugar",
+      "Milk"
+    ],
+    "allergens": [
+      "Eggs"
+    ]
+  },
+  {
+    "id": "nestle-haagen-dazs-chocolate",
+    "name": "Haagen-Dazs Chocolate",
+    "description": "Nestle Haagen-Dazs Chocolate - A delicious ice cream product in the ice cream bars category",
+    "category": "Ice Cream",
+    "subcategory": "Ice Cream Bars",
+    "image_url": "https://example.com/images/products/nestle-haagen-dazs-chocolate.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/YZ8DZ4F2V0",
+        "price": 11.91,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/s3tmbhyl",
+        "price": 15.37,
+        "currency": "USD",
+        "in_stock": false
+      },
+      {
+        "retailer": "Walmart",
+        "url": "https://www.walmart.com/ip/50485878",
+        "price": 10.4,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Milk",
+      "Palm Oil",
+      "Cocoa"
+    ],
+    "allergens": [
+      "Eggs"
+    ]
+  },
+  {
+    "id": "nestle-haagen-dazs-strawberry",
+    "name": "Haagen-Dazs Strawberry",
+    "description": "Nestle Haagen-Dazs Strawberry - A delicious ice cream product in the ice cream tubs category",
+    "category": "Ice Cream",
+    "subcategory": "Ice Cream Tubs",
+    "image_url": "https://example.com/images/products/nestle-haagen-dazs-strawberry.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/F8SCAFP9CV",
+        "price": 24.24,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/5juz80w4",
+        "price": 11.21,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Walmart",
+        "url": "https://www.walmart.com/ip/87590962",
+        "price": 23.79,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/rv8hh32j",
+        "price": 24.58,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Vanilla Extract",
+      "Wheat Flour",
+      "Sugar",
+      "Salt",
+      "Corn Syrup",
+      "Cocoa",
+      "Palm Oil",
+      "Milk"
+    ],
+    "allergens": [
+      "Eggs",
+      "Wheat"
+    ]
+  },
+  {
+    "id": "nestle-dreyers-vanilla",
+    "name": "Dreyer's Vanilla",
+    "description": "Nestle Dreyer's Vanilla - A delicious ice cream product in the ice cream tubs category",
+    "category": "Ice Cream",
+    "subcategory": "Ice Cream Tubs",
+    "image_url": "https://example.com/images/products/nestle-dreyers-vanilla.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/0REZ8C76QX",
+        "price": 3.48,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Walmart",
+        "url": "https://www.walmart.com/ip/23967865",
+        "price": 29.75,
+        "currency": "USD",
+        "in_stock": false
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Sugar",
+      "Palm Oil",
+      "Salt",
+      "Milk"
+    ],
+    "allergens": [
+      "Wheat"
+    ]
+  },
+  {
+    "id": "nestle-dreyers-chocolate",
+    "name": "Dreyer's Chocolate",
+    "description": "Nestle Dreyer's Chocolate - A delicious ice cream product in the ice cream tubs category",
+    "category": "Ice Cream",
+    "subcategory": "Ice Cream Tubs",
+    "image_url": "https://example.com/images/products/nestle-dreyers-chocolate.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/UQ3CV7ISXS",
+        "price": 23.98,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/3n7ow0mm",
+        "price": 18.08,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Milk",
+      "Vanilla Extract",
+      "Palm Oil",
+      "Salt",
+      "Corn Syrup"
+    ],
+    "allergens": [
+      "Wheat"
+    ]
+  },
+  {
+    "id": "nestle-dreyers-rocky-road",
+    "name": "Dreyer's Rocky Road",
+    "description": "Nestle Dreyer's Rocky Road - A delicious ice cream product in the ice cream tubs category",
+    "category": "Ice Cream",
+    "subcategory": "Ice Cream Tubs",
+    "image_url": "https://example.com/images/products/nestle-dreyers-rocky-road.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/KDR2IB1C6O",
+        "price": 16.33,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/lhvpmkvn",
+        "price": 5.28,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Palm Oil",
+      "Sugar",
+      "Corn Syrup",
+      "Cocoa"
+    ],
+    "allergens": [
+      "Wheat"
+    ]
+  },
+  {
+    "id": "nestle-drumstick-vanilla",
+    "name": "Drumstick Vanilla",
+    "description": "Nestle Drumstick Vanilla - A delicious ice cream product in the ice cream tubs category",
+    "category": "Ice Cream",
+    "subcategory": "Ice Cream Tubs",
+    "image_url": "https://example.com/images/products/nestle-drumstick-vanilla.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/IQSLWH7B9V",
+        "price": 4.92,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/oy0khdp6",
+        "price": 20.47,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/2ks0nhy3",
+        "price": 28.15,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Milk",
+      "Sugar",
+      "Palm Oil",
+      "Cocoa",
+      "Salt",
+      "Wheat Flour",
+      "Vanilla Extract"
+    ],
+    "allergens": [
+      "Nuts"
+    ]
+  },
+  {
+    "id": "nestle-drumstick-chocolate",
+    "name": "Drumstick Chocolate",
+    "description": "Nestle Drumstick Chocolate - A delicious ice cream product in the ice cream bars category",
+    "category": "Ice Cream",
+    "subcategory": "Ice Cream Bars",
+    "image_url": "https://example.com/images/products/nestle-drumstick-chocolate.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/1K1N5DEV01",
+        "price": 13.74,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Walmart",
+        "url": "https://www.walmart.com/ip/51108629",
+        "price": 3.08,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/3czs0nvs",
+        "price": 16.39,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/mal5a75t",
+        "price": 2.55,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Wheat Flour",
+      "Sugar",
+      "Vanilla Extract",
+      "Cocoa",
+      "Salt",
+      "Milk",
+      "Corn Syrup"
+    ],
+    "allergens": [
+      "Soy",
+      "Eggs"
+    ]
+  },
+  {
+    "id": "nestle-carnation-evaporated-milk",
+    "name": "Carnation Evaporated Milk",
+    "description": "Nestle Carnation Evaporated Milk - A delicious dairy product in the yogurt category",
+    "category": "Dairy",
+    "subcategory": "Yogurt",
+    "image_url": "https://example.com/images/products/nestle-carnation-evaporated-milk.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/J414VMD545",
+        "price": 28.59,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/k91ugocx",
+        "price": 20.81,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Walmart",
+        "url": "https://www.walmart.com/ip/98327929",
+        "price": 4.79,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/7lt6m6xi",
+        "price": 5.83,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Cocoa",
+      "Sugar",
+      "Vanilla Extract",
+      "Corn Syrup",
+      "Palm Oil",
+      "Milk"
+    ],
+    "allergens": [
+      "Milk",
+      "Nuts"
+    ]
+  },
+  {
+    "id": "nestle-carnation-sweetened-condensed-milk",
+    "name": "Carnation Sweetened Condensed Milk",
+    "description": "Nestle Carnation Sweetened Condensed Milk - A delicious dairy product in the milk products category",
+    "category": "Dairy",
+    "subcategory": "Milk Products",
+    "image_url": "https://example.com/images/products/nestle-carnation-sweetened-condensed-milk.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/MZHUBO22XE",
+        "price": 4.85,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/carnation-sweetened-condensed-milk-2461",
+        "price": 27.5,
+        "currency": "USD",
+        "in_stock": false
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Corn Syrup",
+      "Vanilla Extract",
+      "Cocoa",
+      "Salt",
+      "Milk",
+      "Sugar",
+      "Wheat Flour",
+      "Palm Oil"
+    ],
+    "allergens": [
+      "Eggs"
+    ]
+  },
+  {
+    "id": "nestle-nestle-yogurt",
+    "name": "Nestle Yogurt",
+    "description": "Nestle Nestle Yogurt - A delicious dairy product in the milk products category",
+    "category": "Dairy",
+    "subcategory": "Milk Products",
+    "image_url": "https://example.com/images/products/nestle-nestle-yogurt.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/V52KUS2LJ8",
+        "price": 5.17,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/ctgupi5m",
+        "price": 12.18,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Milk",
+      "Corn Syrup",
+      "Wheat Flour",
+      "Salt",
+      "Sugar",
+      "Vanilla Extract",
+      "Cocoa"
+    ],
+    "allergens": []
+  },
+  {
+    "id": "nestle-coffee-mate-original",
+    "name": "Coffee-Mate Original",
+    "description": "Nestle Coffee-Mate Original - A delicious dairy product in the yogurt category",
+    "category": "Dairy",
+    "subcategory": "Yogurt",
+    "image_url": "https://example.com/images/products/nestle-coffee-mate-original.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/1WIT42NECR",
+        "price": 17.13,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.zxiethq2",
+        "price": 19.52,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/coffee-mate-original-5932",
+        "price": 23.74,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/o7d6xix6",
+        "price": 8.09,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Corn Syrup",
+      "Sugar",
+      "Wheat Flour",
+      "Salt",
+      "Cocoa"
+    ],
+    "allergens": [
+      "Nuts"
+    ]
+  },
+  {
+    "id": "nestle-coffee-mate-french-vanilla",
+    "name": "Coffee-Mate French Vanilla",
+    "description": "Nestle Coffee-Mate French Vanilla - A delicious dairy product in the yogurt category",
+    "category": "Dairy",
+    "subcategory": "Yogurt",
+    "image_url": "https://example.com/images/products/nestle-coffee-mate-french-vanilla.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/XC1M04WPTN",
+        "price": 2.81,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/coffee-mate-french-vanilla-4324",
+        "price": 12.75,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Cocoa",
+      "Salt",
+      "Milk"
+    ],
+    "allergens": [
+      "Eggs",
+      "Wheat"
+    ]
+  },
+  {
+    "id": "nestle-cheerios",
+    "name": "Cheerios",
+    "description": "Nestle Cheerios - A delicious breakfast cereal product in the kids cereal category",
+    "category": "Breakfast Cereal",
+    "subcategory": "Kids Cereal",
+    "image_url": "https://example.com/images/products/nestle-cheerios.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/3UIBJ2I1KF",
+        "price": 11.52,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/wdw89k7b",
+        "price": 12.05,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.y9w4ufhq",
+        "price": 4.6,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Cocoa",
+      "Sugar",
+      "Palm Oil",
+      "Vanilla Extract"
+    ],
+    "allergens": [
+      "Milk"
+    ]
+  },
+  {
+    "id": "nestle-cheerios-honey-nut",
+    "name": "Cheerios Honey Nut",
+    "description": "Nestle Cheerios Honey Nut - A delicious breakfast cereal product in the adult cereal category",
+    "category": "Breakfast Cereal",
+    "subcategory": "Adult Cereal",
+    "image_url": "https://example.com/images/products/nestle-cheerios-honey-nut.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/E75F597TZE",
+        "price": 5.94,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/bcvebhxl",
+        "price": 9.11,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/cheerios-honey-nut-3615",
+        "price": 9.82,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.idgqzuvm",
+        "price": 6.81,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Corn Syrup",
+      "Salt",
+      "Vanilla Extract",
+      "Palm Oil",
+      "Milk",
+      "Wheat Flour"
+    ],
+    "allergens": [
+      "Nuts",
+      "Soy"
+    ]
+  },
+  {
+    "id": "nestle-nesquik-cereal",
+    "name": "Nesquik Cereal",
+    "description": "Nestle Nesquik Cereal - A delicious breakfast cereal product in the kids cereal category",
+    "category": "Breakfast Cereal",
+    "subcategory": "Kids Cereal",
+    "image_url": "https://example.com/images/products/nestle-nesquik-cereal.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/WP3VWXU0S4",
+        "price": 11.72,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/tuc6i1e2",
+        "price": 21.87,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Walmart",
+        "url": "https://www.walmart.com/ip/45409558",
+        "price": 21.16,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/i3egfmeo",
+        "price": 15.46,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Wheat Flour",
+      "Cocoa",
+      "Milk",
+      "Corn Syrup"
+    ],
+    "allergens": [
+      "Soy",
+      "Nuts"
+    ]
+  },
+  {
+    "id": "nestle-shreddies",
+    "name": "Shreddies",
+    "description": "Nestle Shreddies - A delicious breakfast cereal product in the kids cereal category",
+    "category": "Breakfast Cereal",
+    "subcategory": "Kids Cereal",
+    "image_url": "https://example.com/images/products/nestle-shreddies.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/VKM93VQUL5",
+        "price": 16.74,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/shreddies-2772",
+        "price": 9.97,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.olm2ncxk",
+        "price": 3.17,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Milk",
+      "Sugar",
+      "Salt",
+      "Palm Oil"
+    ],
+    "allergens": [
+      "Milk",
+      "Soy"
+    ]
+  },
+  {
+    "id": "nestle-fitness",
+    "name": "Fitness",
+    "description": "Nestle Fitness - A delicious breakfast cereal product in the adult cereal category",
+    "category": "Breakfast Cereal",
+    "subcategory": "Adult Cereal",
+    "image_url": "https://example.com/images/products/nestle-fitness.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/63JNGBA99C",
+        "price": 13.85,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/etcam1ci",
+        "price": 11.14,
+        "currency": "USD",
+        "in_stock": false
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.2l4vuvrv",
+        "price": 19.66,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/fitness-5516",
+        "price": 24.71,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Sugar",
+      "Cocoa",
+      "Salt",
+      "Vanilla Extract",
+      "Corn Syrup",
+      "Palm Oil",
+      "Milk"
+    ],
+    "allergens": [
+      "Milk",
+      "Eggs"
+    ]
+  },
+  {
+    "id": "nestle-cookie-crisp",
+    "name": "Cookie Crisp",
+    "description": "Nestle Cookie Crisp - A delicious breakfast cereal product in the adult cereal category",
+    "category": "Breakfast Cereal",
+    "subcategory": "Adult Cereal",
+    "image_url": "https://example.com/images/products/nestle-cookie-crisp.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/8ZFDNUWYFA",
+        "price": 23.58,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/98ot3kjt",
+        "price": 9.06,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Cocoa",
+      "Vanilla Extract",
+      "Milk",
+      "Corn Syrup",
+      "Palm Oil",
+      "Sugar"
+    ],
+    "allergens": []
+  },
+  {
+    "id": "nestle-corn-flakes",
+    "name": "Corn Flakes",
+    "description": "Nestle Corn Flakes - A delicious breakfast cereal product in the kids cereal category",
+    "category": "Breakfast Cereal",
+    "subcategory": "Kids Cereal",
+    "image_url": "https://example.com/images/products/nestle-corn-flakes.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/LF21TTELWR",
+        "price": 16.06,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/2z3gge5s",
+        "price": 29.53,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/corn-flakes-2205",
+        "price": 23.68,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Salt",
+      "Sugar",
+      "Palm Oil",
+      "Vanilla Extract",
+      "Cocoa",
+      "Corn Syrup"
+    ],
+    "allergens": [
+      "Milk",
+      "Nuts"
+    ]
+  },
+  {
+    "id": "nestle-chocapic",
+    "name": "Chocapic",
+    "description": "Nestle Chocapic - A delicious breakfast cereal product in the granola category",
+    "category": "Breakfast Cereal",
+    "subcategory": "Granola",
+    "image_url": "https://example.com/images/products/nestle-chocapic.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/29GRX3UDGI",
+        "price": 12.18,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.fxtzv3pi",
+        "price": 25.64,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Vanilla Extract",
+      "Corn Syrup",
+      "Cocoa",
+      "Salt",
+      "Wheat Flour",
+      "Milk"
+    ],
+    "allergens": [
+      "Eggs",
+      "Nuts"
+    ]
+  },
+  {
+    "id": "nestle-gerber-rice-cereal",
+    "name": "Gerber Rice Cereal",
+    "description": "Nestle Gerber Rice Cereal - A delicious baby food product in the infant formula category",
+    "category": "Baby Food",
+    "subcategory": "Infant Formula",
+    "image_url": "https://example.com/images/products/nestle-gerber-rice-cereal.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/VYC43NH5KM",
+        "price": 10.5,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Walmart",
+        "url": "https://www.walmart.com/ip/82468572",
+        "price": 25.22,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/3qea6e53",
+        "price": 5.39,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Milk",
+      "Wheat Flour",
+      "Cocoa"
+    ],
+    "allergens": [
+      "Nuts",
+      "Milk"
+    ]
+  },
+  {
+    "id": "nestle-gerber-oatmeal-cereal",
+    "name": "Gerber Oatmeal Cereal",
+    "description": "Nestle Gerber Oatmeal Cereal - A delicious baby food product in the baby meals category",
+    "category": "Baby Food",
+    "subcategory": "Baby Meals",
+    "image_url": "https://example.com/images/products/nestle-gerber-oatmeal-cereal.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/R5PURQOEXW",
+        "price": 6.75,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/6bgn69ot",
+        "price": 12.3,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/kok4urq5",
+        "price": 21.42,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.8ze9ften",
+        "price": 11.63,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Wheat Flour",
+      "Corn Syrup",
+      "Cocoa",
+      "Milk",
+      "Sugar",
+      "Salt"
+    ],
+    "allergens": [
+      "Milk"
+    ]
+  },
+  {
+    "id": "nestle-gerber-apple-sauce",
+    "name": "Gerber Apple Sauce",
+    "description": "Nestle Gerber Apple Sauce - A delicious baby food product in the infant formula category",
+    "category": "Baby Food",
+    "subcategory": "Infant Formula",
+    "image_url": "https://example.com/images/products/nestle-gerber-apple-sauce.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/I7X8UAAD3K",
+        "price": 14.7,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/gerber-apple-sauce-3579",
+        "price": 15.2,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.8gtlovdk",
+        "price": 22.73,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/14tr5et3",
+        "price": 2.25,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Palm Oil",
+      "Wheat Flour",
+      "Milk",
+      "Sugar"
+    ],
+    "allergens": [
+      "Nuts"
+    ]
+  },
+  {
+    "id": "nestle-gerber-banana",
+    "name": "Gerber Banana",
+    "description": "Nestle Gerber Banana - A delicious baby food product in the infant formula category",
+    "category": "Baby Food",
+    "subcategory": "Infant Formula",
+    "image_url": "https://example.com/images/products/nestle-gerber-banana.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/X21D081DZD",
+        "price": 22.14,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Walmart",
+        "url": "https://www.walmart.com/ip/49041298",
+        "price": 19.56,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/gerber-banana-4240",
+        "price": 15.38,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/nhd2pcpg",
+        "price": 5.07,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Corn Syrup",
+      "Palm Oil",
+      "Vanilla Extract",
+      "Milk"
+    ],
+    "allergens": [
+      "Eggs"
+    ]
+  },
+  {
+    "id": "nestle-gerber-chicken-&-rice",
+    "name": "Gerber Chicken & Rice",
+    "description": "Nestle Gerber Chicken & Rice - A delicious baby food product in the baby meals category",
+    "category": "Baby Food",
+    "subcategory": "Baby Meals",
+    "image_url": "https://example.com/images/products/nestle-gerber-chicken-&-rice.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/8IL14IG15X",
+        "price": 29.59,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/gerber-chicken-&-rice-1987",
+        "price": 8.05,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Vanilla Extract",
+      "Milk",
+      "Palm Oil"
+    ],
+    "allergens": []
+  },
+  {
+    "id": "nestle-gerber-sweet-potato",
+    "name": "Gerber Sweet Potato",
+    "description": "Nestle Gerber Sweet Potato - A delicious baby food product in the baby meals category",
+    "category": "Baby Food",
+    "subcategory": "Baby Meals",
+    "image_url": "https://example.com/images/products/nestle-gerber-sweet-potato.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/RBMI474EO8",
+        "price": 14.54,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/gerber-sweet-potato-7050",
+        "price": 24.79,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/pprket8m",
+        "price": 15.2,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Cocoa",
+      "Sugar",
+      "Vanilla Extract",
+      "Palm Oil"
+    ],
+    "allergens": [
+      "Soy",
+      "Eggs"
+    ]
+  },
+  {
+    "id": "nestle-purina-one",
+    "name": "Purina ONE",
+    "description": "Nestle Purina ONE - A delicious pet food product in the pet treats category",
+    "category": "Pet Food",
+    "subcategory": "Pet Treats",
+    "image_url": "https://example.com/images/products/nestle-purina-one.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/VBS66E4MIO",
+        "price": 29.19,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/zt0osejk",
+        "price": 16.41,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/bqdthupr",
+        "price": 7.08,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Milk",
+      "Salt",
+      "Sugar",
+      "Wheat Flour"
+    ],
+    "allergens": [
+      "Wheat",
+      "Eggs"
+    ]
+  },
+  {
+    "id": "nestle-purina-dog-chow",
+    "name": "Purina Dog Chow",
+    "description": "Nestle Purina Dog Chow - A delicious pet food product in the dog food category",
+    "category": "Pet Food",
+    "subcategory": "Dog Food",
+    "image_url": "https://example.com/images/products/nestle-purina-dog-chow.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/U3ZB2YYIL1",
+        "price": 8.93,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/w3cjn6xx",
+        "price": 29.85,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Palm Oil",
+      "Milk",
+      "Cocoa",
+      "Vanilla Extract",
+      "Salt",
+      "Wheat Flour"
+    ],
+    "allergens": []
+  },
+  {
+    "id": "nestle-purina-cat-chow",
+    "name": "Purina Cat Chow",
+    "description": "Nestle Purina Cat Chow - A delicious pet food product in the cat food category",
+    "category": "Pet Food",
+    "subcategory": "Cat Food",
+    "image_url": "https://example.com/images/products/nestle-purina-cat-chow.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/TOLJZN1Q4B",
+        "price": 9.93,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.dv89a63o",
+        "price": 4.75,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Wheat Flour",
+      "Corn Syrup",
+      "Vanilla Extract"
+    ],
+    "allergens": [
+      "Wheat",
+      "Soy"
+    ]
+  },
+  {
+    "id": "nestle-purina-fancy-feast",
+    "name": "Purina Fancy Feast",
+    "description": "Nestle Purina Fancy Feast - A delicious pet food product in the cat food category",
+    "category": "Pet Food",
+    "subcategory": "Cat Food",
+    "image_url": "https://example.com/images/products/nestle-purina-fancy-feast.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/E0OAZXJMS0",
+        "price": 18.12,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/purina-fancy-feast-1228",
+        "price": 22.22,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.1jijk7bl",
+        "price": 18.6,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/a2ve90cu",
+        "price": 29.73,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Milk",
+      "Palm Oil",
+      "Cocoa",
+      "Salt",
+      "Corn Syrup"
+    ],
+    "allergens": [
+      "Wheat"
+    ]
+  },
+  {
+    "id": "nestle-purina-pro-plan",
+    "name": "Purina Pro Plan",
+    "description": "Nestle Purina Pro Plan - A delicious pet food product in the dog food category",
+    "category": "Pet Food",
+    "subcategory": "Dog Food",
+    "image_url": "https://example.com/images/products/nestle-purina-pro-plan.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/SG3N3FHFFK",
+        "price": 19.85,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.slh32yfe",
+        "price": 16.79,
+        "currency": "USD",
+        "in_stock": false
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/06n3209c",
+        "price": 16.87,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/purina-pro-plan-7466",
+        "price": 19.48,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Palm Oil",
+      "Milk",
+      "Salt",
+      "Vanilla Extract",
+      "Corn Syrup"
+    ],
+    "allergens": []
+  },
+  {
+    "id": "nestle-purina-friskies",
+    "name": "Purina Friskies",
+    "description": "Nestle Purina Friskies - A delicious pet food product in the cat food category",
+    "category": "Pet Food",
+    "subcategory": "Cat Food",
+    "image_url": "https://example.com/images/products/nestle-purina-friskies.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/U2MZGSZWJX",
+        "price": 15.0,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.djpa7dnw",
+        "price": 5.8,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Walmart",
+        "url": "https://www.walmart.com/ip/62793423",
+        "price": 7.44,
+        "currency": "USD",
+        "in_stock": false
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/4hx2l5lz",
+        "price": 28.24,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Vanilla Extract",
+      "Milk",
+      "Wheat Flour"
+    ],
+    "allergens": []
+  },
+  {
+    "id": "nestle-purina-beneful",
+    "name": "Purina Beneful",
+    "description": "Nestle Purina Beneful - A delicious pet food product in the cat food category",
+    "category": "Pet Food",
+    "subcategory": "Cat Food",
+    "image_url": "https://example.com/images/products/nestle-purina-beneful.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/ZN099PB1WU",
+        "price": 4.18,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.0a3btrxd",
+        "price": 18.05,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Palm Oil",
+      "Sugar",
+      "Vanilla Extract",
+      "Salt"
+    ],
+    "allergens": []
+  },
+  {
+    "id": "nestle-purina-felix",
+    "name": "Purina Felix",
+    "description": "Nestle Purina Felix - A delicious pet food product in the dog food category",
+    "category": "Pet Food",
+    "subcategory": "Dog Food",
+    "image_url": "https://example.com/images/products/nestle-purina-felix.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/DM3VS27E4R",
+        "price": 8.33,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Walmart",
+        "url": "https://www.walmart.com/ip/30682559",
+        "price": 10.18,
+        "currency": "USD",
+        "in_stock": false
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Cocoa",
+      "Vanilla Extract",
+      "Palm Oil",
+      "Salt",
+      "Milk",
+      "Sugar"
+    ],
+    "allergens": [
+      "Nuts"
+    ]
+  },
+  {
+    "id": "nestle-poland-spring",
+    "name": "Poland Spring",
+    "description": "Nestle Poland Spring - A delicious water product in the flavored water category",
+    "category": "Water",
+    "subcategory": "Flavored Water",
+    "image_url": "https://example.com/images/products/nestle-poland-spring.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/O064POC35R",
+        "price": 7.66,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/ay88nfko",
+        "price": 29.59,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Cocoa",
+      "Wheat Flour",
+      "Salt",
+      "Milk",
+      "Sugar",
+      "Vanilla Extract",
+      "Corn Syrup"
+    ],
+    "allergens": [
+      "Soy"
+    ]
+  },
+  {
+    "id": "nestle-perrier",
+    "name": "Perrier",
+    "description": "Nestle Perrier - A delicious water product in the flavored water category",
+    "category": "Water",
+    "subcategory": "Flavored Water",
+    "image_url": "https://example.com/images/products/nestle-perrier.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/U118904G1U",
+        "price": 24.13,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.3tmp7jya",
+        "price": 15.31,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/perrier-9930",
+        "price": 6.31,
+        "currency": "USD",
+        "in_stock": false
+      },
+      {
+        "retailer": "Walmart",
+        "url": "https://www.walmart.com/ip/25353827",
+        "price": 23.06,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Salt",
+      "Milk",
+      "Sugar",
+      "Wheat Flour",
+      "Corn Syrup",
+      "Palm Oil",
+      "Vanilla Extract",
+      "Cocoa"
+    ],
+    "allergens": [
+      "Soy",
+      "Wheat"
+    ]
+  },
+  {
+    "id": "nestle-s.pellegrino",
+    "name": "S.Pellegrino",
+    "description": "Nestle S.Pellegrino - A delicious water product in the flavored water category",
+    "category": "Water",
+    "subcategory": "Flavored Water",
+    "image_url": "https://example.com/images/products/nestle-s.pellegrino.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/664Y2ETQNC",
+        "price": 7.9,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/s.pellegrino-8982",
+        "price": 29.17,
+        "currency": "USD",
+        "in_stock": false
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Wheat Flour",
+      "Corn Syrup",
+      "Salt",
+      "Palm Oil",
+      "Sugar",
+      "Milk",
+      "Vanilla Extract"
+    ],
+    "allergens": [
+      "Eggs"
+    ]
+  },
+  {
+    "id": "nestle-nestle-pure-life",
+    "name": "Nestle Pure Life",
+    "description": "Nestle Nestle Pure Life - A delicious water product in the flavored water category",
+    "category": "Water",
+    "subcategory": "Flavored Water",
+    "image_url": "https://example.com/images/products/nestle-nestle-pure-life.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/P88QWA99JS",
+        "price": 28.19,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/k0xg6hnr",
+        "price": 12.63,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Milk",
+      "Vanilla Extract",
+      "Palm Oil"
+    ],
+    "allergens": [
+      "Eggs",
+      "Soy"
+    ]
+  },
+  {
+    "id": "nestle-arrowhead",
+    "name": "Arrowhead",
+    "description": "Nestle Arrowhead - A delicious water product in the flavored water category",
+    "category": "Water",
+    "subcategory": "Flavored Water",
+    "image_url": "https://example.com/images/products/nestle-arrowhead.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/7BPFCIH1GH",
+        "price": 17.8,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/sd3jde1f",
+        "price": 4.91,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/mi4r4s4w",
+        "price": 22.71,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.3rz6jl2o",
+        "price": 5.52,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Cocoa",
+      "Wheat Flour",
+      "Corn Syrup",
+      "Vanilla Extract",
+      "Salt"
+    ],
+    "allergens": []
+  },
+  {
+    "id": "nestle-deer-park",
+    "name": "Deer Park",
+    "description": "Nestle Deer Park - A delicious water product in the sparkling water category",
+    "category": "Water",
+    "subcategory": "Sparkling Water",
+    "image_url": "https://example.com/images/products/nestle-deer-park.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/FYL3L583RU",
+        "price": 2.14,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/n1lxyfz8",
+        "price": 9.2,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Salt",
+      "Wheat Flour",
+      "Cocoa",
+      "Palm Oil",
+      "Corn Syrup",
+      "Vanilla Extract",
+      "Milk",
+      "Sugar"
+    ],
+    "allergens": [
+      "Eggs",
+      "Nuts"
+    ]
+  },
+  {
+    "id": "nestle-ozarka",
+    "name": "Ozarka",
+    "description": "Nestle Ozarka - A delicious water product in the still water category",
+    "category": "Water",
+    "subcategory": "Still Water",
+    "image_url": "https://example.com/images/products/nestle-ozarka.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/IYFJIFMIWR",
+        "price": 24.01,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/rwpw91op",
+        "price": 18.16,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.6ajbg515",
+        "price": 5.71,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Sugar",
+      "Cocoa",
+      "Milk",
+      "Wheat Flour"
+    ],
+    "allergens": [
+      "Nuts",
+      "Eggs"
+    ]
+  },
+  {
+    "id": "nestle-zephyrhills",
+    "name": "Zephyrhills",
+    "description": "Nestle Zephyrhills - A delicious water product in the sparkling water category",
+    "category": "Water",
+    "subcategory": "Sparkling Water",
+    "image_url": "https://example.com/images/products/nestle-zephyrhills.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/CG9OM1EIWA",
+        "price": 17.06,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/zephyrhills-7208",
+        "price": 17.92,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Walmart",
+        "url": "https://www.walmart.com/ip/38361956",
+        "price": 25.28,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Corn Syrup",
+      "Vanilla Extract",
+      "Sugar",
+      "Palm Oil"
+    ],
+    "allergens": [
+      "Nuts"
+    ]
+  },
+  {
+    "id": "nestle-sweetarts",
+    "name": "SweeTarts",
+    "description": "Nestle SweeTarts - A delicious confectionery product in the gum category",
+    "category": "Confectionery",
+    "subcategory": "Gum",
+    "image_url": "https://example.com/images/products/nestle-sweetarts.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/BP2XX52O1F",
+        "price": 16.55,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/sweetarts-2894",
+        "price": 24.17,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Walmart",
+        "url": "https://www.walmart.com/ip/38564284",
+        "price": 28.56,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.8gmauapd",
+        "price": 4.66,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Salt",
+      "Cocoa",
+      "Sugar",
+      "Palm Oil"
+    ],
+    "allergens": [
+      "Wheat"
+    ]
+  },
+  {
+    "id": "nestle-laffy-taffy",
+    "name": "Laffy Taffy",
+    "description": "Nestle Laffy Taffy - A delicious confectionery product in the candy category",
+    "category": "Confectionery",
+    "subcategory": "Candy",
+    "image_url": "https://example.com/images/products/nestle-laffy-taffy.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/RSNULJ655R",
+        "price": 6.79,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Walmart",
+        "url": "https://www.walmart.com/ip/58798672",
+        "price": 5.63,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/tv9shge4",
+        "price": 23.46,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/fly43ssk",
+        "price": 10.41,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Wheat Flour",
+      "Cocoa",
+      "Milk",
+      "Salt",
+      "Vanilla Extract",
+      "Palm Oil"
+    ],
+    "allergens": []
+  },
+  {
+    "id": "nestle-wonka-nerds",
+    "name": "Wonka Nerds",
+    "description": "Nestle Wonka Nerds - A delicious confectionery product in the candy category",
+    "category": "Confectionery",
+    "subcategory": "Candy",
+    "image_url": "https://example.com/images/products/nestle-wonka-nerds.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/NNFNSRNATS",
+        "price": 23.25,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/ao63xh6q",
+        "price": 29.02,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Walmart",
+        "url": "https://www.walmart.com/ip/84906434",
+        "price": 19.8,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Cocoa",
+      "Milk",
+      "Vanilla Extract",
+      "Corn Syrup",
+      "Wheat Flour",
+      "Salt",
+      "Palm Oil",
+      "Sugar"
+    ],
+    "allergens": [
+      "Soy"
+    ]
+  },
+  {
+    "id": "nestle-runts",
+    "name": "Runts",
+    "description": "Nestle Runts - A delicious confectionery product in the gum category",
+    "category": "Confectionery",
+    "subcategory": "Gum",
+    "image_url": "https://example.com/images/products/nestle-runts.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/AJXPXMPUSD",
+        "price": 25.75,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Walmart",
+        "url": "https://www.walmart.com/ip/88750523",
+        "price": 6.66,
+        "currency": "USD",
+        "in_stock": false
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.evvii3ey",
+        "price": 24.02,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Vanilla Extract",
+      "Sugar",
+      "Corn Syrup",
+      "Cocoa",
+      "Milk",
+      "Wheat Flour",
+      "Salt"
+    ],
+    "allergens": []
+  },
+  {
+    "id": "nestle-gobstoppers",
+    "name": "Gobstoppers",
+    "description": "Nestle Gobstoppers - A delicious confectionery product in the mints category",
+    "category": "Confectionery",
+    "subcategory": "Mints",
+    "image_url": "https://example.com/images/products/nestle-gobstoppers.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/WV2MLORPBO",
+        "price": 16.31,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/21dvg0md",
+        "price": 15.4,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Corn Syrup",
+      "Cocoa",
+      "Sugar",
+      "Wheat Flour"
+    ],
+    "allergens": []
+  },
+  {
+    "id": "nestle-bottle-caps",
+    "name": "Bottle Caps",
+    "description": "Nestle Bottle Caps - A delicious confectionery product in the candy category",
+    "category": "Confectionery",
+    "subcategory": "Candy",
+    "image_url": "https://example.com/images/products/nestle-bottle-caps.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/XXIYOGK91Z",
+        "price": 8.24,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/xnbc5dex",
+        "price": 19.32,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Wheat Flour",
+      "Salt",
+      "Cocoa",
+      "Palm Oil",
+      "Milk",
+      "Vanilla Extract",
+      "Corn Syrup"
+    ],
+    "allergens": []
+  },
+  {
+    "id": "nestle-toll-house-chocolate-chips",
+    "name": "Toll House Chocolate Chips",
+    "description": "Nestle Toll House Chocolate Chips - A delicious baking product in the baking mixes category",
+    "category": "Baking",
+    "subcategory": "Baking Mixes",
+    "image_url": "https://example.com/images/products/nestle-toll-house-chocolate-chips.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/PM55517EWI",
+        "price": 29.92,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/6yiqglk2",
+        "price": 14.52,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/toll-house-chocolate-chips-5213",
+        "price": 27.19,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Wheat Flour",
+      "Palm Oil",
+      "Cocoa",
+      "Vanilla Extract",
+      "Sugar",
+      "Salt"
+    ],
+    "allergens": [
+      "Eggs"
+    ]
+  },
+  {
+    "id": "nestle-toll-house-cookie-dough",
+    "name": "Toll House Cookie Dough",
+    "description": "Nestle Toll House Cookie Dough - A delicious baking product in the baking mixes category",
+    "category": "Baking",
+    "subcategory": "Baking Mixes",
+    "image_url": "https://example.com/images/products/nestle-toll-house-cookie-dough.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/B7KFZH07A4",
+        "price": 16.21,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.n4gnk9nq",
+        "price": 20.82,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/cntp912z",
+        "price": 25.67,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Salt",
+      "Wheat Flour",
+      "Sugar",
+      "Milk",
+      "Palm Oil",
+      "Cocoa",
+      "Vanilla Extract",
+      "Corn Syrup"
+    ],
+    "allergens": [
+      "Wheat"
+    ]
+  },
+  {
+    "id": "nestle-nestle-cocoa-powder",
+    "name": "Nestle Cocoa Powder",
+    "description": "Nestle Nestle Cocoa Powder - A delicious baking product in the baking mixes category",
+    "category": "Baking",
+    "subcategory": "Baking Mixes",
+    "image_url": "https://example.com/images/products/nestle-nestle-cocoa-powder.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/2QNCHC1FN6",
+        "price": 16.0,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/nestle-cocoa-powder-5902",
+        "price": 18.17,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/trky8bf5",
+        "price": 24.14,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Costco",
+        "url": "https://www.costco.com/e9zxoc27",
+        "price": 28.51,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Sugar",
+      "Wheat Flour",
+      "Corn Syrup",
+      "Palm Oil",
+      "Salt",
+      "Milk"
+    ],
+    "allergens": []
+  },
+  {
+    "id": "nestle-toll-house-brownie-mix",
+    "name": "Toll House Brownie Mix",
+    "description": "Nestle Toll House Brownie Mix - A delicious baking product in the cocoa powder category",
+    "category": "Baking",
+    "subcategory": "Cocoa Powder",
+    "image_url": "https://example.com/images/products/nestle-toll-house-brownie-mix.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/5ZVH7FQW8I",
+        "price": 12.28,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Kroger",
+        "url": "https://www.kroger.com/p/ondwzphf",
+        "price": 13.96,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.0tcj7398",
+        "price": 22.12,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Target",
+        "url": "https://www.target.com/p/toll-house-brownie-mix-4229",
+        "price": 15.46,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Cocoa",
+      "Corn Syrup",
+      "Wheat Flour",
+      "Vanilla Extract",
+      "Salt"
+    ],
+    "allergens": [
+      "Eggs",
+      "Nuts"
+    ]
+  },
+  {
+    "id": "nestle-toll-house-cake-mix",
+    "name": "Toll House Cake Mix",
+    "description": "Nestle Toll House Cake Mix - A delicious baking product in the cocoa powder category",
+    "category": "Baking",
+    "subcategory": "Cocoa Powder",
+    "image_url": "https://example.com/images/products/nestle-toll-house-cake-mix.jpg",
+    "purchase_links": [
+      {
+        "retailer": "Amazon",
+        "url": "https://www.amazon.com/dp/HVBCHVWETV",
+        "price": 12.43,
+        "currency": "USD",
+        "in_stock": true
+      },
+      {
+        "retailer": "Safeway",
+        "url": "https://www.safeway.com/shop/product-details.a83sag9d",
+        "price": 11.52,
+        "currency": "USD",
+        "in_stock": true
+      }
+    ],
+    "nutrition_facts": null,
+    "ingredients": [
+      "Salt",
+      "Palm Oil",
+      "Sugar",
+      "Wheat Flour",
+      "Milk",
+      "Cocoa"
+    ],
+    "allergens": []
+  }
+]

@@ -1,0 +1,112 @@
+{
+  "products": [
+    {
+      "name": "KitKat",
+      "description": "Crispy wafer bars covered in smooth milk chocolate",
+      "amazon_link": "https://www.amazon.ca/KIT-KAT-Finger-4x45g-Multipack/dp/B00GMA7F0U/ref=sr_1_1?dib=eyJ2IjoiMSJ9.tM8w6VfD7R2VMjWUQFSwxeHKN3L_HPUZ5d-3OTyZE2IvnEVEVHDLUlR4mcE_0c8_VaT5OpJ56-zqUm73mS6V5bzFnuHPifk-cHC4SXHjX6fbKmDbObcMLvpmXBT0SAiJpRMOlJi8BCjlDFH8v_awQq1o0Cps6aG9oJCj1NgeMb1dpId7Tp7cgU8T5HtZJYipBF42Xn7KEegTM4PfJLY_rQ-6fKd0gYo08Gt19jDDKoM5JvlJXmIBKnrBTdIVn8mOTrLMtDKKULKMKXDq-hPIdAahbFIUuu2r53sg9_jTqgg.MMKJrIpoWcp9iYv2rZXuzVYbrNhw0wisTQ5oCh8zMGo&dib_tag=se&qid=1748729225&sr=8-1&srs=20618961011",
+      "image_url": "https://www.madewithnestle.ca/sites/default/files/styles/product_tab_image/public/2022-03/kitkat%204%20finger%20updated%20%281%29.png"
+    },
+    {
+      "name": "Nescafé",
+      "description": "Premium instant coffee",
+      "amazon_link": "https://www.amazon.ca/NESCAF%C3%89-Creamy-Original-Instant-Coffee/dp/B08XMVJCTS/ref=sr_1_1_sspa?crid=22X52YD7EABA1&dib=eyJ2IjoiMSJ9.KtGRPp3-SHENQKJCyM7qNpYHyUgU3rPTB8v1Y37EiHwCWKvRG5Q1ODeEqP87lylGcOQpPGVO4EdrkmbQCLIX5UoKXFHECniKR5qktY8UhFeA4D5s7H8Tee2zhP8D8nxj2oaqCcjhcQeXoaP1o87RUnBlObBCVDQqhdAKnd7oYJWH4keSZMJOxAM8G7rOUEMM5ZjW9J8z2NB-Js_BLt4v4DsoQx8Vc_A5bojm8gI0vZVVtB4OG_zZp1xn-_zRayK8eJDdEPFRhiBIQBl7lIHNy3WaViDyc15YzcsP9lNYGLY.zL--DdoPJJ1KzW4tocLjx4haVN1NSG_f4oUwb9wZbUM&dib_tag=se&keywords=nescafe&qid=1748729250&sprefix=nescafe%2Caps%2C86&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1/",
+      "image_url": "https://www.madewithnestle.ca/sites/default/files/styles/product_tab_image/public/2022-07/NESCAFE%C2%AE%20Rich%20200g.png"
+    },
+    {
+      "name": "Smarties",
+      "description": "Colorful sugar-coated chocolate candies",
+      "amazon_link": "https://www.amazon.ca/NESTL%C3%89-SMARTIES-Coated-Chocolate-Pantry/dp/B09YG55J1X/ref=sr_1_1_sspa?crid=1ZVY5C0VWZYWM&dib=eyJ2IjoiMSJ9.gkvwACeVnPYJTnTNFS-MjlKBCZD9-gPz8c9d2tHEcvi9aZiUzyOgayJcOX8_epZzOODnouf7erAwld1y7UHD8rn67WngS3UBdWvIoyWbddSD2UNI3UDid4uYlmmwTaAnaWbZk9vyh3wa8ZEeZLS8bXIAl6OmhaV7xSkchCQQ17rHwUkNSISulG2mBykexqaC1-Ki4p788XTObGoRxML3AxRh-KutyVNy_vz8FXOeDvwG-OhpB9qJ4mmpjOImdbcgQwW5dIAs_nwP9uZnFiRg-b4iTvJZ__AAzfkginbXqjg.t83zmBF8LeC4CGT8BkFFoYt4MtoNO5UgTkIGuZHO_TA&dib_tag=se&keywords=Smarties&qid=1748729268&sprefix=smarties%2Caps%2C130&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1/",
+      "image_url": "https://www.madewithnestle.ca/sites/default/files/styles/product_tab_image/public/2023-10/Smarties%20Tablet%20-%20Beauty%20Image.png"
+    },
+    {
+      "name": "Nestea",
+      "description": "Refreshing iced tea",
+      "amazon_link": "https://www.amazon.ca/NESTEA-Original-Lemon-Iced-Canister/dp/B0070O1BL6/ref=sr_1_1_sspa?crid=1QB8DYF89BC47&dib=eyJ2IjoiMSJ9._7Os79MKvIZut2Ife5RZyTmZZ5e1dbiuuliTGVhMlK38P_XZJKN3RztsFg2YsXS-M_MiP4gKRmTNScVNuME9m1ulGJrT19Ow5nBfZHrH0-30Khb0a89UVvxas0qfEYffthRhjZ6vxeHzN9R4kS3c_IUFQoNbMJAs5GUsSYM93K-ldImVmGBKNozSNOq_G-1ZaVaaGP-LqFD9oeXQWm8HSjwFiAwxYc0SSrHpytaH3yWIvh9ofvxXsXVEoWG-Togk5x6k0PB7JYLs7iBO7-ADZzaO53dDL276GD4MYWvq52M.JgicIuClhalPa6aR3mw_v5N0WEsdkpOxVPcW2e5Tvpo&dib_tag=se&keywords=Nestea&qid=1748729294&sprefix=nestea%2Caps%2C123&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1/",
+      "image_url": "https://www.madewithnestle.ca/sites/default/files/styles/product_tab_image/public/2023-07/Nestea%20Zero%20500ML%20-%20Beauty%20-%20EN.png"
+    },
+    {
+      "name": "Perrier",
+      "description": "Sparkling natural mineral water",
+      "amazon_link": "https://www.amazon.ca/Perrier-Original-Carbonated-Calories-Sweeteners/dp/B0C28RH6FJ/ref=sr_1_6?crid=1KO66T4XU2FKZ&dib=eyJ2IjoiMSJ9.gukwcgz8plojHiUJe-i5K2mTkdUJ2oLr8WBsdG7iL2qWITt3QhJi7jNuEgw_13ZpGeEYaTBTZ4RlnqZ0kGmldySoLUdP583iYaZI5gmci3JnAmNDjKAv7IILfiQHBPSfozT8lt5Xq9tr2vtjMJwCHRCp9W0oLb0YyNBD71UsnYCAUxbJ9TvudBAVNixRdqYe7OBPoVFshx62aIoGsE3RY4tcLm7i-aVzOAGCWIOzneN99_7etQtpnId60j3SZQ6rDjWbz3H9fr7WhY9vWKq94IRNnjHTSGUhG6XnclFMJ-Q.h3A5fkK_xWoyiidO7f9UxU6JahSYvlL3a7Ytwx5mOZU&dib_tag=se&keywords=Perrier&qid=1748729315&sprefix=perrier%2Caps%2C122&sr=8-6/",
+      "image_url": "https://www.madewithnestle.ca/sites/default/files/styles/product_tab_image/public/2023-01/perrier-regular-330-ml-beauty.png"
+    },
+    {
+      "name": "San Pellegrino",
+      "description": "Italian sparkling natural mineral water",
+      "amazon_link": "https://www.amazon.ca/San-Pellegrino-Naturali-Sparkling-Aranciata/dp/B09QQPMZNZ/ref=sr_1_3?crid=3HY5635CS4TU7&dib=eyJ2IjoiMSJ9.UBRQmCn7gFCAdFjmDDVpCrsllcLpbtutEtVV366CxibcfeCBMtPtqSpfRWVbyhg-L8jcWXehODBng9hIKQOeUeR6ruU4me6Ti1s3VqRbEdliT4xOhZ9xhwwl6rJrHbGQzrfcU6tc4ruUzAl5qiGH7RdrVCXzU4fGn_V_k-1YnF7igNWgly5-WT4qWwImdKGqHyTueFZrmz7qikdjCeU2h52wv_IaaFBNxNA87v5H14pUhhhyeYJ3bH6D8r4wun4UShPgZ9Yp6kHqnKib5ORsfc5X8RK9jxVNrbZzRyIbrWg.7bfQ8AJNRqQUqbzCpT45exslO9YLeJ9dRkK4xtLgiFU&dib_tag=se&keywords=San%2BPellegrino&qid=1748729345&sprefix=san%2Bpellegrino%2Caps%2C140&sr=8-3&th=1/",
+      "image_url": "https://www.madewithnestle.ca/sites/default/files/styles/product_tab_image/public/2023-01/spl-regular-500-ml-beauty-image.png"
+    },
+    {
+      "name": "Coffee Crisp",
+      "description": "Light crispy wafers with coffee-flavored cream",
+      "amazon_link": "https://www.amazon.ca/Peanut-free-Chocolatey-Bite-Sized-Resealable-Prepared/dp/B0CX5MDQV8/ref=sr_1_1_sspa?crid=38TAM45I2RS8Z&dib=eyJ2IjoiMSJ9.quW6Fbz60xsR60G8OpKhMI-qTf6g7YCSyP39DRE9ViK7klkr6Wz5vtYVjhg6Y1fRQfupE_sgZYxNMv_48ZB8JuPSUUAdYIzLVVG9Qxdv2E6WklNHTX384-tz59DQAc3_genVdSYNLzg7iUkpd9qcXguJqcAWJUfOX-i4tPlzYO2zAhp9fXr9oPrv5dAX-7JzvZirLZxBbTQfymPcvhDKNyVArF8m35Te5Q9_6CeLZjRMW9tdysW2LTu8XcLyFu_fY4RFyQkuGePFQ5Rka83Xi-_T3xy8xprVQU2fljp8Ssk.fTuBROegd8A--lzI4Ak6SKe1P_GCBx3qCuzvrBejOJM&dib_tag=se&keywords=Coffee+Crisp&qid=1748729405&sprefix=coffee+crisp%2Caps%2C129&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1/",
+      "image_url": "https://www.madewithnestle.ca/sites/default/files/styles/product_tab_image/public/2022-07/COFFEE%20CRISP%20%28Original%29%2050g.png"
+    },
+    {
+      "name": "Aero",
+      "description": "Bubbly milk chocolate bar",
+      "amazon_link": "https://www.amazon.ca/Aero-Milk-Bubbly-Bar-Multipack/dp/B00WMMQYHW/ref=sr_1_1_sspa?crid=13PEP7ERBK2YN&dib=eyJ2IjoiMSJ9.4IFdfj0QiNLboU695PDLHtdC1c10jH5mVNDM2MlbFaLIpNh-HLssjABJfSpc35RO6y9e_-_opMjQbZnWh5V7NqLuPTtvTT7aHJOP7mPRDA2sHREGOhnJNncaaXkIPQYFC6pxZRCqor-bd5jZxb9tswFEkl00B2DaJIrWgmbtCjSnptrNv2owvS9G9Ylr-8fq8qKdcFUR-FNgpkGbRmTIVkOOXv_aYqOJ9AFRkTfJ4EgYcx4jCxJx1VbdP871qsyrvPu-0HjbB0tuIdFv_rzKMaoUlCgGgfjDsa0LZEeUA20.9u94FPMIRw6g2DQZsHflOboUc4fKXYgc5SffLq71TTw&dib_tag=se&keywords=Aero&qid=1748729460&sprefix=aero%2Caps%2C163&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1/",
+      "image_url": "https://www.madewithnestle.ca/sites/default/files/styles/product_tab_image/public/2022-07/AERO%20Milk%20bar%2042g.png"
+    },
+    {
+      "name": "Nestlé Pure Life",
+      "description": "Purified bottled water",
+      "amazon_link": "https://www.amazon.ca/Nestle-Purified-Water-Bottles-Cases/dp/B076Z14K59/ref=sr_1_2?crid=3NU5X84EKI7GL&dib=eyJ2IjoiMSJ9.7jbviQZj64Nu6TWw424ttC98cX4dLRekqpaFc0nGf2pZlFHLv13M00RUs7L5W56a5xgzhB7k8S9qc2HIkhI-7JPZO0B84yEPo4kD1nb3PkPwpN50iyM531gNosAlybZrdvxqBVy--LOB8pQZbYt9UdmbZoMW5CcvaNXG90XBvt04ad_E6gGHn5eBC3K6o_9Wzbetwbop6ufeEGPTQZ-6Pvr3HP-kULEH7358B-qPfs5CVOQ-jwTarv2qBUO1sZs7CuJw3BVver1AXayXcIVIDdeKOo2qv60aczU5VItxe7A.-YLt_MDhId49gHe4x4NrquxzEEZoIqX1COd89uGTjHQ&dib_tag=se&keywords=Nestl%C3%A9+Pure+Life&qid=1748729489&sprefix=nestl%C3%A9+pure+life%2Caps%2C146&sr=8-2/",
+      "image_url": "https://www.madewithnestle.ca/sites/default/files/styles/product_tab_image/public/2022-10/500ml%20NPL.png"
+    },
+    {
+      "name": "After Eight",
+      "description": "Thin dark chocolate mints with fondant filling",
+      "amazon_link": "https://www.amazon.ca/Chocolate-Individually-Artificial-Entertaining-Rainforest/dp/B0CFW1945W/ref=sr_1_3?crid=T2TDQR5CYFZ1&dib=eyJ2IjoiMSJ9.V17J87tKRj59PiEA64yFWQKaqfsu74HHvgiwsFIDjrUdjd4MJ1G6ZwqLtHPGHminLupaPAQ4n0bnoqH0-XjGuaHaps0Hilg-6AO-PXpXs5j2nN4u1TTtjvwzoKNOa2bq9PqzgfnXR7oQGyN6XW5wLigQmLG9EMuhA7oH4rn6L3uBXWUojhKvR2XnBOssJjDbRQspLfYvGXMShrquprDeEQ2Px7KtpHM31DeECEnZzKbtHBhIdN-SOWniZDnAkVmeht_m6vK4AGKZQH-StRCT6VQMHL4bADkiTJVIcZs5zBc.2uvKEK1YXITLk7ZcV13CL5fj5dowgnyUH-5ziIR-Zek&dib_tag=se&keywords=After%2BEight&qid=1748730083&sprefix=after%2Beight%2Caps%2C122&sr=8-3&th=1/",
+      "image_url": "https://www.madewithnestle.ca/sites/default/files/styles/product_tab_image/public/2022-07/After%20Eight%20200g.png"
+    },
+    {
+      "name": "Big Turk",
+      "description": "Turkish delight covered in milk chocolate",
+      "amazon_link": "https://www.amazon.ca/Turk-Chocolate-Bites-180gm-Pouch/dp/B006OS2CZS/ref=sr_1_2?crid=1IGGUYO0MO4TF&dib=eyJ2IjoiMSJ9.KlmAk646ddSGoTIRtjcRusgJb279HW84nLg8DX-COcGkdLR1DvdqUB9NYDfeLU791JCPKT5AHhnxhlYSsppvbevp_lXZAmiroqw0KsJ_3tlZTRWYu_n4TxTEEXWSmyGJRWXiqk6JaIuFVh0mWk8tFIbNj1imkGygMXvB5_VbbzEfmlSyU2TNe1QdCC_87HIwcoLbcuXdFSpsPmlaVRnJO5vPlzDxyY5WP6oecA_vgH5g0M2TMtBLRAoaTSqFyaqBmYQG7BlW_IjgQ2B1BWm53VMpKvoflMsGDlHaWEKfPL0.AkaDYXYUAyuM_uosWp8WgUaBSCC0SZNJhE06fLXcEGE&dib_tag=se&keywords=Big%2BTurk&qid=1748730134&sprefix=big%2Bturk%2Caps%2C120&sr=8-2&th=1",
+      "image_url": "https://www.madewithnestle.ca/sites/default/files/styles/product_tab_image/public/2022-07/BIG%20TURK%2043g.png"
+    },
+    {
+      "name": "Crunch",
+      "description": "Milk chocolate with crisped rice",
+      "amazon_link": "https://www.amazon.ca/Buncha-Crunch-3-2oz-Theater-Nestle/dp/B00PACBA5W/ref=sr_1_1_sspa?crid=3RFLL8PUO1SBW&dib=eyJ2IjoiMSJ9.toF14DGscO3ENS3i4zEpsL0GiFY5DcbhyzZny_rA2us_VAwE0db0VJAwxqyJ6O64IEiBh8RHYjVPPA2bXSKZ46iAV0pzKo_Br_zw2mzFAgZ_1Yilsb9klkngomwKl0kK4vP772VJ2Y7B8dDFWKsCEPk9hj4a-CGNzfir2FMD6CqJqXT4CHdoOLrKMdYpJjBvuBjhjwInC31zcHbkKEf0S0DU5GMu0FN1_XWTKXUSBJlLa4n5TDyyDPYkdmlbOHu6PUeySuFUvvijFoodkHBlR1NilHZox7ogRb7U_PAhXN4.BRN27Y2QWuSer5HOsvDGYW37p8JnaJcUFsTTJ2Zldh4&dib_tag=se&keywords=Crunch&qid=1748730160&sprefix=crunch%2Caps%2C124&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1&smid=AG4YBGSGXZCUD/",
+      "image_url": "https://www.madewithnestle.ca/sites/default/files/styles/product_tab_image/public/2022-07/CRUNCH%2044g.png"
+    },
+    {
+      "name": "Turtles",
+      "description": "Pecan halves covered in caramel and chocolate",
+      "amazon_link": "https://www.amazon.ca/TURTLES-Classic-Recipe-Holiday-Chocolates/dp/B073TZWBSQ/ref=sr_1_1_sspa?crid=3H510T2E4GPFH&dib=eyJ2IjoiMSJ9.SSaBfKmGHecq2AiS7T_bl7VdnMJK2pxGWPHN_1EhVg5Vtf_5peaZXMTj3F_SvehESOHHN6ufDqkZ1T1ZoHkw0jwPY4POry_0zSsSfoFGOtsrYIpM9LjNxbWIwSUs8o9q3ufmA8mAHJRUuGhxDZiK5zd7oUOXjEOnuCydSGs2b0nVwjK_xxuFguPmwkU-suBOlz0Nf4f4yUOk4YfUpA_pybh0-0_sMPfHMlnxV0f5Pg35kXIzqlpfuJtjLLExmG3CcuMBkGhkseAOCcLqWlh9dssh37BiNFPGMsE5GjP9B-0.waV0mrAQ1feVYZiPYKd03y_5Y_31H0iDBjxQq9DnEOU&dib_tag=se&keywords=Turtles&qid=1748730194&sprefix=turtles%2Caps%2C122&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1",
+      "image_url": "https://www.madewithnestle.ca/sites/default/files/styles/product_tab_image/public/2022-07/turtles%20classic%20300g%20standup%20bag.png"
+    },
+    {
+      "name": "Häagen-Dazs",
+      "description": "Premium ice cream",
+      "amazon_link": "https://www.amazon.ca/Haagen-Dazs-Coffee-Cream-Ounce/dp/B01AO1CJW6/ref=sr_1_5?crid=152BLRNN9Q5SI&dib=eyJ2IjoiMSJ9.mMGxwAwlNN8z1ieLDL0yNW_-W41A3x5D-5hffmjUSd9VKQ8z0wTtV5A1KJirxCqV--YtiLDq29lTlvdf0yQmgLgiGbPh9TEih17cR9TuuQw.En-UfK3GURnI1Es1V-pm4AhN2ZzWPwTpDdPLiKom5MM&dib_tag=se&keywords=H%C3%A4agen-Daz&qid=1748730216&sprefix=h%C3%A4agen-daz%2Caps%2C151&sr=8-5&th=1",
+      "image_url": "https://www.madewithnestle.ca/sites/default/files/styles/product_tab_image/public/2022-07/HD%20Coffee%20Pint.png"
+    },
+    {
+      "name": "Carnation Hot Chocolate",
+      "description": "Rich hot chocolate mix",
+      "amazon_link": "https://www.amazon.ca/CARNATION-Nestle-Chocolate-Canister-Kilogram/dp/B07JDHHTXH/ref=sr_1_5?crid=2RUJ62O19SEHS&dib=eyJ2IjoiMSJ9.C9yJEWShoqf2hh68VzlWzGmIyiCetJV5e1Uqxiuy-TEP2BKbHB-8e8v2vdeBmVqE4u0WGp5wRgHH8ofZTpPVNF0MiGT5kRBz5mxSMSaek_wrlNbAdWkst2Um0G_WFrRX1uVH0R3jVeqtD-FYqG2A34uYKG4HUK78ALITBP45vq0MmebmwuZDzGCjuiXa8349lIth1Qiyn-aFZkDcC9Nn7gGSagTec7blG5zq4FVciauSFyxrwhZacRkzAVbRvtOlRTlFs0hDNnV3iIGM3VT4KJks-f2YAzUJ1UUW8q4sFC0.QRlBROYk7Pb_h8xonPARFW3hCvmY7rQZCLiRQRptb6Q&dib_tag=se&keywords=Carnation%2BHot%2BChocolate&qid=1748730248&sprefix=carnation%2Bhot%2Bchocolate%2Caps%2C130&sr=8-5&th=1",
+      "image_url": "https://www.madewithnestle.ca/sites/default/files/styles/product_tab_image/public/2022-07/carnation%20hot%20chocolate%20with%20marshmallows%20225g.png"
+    },
+    {
+      "name": "Milo",
+      "description": "Chocolate and malt powder beverage",
+      "amazon_link": "https://www.amazon.ca/Milo-Drink-Chocolate-900-Grams/dp/B0752N9LCD/ref=sr_1_1?crid=1KYK2B05RAPN1&dib=eyJ2IjoiMSJ9.vgDfi2iwXM6z3JDN8CivA9xoUMzg4GsdyQiFS6REJGjLwuJjRrHrwnJa6qcITMarhzItmZBs52bZN5nOYsY2Rz1ayKsrLePtKB3WGCREdt9REm9ZLnzNWMmr3CyYsBasm2dMOQR5FtPYxbdu7VTECWDYQpcUlE9WaJw8RHUk5BCzuUkEhV7LV6OTbuK_KRZWqCHrqeKOXv1Eh-B4-GMjQQCYM7zgIG6W3ilIxYcoNco97g4NJxHFutep8HgdYtW-3SuIlR6Cg9_PFKdueLsSpTV_x-PjYbWaLLQKDzgFuJ8.Rr1wbQw5fl3aokhXHFpe7do4RvppMoFG_zNzC-d1FA0&dib_tag=se&keywords=Milo&qid=1748730278&sprefix=milo%2Caps%2C139&sr=8-1&th=1",
+      "image_url": "https://www.madewithnestle.ca/sites/default/files/styles/product_tab_image/public/2022-07/MILO%20200g%20jar.png"
+    },
+    {
+      "name": "Nesquik",
+      "description": "Chocolate flavored milk mix",
+      "amazon_link": "https://www.amazon.ca/Nestle-Nesquik-Strawberry-Syrup-22/dp/B007EC5ITA/ref=sr_1_1_sspa?crid=33MBEOFKKCYT4&dib=eyJ2IjoiMSJ9.K414ZnojvbDYeQMfiEE7mTw-fyYylVriCGry8lL7EFuAr0sl4-LRyeY_p4Vw8ueusVxIF2LpCy2e2a-ihc09Qz3mXgCeR880Fjy8bTzuBxBgwrmhsSj2jHUBeeKulhH4T_UCcsSjQDx34N3pl2ot3ejkz6A2WJYmJeB4E3cTjK3ol0AQArrEQkJwgG4SSZvRv7Uy5kFG--cUy6eZSos1MdcqMB62wGOSl_IU2feSoatKDbJq4a63UWyw4EimXUU9xcEcgmJUYn1CkJ0iyiW8G9bbnAB8jmUlizqPzVUYPmk.8wEj1FNrddPnjf63Z1eOfNsB5bPzwaRIdfxvgTW_MQQ&dib_tag=se&keywords=Nesquik&qid=1748730299&sprefix=nesquik%2Caps%2C118&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1",
+      "image_url": "https://www.madewithnestle.ca/sites/default/files/styles/product_tab_image/public/2022-07/NQ%20Choc%20Less%20Sugar%20540g%20tub.png"
+    },
+    {
+      "name": "MAGGI",
+      "description": "Instant noodles and cooking aids",
+      "amazon_link": "https://www.amazon.ca/Maggi-Seasoning/dp/B074XH8ZRX/ref=sr_1_5?crid=VPLL8THV4ZP5&dib=eyJ2IjoiMSJ9.Po13kF_IttYeVsjqSev_81mC7wqX6OTaTiG__cgxCvtCpauaqf8EO3qXzVbyFX6B4Gy5XMefgRO_Lo8hiCBEm0U0XoqlVUlvyFSP5UWKcNpR8ToP2eAoyli1pul5sQdE_qpPsMxW77wBAbHanAy5q2FQn6OwDWkuhxV0DXbTK5srmFEZdziX0L4QiSZFsQHnezKLLe39kLWiZyJIKOLIfLyEtFvUzpVhOVLJUAn4OZcelPfe7Xhgc-oSu3aH3L_inYQ9BizkR47SzMU4Bb7O_Q0RwOLoCrmeBVwYlwF8vTs.F54nRCPpY75J9cKr9k_dcnItDgbl5KSrk4WhcNfOtFs&dib_tag=se&keywords=MAGGI&qid=1748730376&sprefix=maggi%2Caps%2C152&sr=8-5",
+      "image_url": "https://www.madewithnestle.ca/sites/default/files/styles/product_tab_image/public/2022-07/Maggi%20Chicken%20Bouillon%20Cubes%20in%20Tablet%20Bulk%20Bottle%20450g.png"
+    }
+  ]
+} 

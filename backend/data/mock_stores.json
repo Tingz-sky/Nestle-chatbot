@@ -1,0 +1,204 @@
+{
+  "stores": [
+    {
+      "id": 1,
+      "name": "Walmart Supercentre",
+      "address": "1900 Major Mackenzie Dr W, Vaughan, ON",
+      "latitude": 43.8406,
+      "longitude": -79.5016,
+      "products": ["KitKat", "Nescafé", "Nestea", "Smarties", "Aero", "Coffee Crisp", "Nestlé Pure Life", "MAGGI", "After Eight", "Crunch", "Nesquik", "Milo"]
+    },
+    {
+      "id": 2,
+      "name": "Loblaws",
+      "address": "5010 Glen Erin Dr, Mississauga, ON",
+      "latitude": 43.5445,
+      "longitude": -79.7130,
+      "products": ["KitKat", "Nescafé", "Perrier", "Aero", "Coffee Crisp", "Nestlé Pure Life", "MAGGI", "Big Turk", "Turtles", "Carnation Hot Chocolate", "Milo"]
+    },
+    {
+      "id": 3,
+      "name": "Shoppers Drug Mart",
+      "address": "123 Queen St W, Toronto, ON",
+      "latitude": 43.6515,
+      "longitude": -79.3845,
+      "products": ["KitKat", "Nescafé", "Aero", "Coffee Crisp", "Smarties", "After Eight", "Turtles", "Carnation Hot Chocolate", "Nesquik"]
+    },
+    {
+      "id": 4,
+      "name": "Metro",
+      "address": "2155 St Clair Ave W, Toronto, ON",
+      "latitude": 43.6741,
+      "longitude": -79.4721,
+      "products": ["Perrier", "Nestea", "Nescafé", "KitKat", "Aero", "Coffee Crisp", "Nestlé Pure Life", "MAGGI", "Crunch", "Big Turk", "Häagen-Dazs"]
+    },
+    {
+      "id": 5,
+      "name": "Real Canadian Superstore",
+      "address": "51 Gerry Fitzgerald Dr, North York, ON",
+      "latitude": 43.7801,
+      "longitude": -79.4709,
+      "products": ["KitKat", "Smarties", "Nestea", "Nescafé", "Aero", "Coffee Crisp", "Nestlé Pure Life", "MAGGI", "After Eight", "Big Turk", "Crunch", "Turtles", "Häagen-Dazs", "Carnation Hot Chocolate", "Milo", "Nesquik"]
+    },
+    {
+      "id": 6,
+      "name": "Costco Wholesale",
+      "address": "1 Yorkdale Rd, North York, ON",
+      "latitude": 43.7246,
+      "longitude": -79.4526,
+      "products": ["KitKat", "Perrier", "Nescafé", "Aero", "Nestlé Pure Life", "MAGGI", "Turtles", "Häagen-Dazs", "Carnation Hot Chocolate", "Milo", "Nesquik"]
+    },
+    {
+      "id": 7,
+      "name": "Whole Foods Market",
+      "address": "301 Avenue Rd, Toronto, ON",
+      "latitude": 43.6782,
+      "longitude": -79.4009,
+      "products": ["Perrier", "San Pellegrino", "Nestlé Pure Life", "Aero", "Häagen-Dazs"]
+    },
+    {
+      "id": 8,
+      "name": "Sobeys",
+      "address": "125 The Queensway, Toronto, ON",
+      "latitude": 43.6289,
+      "longitude": -79.4908,
+      "products": ["KitKat", "Nestea", "Nescafé", "Smarties", "Aero", "Coffee Crisp", "MAGGI", "After Eight", "Crunch", "Turtles", "Nesquik"]
+    },
+    {
+      "id": 9,
+      "name": "Longo's",
+      "address": "15 York St, Toronto, ON",
+      "latitude": 43.6431,
+      "longitude": -79.3809,
+      "products": ["KitKat", "Perrier", "San Pellegrino", "Aero", "Coffee Crisp", "Nestlé Pure Life", "Big Turk", "Häagen-Dazs", "Carnation Hot Chocolate"]
+    },
+    {
+      "id": 10,
+      "name": "No Frills",
+      "address": "222 Lansdowne Ave, Toronto, ON",
+      "latitude": 43.6525,
+      "longitude": -79.4330,
+      "products": ["KitKat", "Nescafé", "Nestea", "Smarties", "Aero", "Coffee Crisp", "Nestlé Pure Life", "MAGGI", "Crunch", "Milo", "Nesquik"]
+    },
+    {
+      "id": 11,
+      "name": "T&T Supermarket",
+      "address": "222 Cherry St, Toronto, ON",
+      "latitude": 43.6465,
+      "longitude": -79.3520,
+      "products": ["KitKat", "Nescafé", "Smarties", "Aero", "MAGGI", "Milo", "Nesquik"]
+    },
+    {
+      "id": 12,
+      "name": "FreshCo",
+      "address": "325 Parliament St, Toronto, ON",
+      "latitude": 43.6604,
+      "longitude": -79.3669,
+      "products": ["KitKat", "Nescafé", "Smarties", "Aero", "Coffee Crisp", "After Eight", "Big Turk", "Crunch"]
+    },
+    {
+      "id": 13,
+      "name": "Food Basics",
+      "address": "2550 Finch Ave W, North York, ON",
+      "latitude": 43.7486,
+      "longitude": -79.5053,
+      "products": ["KitKat", "Nescafé", "Smarties", "Aero", "Nestlé Pure Life", "MAGGI", "Crunch", "Nesquik"]
+    },
+    {
+      "id": 14,
+      "name": "Farm Boy",
+      "address": "777 Bay St, Toronto, ON",
+      "latitude": 43.6605,
+      "longitude": -79.3843,
+      "products": ["KitKat", "Perrier", "San Pellegrino", "After Eight", "Häagen-Dazs"]
+    },
+    {
+      "id": 15,
+      "name": "Fortinos",
+      "address": "35 Worthington Ave, Brampton, ON",
+      "latitude": 43.7363,
+      "longitude": -79.7824,
+      "products": ["KitKat", "Nescafé", "Smarties", "Aero", "Coffee Crisp", "Nestlé Pure Life", "MAGGI", "After Eight", "Big Turk", "Crunch", "Turtles", "Häagen-Dazs", "Carnation Hot Chocolate", "Milo", "Nesquik"]
+    },
+    {
+      "id": 16,
+      "name": "Rabba Fine Foods",
+      "address": "126 Simcoe St, Toronto, ON",
+      "latitude": 43.6498,
+      "longitude": -79.3872,
+      "products": ["KitKat", "Nescafé", "Smarties", "Perrier", "San Pellegrino", "Aero", "Nestlé Pure Life"]
+    },
+    {
+      "id": 17,
+      "name": "Pusateri's Fine Foods",
+      "address": "1539 Avenue Rd, Toronto, ON",
+      "latitude": 43.7207,
+      "longitude": -79.4127,
+      "products": ["Perrier", "San Pellegrino", "Häagen-Dazs", "After Eight"]
+    },
+    {
+      "id": 18,
+      "name": "Highland Farms",
+      "address": "3300 Rutherford Rd, Vaughan, ON",
+      "latitude": 43.8328,
+      "longitude": -79.5354,
+      "products": ["KitKat", "Nescafé", "Smarties", "Aero", "Coffee Crisp", "Nestlé Pure Life", "MAGGI", "Carnation Hot Chocolate", "Nesquik"]
+    },
+    {
+      "id": 19,
+      "name": "Galleria Supermarket",
+      "address": "865 York Mills Rd, Toronto, ON",
+      "latitude": 43.7705,
+      "longitude": -79.3363,
+      "products": ["KitKat", "Nescafé", "Perrier", "MAGGI", "Milo"]
+    },
+    {
+      "id": 20,
+      "name": "Coppa's Fresh Market",
+      "address": "4750 Dufferin St, Toronto, ON",
+      "latitude": 43.7521,
+      "longitude": -79.4747,
+      "products": ["KitKat", "Smarties", "Perrier", "San Pellegrino", "Aero", "Coffee Crisp", "After Eight", "Häagen-Dazs"]
+    },
+    {
+      "id": 21,
+      "name": "Organic Garage",
+      "address": "42 Hanna Ave, Toronto, ON",
+      "latitude": 43.6387,
+      "longitude": -79.4246,
+      "products": ["Perrier", "San Pellegrino", "Nestlé Pure Life", "Häagen-Dazs"]
+    },
+    {
+      "id": 22,
+      "name": "Fiesta Farms",
+      "address": "200 Christie St, Toronto, ON",
+      "latitude": 43.6680,
+      "longitude": -79.4222,
+      "products": ["KitKat", "Perrier", "San Pellegrino", "Aero", "Nestlé Pure Life", "After Eight"]
+    },
+    {
+      "id": 23,
+      "name": "Nations Fresh Foods",
+      "address": "4476 Erin Mills Pkwy, Mississauga, ON",
+      "latitude": 43.5382,
+      "longitude": -79.6546,
+      "products": ["KitKat", "Nescafé", "Smarties", "Perrier", "MAGGI", "Milo", "Nesquik"]
+    },
+    {
+      "id": 24,
+      "name": "Starsky Fine Foods",
+      "address": "2040 Dundas St E, Mississauga, ON",
+      "latitude": 43.6105,
+      "longitude": -79.5748,
+      "products": ["KitKat", "Aero", "Coffee Crisp", "Perrier", "San Pellegrino", "MAGGI"]
+    },
+    {
+      "id": 25,
+      "name": "Bruno's Fine Foods",
+      "address": "2770 Dufferin St, Toronto, ON",
+      "latitude": 43.6883,
+      "longitude": -79.4552,
+      "products": ["KitKat", "Nescafé", "Perrier", "San Pellegrino", "Aero", "Coffee Crisp", "After Eight", "Carnation Hot Chocolate"]
+    }
+  ]
+} 
