@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import ApiService from '../services/apiService';
 import { 
   ChatContainer, ChatHeader, ChatTitle, BotLogo, 
@@ -8,7 +9,7 @@ import {
   ChatInput, SendButton, ChatBubble, ResizeControls, ResizeButton,
   ProductInfo, ProductTitle, PurchaseLink, StoresContainer,
   StoreItem, StoreHeader, StoreName, StoreDistance, StoreAddress,
-  LocationButton
+  LocationButton, TableStyles
 } from './ChatStyles';
 import styled from 'styled-components';
 
@@ -259,14 +260,14 @@ const ChatBot = ({ isOpen, toggleChat }) => {
       /where.*(sell|sold)/i
     ];
     
-    // Check for strong purchase intent
+    // Check if contains strong purchase intent
     for (const pattern of strongBuyIntentPatterns) {
       if (pattern.test(messageLower)) {
         return true;
       }
     }
     
-    // If message contains purchase-related words and product names, it might also be purchase intent
+    // If message contains purchase-related words and product names, it may also indicate purchase intent
     const buyKeywords = /(buy|purchase|shop|order)/i;
     const productKeywords = /(kitkat|kit kat|nescafe|smarties|perrier|chocolate|coffee|water|nestle)/i;
     
@@ -274,12 +275,12 @@ const ChatBot = ({ isOpen, toggleChat }) => {
       return true;
     }
     
-    // Special case: "where can I find X" is likely purchase intent
+    // Special case: "where can I find X" is likely a purchase intent
     if (/where can (i|we) find/i.test(messageLower) && productKeywords.test(messageLower)) {
       return true;
     }
     
-    // Default is not purchase intent
+    // Default: not a purchase intent
     return false;
   };
   
@@ -570,7 +571,13 @@ const ChatBot = ({ isOpen, toggleChat }) => {
                   </TypingIndicator>
                 ) : (
                   <>
-                    <ReactMarkdown>
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      components={{
+                        // Apply custom styling to tables
+                        table: ({ node, ...props }) => <div style={{ overflowX: 'auto' }}><table {...props} /></div>,
+                      }}
+                    >
                       {message.text}
                     </ReactMarkdown>
                     

@@ -151,6 +151,9 @@ export const Message = styled.div`
     overflow-x: auto;
     margin: 10px 0;
   }
+  
+  /* Table styles */
+  ${props => props.isBot ? TableStyles : ''}
 `;
 
 export const TypingIndicator = styled.div`
@@ -461,5 +464,45 @@ export const LocationButton = styled.button`
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+  }
+`;
+
+// Table styles
+export const TableStyles = `
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    font-size: 0.95em;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  table th {
+    background-color: #f0f7ee;
+    color: #3a3a3a;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid #ddd;
+  }
+
+  table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #e6e6e6;
+    color: #333;
+  }
+
+  table tr:last-child td {
+    border-bottom: none;
+  }
+
+  table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  table tr:hover {
+    background-color: #f0f7ee;
   }
 `; 
